@@ -1,0 +1,21 @@
+一共重启多少组？
+
+introduction 部分 修改Chinese Journal of Computers
+每一种分类器的公式是不是都要加上
+（简介三类特征选择算法Filter, Wrapper and Embedded，以及每一个类型的代表性算法）   其他filter算法的 皮尔逊相关系数 方差检验 卡方检验？
+
+（ 【Inkscape画图，给我原始图SVG格式】）  图片是否需要重画
+
+Therefore, in the process of the algorithm, we would bind the randomly generated dataset with the top 20 features as shown in the algorithm framework line 12 above.    混合前20个特征中的多少个特征？
+
+（需要重新设置随机种子，譬如为：set.seed(0)；）  随机种子设定的作用
+
+（测试从随机开始点出发的特征子集窗口大小对RIFS的影响） 是什么意思
+
+Comparison with filters ?
+
+数学建模
+
+
+
+filter 排序
