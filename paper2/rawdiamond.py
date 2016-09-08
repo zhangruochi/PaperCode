@@ -28,17 +28,17 @@ from sklearn.grid_search import GridSearchCV
 from sklearn.cross_validation import KFold
 
 # 加载数据集
-
-
 def load_one_dataset(filename):
-    full_path_name = os.path.join("data", filename)
+    full_path_name = os.path.join(
+        "/Users/ZRC/Desktop/paper/dataset/data", filename)
     dataset = pd.read_csv(full_path_name, index_col=0)
     return dataset
 
 
 # 加载类标集
 def load_one_labels(filename):
-    full_path_name = os.path.join("label", filename)
+    full_path_name = os.path.join(
+        "/Users/ZRC/Desktop/paper/dataset/class", filename)
     labelset = pd.read_csv(full_path_name).loc[:, "Class"]
 
     def to_numeric(lebel):
@@ -54,7 +54,6 @@ def load_one_labels(filename):
     labels = labelset.apply(to_numeric).values
     #[1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
     return labels
-
 
 # 选择 estimator
 def select_estimator(case):
@@ -132,31 +131,36 @@ def main_metod():
     max_loc = []
 
     for feature_i in range(length - 1):
-        print(feature_i)
+
         for feature_j in range(feature_i + 1, length):
-            print(feature_j)
             X = dataset.iloc[:, [feature_i, feature_j]]
             for estimator in estimator_list:
                 estimator_aac = get_aac(select_estimator(estimator), X, y, k)   # k 折交叉验证的结果
                 if estimator_aac > estimator_max_aac:
                     estimator_max_aac = estimator_aac
 
-            
-            if estimator_max_aac == max_i_aac:
-                max_loc.append((feature_i,feature_j))
-
-
-            if estimator_max_aac > max_i_aac:
+            if estimator_max_aac < max_i_aac:
+                estimator_max_aac = 0
+                continue        
+                    
+            elif estimator_max_aac > max_i_aac:
                 max_i_aac = estimator_max_aac
-                max_loc = []
+                del max_loc[:]
                 max_loc.append((feature_i,feature_j))
-    
-            estimator_max_aac = 0
-        print(max_i_aac,max_loc)
+                estimator_max_aac = 0
+
+            elif estimator_max_aac == max_i_aac:
+                max_loc.append((feature_i,feature_j))
+                estimator_max_aac = 0
+                print(max_loc)    
+
+            
+        
+        break
 
     return max_i_aac,max_loc        
 
 
 if __name__ == '__main__':
     max_i_aac,max_loc  = main_metod()
-    print(max_i_aac,max_loc )
+    print(max_i_aac,max_loc)
