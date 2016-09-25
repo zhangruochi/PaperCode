@@ -10,12 +10,12 @@ Required packages
 Info
 - name   : "zhangruochi"
 - email  : "zrc720@gmail.com"
-- date   : "2016.09.05"
-- Version : 1.0.0
+- date   : "2016.09.25"
+- Version : 2.0.0
 
 Description
     穷举法  每次选取两个特征
-    加入多线程进行并行计算  提高效率
+    使用 apply 函数迭代  取消双层 for 循环
 '''
 
 import pandas as pd
@@ -37,7 +37,8 @@ from sklearn.cross_validation import KFold
 def load_one_dataset(filename):
     full_path_name = os.path.join(
         "/Users/ZRC/Desktop/paper/dataset/data", filename)
-    dataset = pd.read_csv(full_path_name, index_col=0)
+    dataset = pd.read_csv(full_path_name).drop(' ',axis=1)
+
     return dataset
 
 
@@ -62,7 +63,7 @@ def load_one_labels(filename):
     return labels
 
 
-# 选择 estimator
+#选择estimator
 def select_estimator(case):
 
     if case == 0:
@@ -83,19 +84,19 @@ def select_estimator(case):
     return estimator
 
 
-# K-Fold 生成器
+# K-Fold生成器
 def k_fold(y, k):
     kf = KFold(len(y), n_folds=k)
     for train_index, test_index in kf:
         yield train_index, test_index
 
 
-# 采用 K-Fold 交叉验证得到 aac  (注意这里存在问题)
+#采用 K-Fold 交叉验证得到 aac  (注意这里存在问题)
 def get_aac(estimator, X, y, k):
     scores = []
     for train_index, test_index in k_fold(y, k):
-        estimator.fit(X.iloc[train_index], y[train_index])
-        scores.append(estimator.score(X.iloc[test_index], y[test_index]))
+        estimator.fit(X[train_index], y[train_index])
+        scores.append(estimator.score(X[test_index], y[test_index]))
     return np.mean(scores)
 
 
@@ -119,55 +120,58 @@ def variance_filter(dataset, per=0.6):
     return filtered_dataset, feature_name_index
 
 
-def func(X, y,estimator_list,max_loc,max_i_aac,feature_i, feature_j):
+
+def cal(estimator_list,X,y):
+    global max_i_aac,count_1,count_2
+
     estimator_max_aac = 0
     for estimator in estimator_list:
-        estimator_aac = get_aac(select_estimator(
-            estimator), X, y, 3)   # k 折交叉验证的结果
+        estimator_aac = get_aac(select_estimator(estimator), X, y, 3)   # k 折交叉验证的结果
         if estimator_aac > estimator_max_aac:
-            estimator_max_aac = estimator_aac
-    
-    if estimator_max_aac < max_i_aac.value:
-        estimator_max_aac = 0       
-            
-    elif estimator_max_aac > max_i_aac.value:
-        max_i_aac.value = estimator_max_aac
+            estimator_max_aac = estimator_aac  
+
+    if estimator_max_aac > max_i_aac:
+        max_i_aac = estimator_max_aac
         del max_loc[:]
-        max_loc.append((feature_i,feature_j))
-        estimator_max_aac = 0
+        max_loc.append((count_1,count_2,max_i_aac))
 
-    else:
-        max_loc.append((feature_i,feature_j))
-        estimator_max_aac = 0
-        print(max_loc)        
- 
-        
-def main_metod():
+    elif estimator_max_aac == max_i_aac:
+        max_loc.append((count_1,count_2,max_i_aac))
+        estimator_max_aac = 0    
+    
+    if count_2 == 7376:
+        print(max_loc)
+        exit()
+   
+           
 
-    estimator_list = [1]
+def layer_first(row):
+    global count_1
+    global count_2
+    count_1 += 1
+    count_2 = 0
+    layer_second_dataset = dataset.drop(dataset.columns[0:count_1],axis=1,inplace=False) #第二层循环丢掉第一层循环之前的特征
+    layer_second_dataset.apply(func=layer_second,axis=0,args=(row.values,)) 
 
-    dataset = load_one_dataset("Adenoma.csv").T
-    #filtered_dataset, feature_name_index = variance_filter(dataset)
-
-    y = load_one_labels("Adenomaclass.csv")
-    length = dataset.shape[1]
-
-    pool = multiprocessing.Pool(4) #进程池中开辟四个进程
-    manager = multiprocessing.Manager()
-    max_loc = manager.list()
-    max_i_aac = manager.Value('d', 0.0)
-    #lock = manager.Lock()
-
-    for feature_i in range(length - 1):
-        for feature_j in range(feature_i + 1, length):
-            X = dataset.iloc[:, [feature_i, feature_j]]
-            pool.apply_async(func, (X, y,estimator_list,max_loc,max_i_aac,feature_i, feature_j)) 
-        break
-
-    pool.close()
-    pool.join()
-    print(max_i_aac.value, max_loc)
+def layer_second(row,layer_first_row):
+    global count_2
+    count_2 += 1
+    X = np.vstack((layer_first_row,row.values)).T
+    cal(estimator_list,X,y)
 
 
-if __name__ == '__main__':
-    main_metod()
+estimator_list = [1]
+dataset = load_one_dataset("Adenoma.csv").T
+#filtered_dataset, feature_name_index = variance_filter(dataset)
+y = load_one_labels("Adenomaclass.csv")
+length = dataset.shape[1]
+layer_first_dataset = dataset.drop(dataset.columns[-1],axis=1,inplace=False)  #第一层循环丢掉最后一个特征
+
+count_1 = 0
+count_2 = 0
+max_i_aac = 0
+max_loc = []
+layer_first_dataset.apply(func = layer_first)
+    
+
+    

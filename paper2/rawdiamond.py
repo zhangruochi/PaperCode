@@ -1,4 +1,6 @@
 '''
+python3
+
 Required packages
 - pandas
 - numpy
@@ -12,6 +14,7 @@ Info
 
 Description
     穷举法  每次选取两个特征
+    单线程版本
 '''
 
 import pandas as pd
@@ -153,9 +156,6 @@ def main_metod():
                 max_loc.append((feature_i,feature_j))
                 estimator_max_aac = 0
                 print(max_loc)    
-
-            
-        
         break
 
     return max_i_aac,max_loc        
