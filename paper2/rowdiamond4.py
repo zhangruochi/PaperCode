@@ -11,7 +11,7 @@ Info
 - name   : "zhangruochi"
 - email  : "zrc720@gmail.com"
 - date   : "2016.10.5"
-- Version : 2.0.0
+- Version : 3.0.0
 
 Description
     穷举法  每次选取两个特征

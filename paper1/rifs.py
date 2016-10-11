@@ -10,23 +10,25 @@ from sklearn.grid_search import GridSearchCV
 
 #加载数据集
 def load_data(filename):
-    full_path_name = os.path.join(os.getcwd(),"data",filename)
+    full_path_name = os.path.join("/Users/ZRC/Desktop/HLab/dataset/data",filename)
     dataset = pd.read_csv(full_path_name,index_col=0)
-    #print(dataset)
     return dataset
 
 
 #加载标签
 def load_class(filename):
-    full_path_name = os.path.join(os.getcwd(),"class",filename)
+    full_path_name = os.path.join("/Users/ZRC/Desktop/HLab/dataset/class",filename)
     class_set = pd.read_csv(full_path_name,index_col = 0)
     labels = class_set["Class"]
     result = []
-    for i in range(len(labels)):
-        if labels[i] == "N":
+    
+    def convert(label):
+        if label == 'N':
             result.append(0)
-        if labels[i] == "P":
-            result.append(1)
+        if label == 'P':
+            result.append(1)    
+
+    labels.apply(func = convert)        
 
     return np.array(result)
 
@@ -38,23 +40,24 @@ def t_test(dataset,labels):
     p_num = np.sum(labels)
     n_num = len(labels) - p_num  #  计算正负类各自标签的数量
 
-    p_feature_data,n_feature_data = [],[]
-    p_feature,n_feature = (),()
-
     t_value = []
     
-    for feature in dataset.values:  #遍历每个特征
+    def t_test_row(row):
+        p_feature_data,n_feature_data = [],[]
+
         for index,label in enumerate(labels):
             if label == 0:
-                n_feature_data.append(feature[index])  
+                n_feature_data.append(row[index])  
             elif label == 1:
-                p_feature_data.append(feature[index])
+                p_feature_data.append(row[index])
                 
         p_mean,n_mean = np.mean(p_feature_data),np.mean(n_feature_data)
         p_std,n_std = np.std(p_feature_data),np.std(n_feature_data)
-        p_feature_data,n_feature_data = [],[]
+        
 
         t_value.append(t_test_algo(p_mean,n_mean,p_std,n_std,p_num,n_num))  #t 检验
+    
+    dataset.apply(func = t_test_row,axis = 1)
 
     return t_value
  
@@ -220,8 +223,9 @@ def svc_test(X,y):
 """
 
 if __name__ == '__main__':
-    main()
-    #
+    dataset = load_data("Adenoma.csv")
+    labels = load_class("Adenomaclass.csv")
+    t_test(dataset,labels)
     
     
     
