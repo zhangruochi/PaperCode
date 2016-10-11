@@ -171,6 +171,7 @@ def k_fold(y,k):
 #生成重启的位置
 def random_num_generator(num_of_feature):
     #random.seed(datetime.datetime.now())
+    random.seed(7)
     return [random.randint(0,num_of_feature) for i in range(num_of_feature // 2 )]   # 重启的组数为所有特征的一半
 
 
@@ -204,22 +205,17 @@ def single(dataset_filename,label_filename):
             if max_estimator_aac > max_k_aac:
                 count = 0 
                 max_k_aac = max_estimator_aac   #得到的是从 loc 开始重启的最大值
+                #print("if {} {}".format(loc,cmax_k_aac))
                 num = k+1
                 best_estimator = best_temp_estimator
             
             
-            if max_estimator_aac == max_k_aac:
+            else:
                 count += 1
-                print(count)
-                if k+1 < num:
-                    num = k+1
-                    best_estimator = best_temp_estimator
-
+                #print("else {}:{}".format(count,max_k_aac))
                 if count == 3:
                     break
 
-            else:
-                break
 
             
         if max_k_aac > max_loc_aac:
@@ -271,7 +267,7 @@ def all_dataset():
 
 
 if __name__ == '__main__':
-    single("Adenoma.csv","Adenomaclass.csv")
+    all_dataset()
     
 
     
