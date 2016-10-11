@@ -1,3 +1,22 @@
+'''
+python3
+
+Required packages
+- pandas
+- numpy
+- sklearn
+
+Info
+- name   : "zhangruochi"
+- email  : "zrc720@gmail.com"
+- date   : "2016.10.12"
+- Version : 2.0.0
+
+Description
+    RIFS
+'''
+
+
 import numpy as np
 import pandas as pd
 import os
@@ -134,10 +153,11 @@ def select_estimator(case):
 #采用 K-Fold 交叉验证 得到 aac 
 def get_aac(estimator,X,y):
     scores = []
-    k = 3
+    k = 4
     for train_index,test_index in k_fold(y,k):
         estimator.fit(X.iloc[train_index,:],y[train_index])
         scores.append(estimator.score(X.iloc[test_index,:],y[test_index]))
+
     return np.mean(scores)    
 
 # K-Fold  生成器
