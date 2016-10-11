@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 import os
+import pickle
+import random
 
 from sklearn.svm import SVC
 from sklearn.naive_bayes import GaussianNB
@@ -12,7 +14,23 @@ from sklearn.grid_search import GridSearchCV
 def load_data(filename):
     full_path_name = os.path.join("/Users/ZRC/Desktop/HLab/dataset/data",filename)
     dataset = pd.read_csv(full_path_name,index_col=0)
+    name_index_dic = get_name_index(dataset)
+    with open("name_index.pkl","wb") as f:
+        pickle.dump(name_index_dic,f)
+    
+    dataset = dataset.rename(index = name_index_dic)
+
     return dataset
+
+
+#创造特征索引和特征名字对应的字典 
+def get_name_index(dataset):
+    name_index_dic = {}
+    index = 0
+    for name in dataset.index:
+        name_index_dic[name] = index
+        index += 1
+    return name_index_dic 
 
 
 #加载标签
@@ -67,35 +85,27 @@ def t_test_algo(p_mean,n_mean,p_std,n_std,p_num,n_num):
 
 
 #根据 t 检验的结果的大小重新构造特征集
-def rank_t_value(t_value):
-    dict_t_value = dict()
+def rank_t_value(dataset,labels):
+    t_value = t_test(dataset,labels)
+    list_t_value = []
+
     for index,value in enumerate(t_value):
-        dict_t_value[index] = value
+        list_t_value.append((index,value))
 
     from operator import itemgetter
-    sorted_dict_t_value = sorted(dict_t_value.items(),key = itemgetter(1),reverse = True)
-    sort_list = [ item[0] for item in sorted_dict_t_value ]
-    
-    return sort_list
+    sorted_tuple = sorted(list_t_value,key = itemgetter(1),reverse = True)
+    sorted_list = [item[0] for item in sorted_tuple]
+    dataset = dataset.reindex(sorted_list)
+
+    return dataset.T
 
 
-#创造特征索引和特征名字对应的字典 
-def get_name_index(dataset):
-    name_index_dic = {}
-    index = 0
-    for name,feature in dataset.iterrows():
-        name_index_dic[index] = name
-        index += 1
+def prepare(datset_filename,class_filename):
+    dataset = load_data(datset_filename)
+    labels = load_class(class_filename)
+    dataset = rank_t_value(dataset,labels)
+    return dataset,labels
 
-    return name_index_dic 
-        
-
-
-#得到根据t检验排序后的数据集  t值递减排序
-def renew_dataset(dataset,sort_list):
-    dataset = dataset.values
-    new_dataset = [dataset[i] for i in sort_list]
-    return np.array(new_dataset).T
 
 
 #选择分类器 D-tree,SVM,NBayes,KNN 
@@ -137,26 +147,13 @@ def k_fold(y,k):
 
 #生成重启的位置
 def random_num_generator(num_of_feature):
-    from numpy.random import randint
-    return [randint(0,num_of_feature) for i in range(num_of_feature // 2 )]
+    random.seed(7)
+    return [random.randint(0,num_of_feature) for i in range(num_of_feature // 2 )]   # 重启的组数为所有特征的一半
 
 
 
 def main():
-    # load data and class
-    data_filename = "Colon.csv"
-    class_filename = "Colonclass.csv"
-    labels = load_class(class_filename)
-    dataset = load_data(data_filename)
-
-    #保存一个名字和索引对应的字典 方便后面返回特征的名字
-    name_index_dic = get_name_index(dataset)
-
-    #根据 T 值 排序 得到重新排序后的数据集
-    t_value = t_test(dataset,labels) 
-    sort_list = rank_t_value(t_value)
-    t_dataset = renew_dataset(dataset,sort_list) #62 * 1990  t_dataset表示更新后的数据集
-
+    dataset,labels = prepare("Adenoma.csv","Adenomaclass.csv")
     loc_of_first_feature = random_num_generator(t_dataset.shape[1]) # 重启的位置
 
     max_aac = 0
@@ -164,9 +161,9 @@ def main():
     max_loc_aac = 0
     max_k_aac = 0
 
-
+    feature_range = t_dataset.shape[1]
     for loc in loc_of_first_feature:
-        for k in range(t_dataset.shape[1] - loc - 2):  # 从 loc位置 开始选取k个特征   -3的原因是停止的条件是增加后面三个特征 aac 不增加
+        for k in range(feature_range - loc - 2):  # 从 loc位置 开始选取k个特征   -3的原因是停止的条件是增加后面三个特征 aac 不增加
             locs = [i for i in range(loc,loc+k+1)]
             X = t_dataset[:,locs]
             for i in range(4):
@@ -223,9 +220,10 @@ def svc_test(X,y):
 """
 
 if __name__ == '__main__':
-    dataset = load_data("Adenoma.csv")
-    labels = load_class("Adenomaclass.csv")
-    t_test(dataset,labels)
+    dataset,labels = prepare("Adenoma.csv","Adenomaclass.csv")
+    print(dataset)
+    print(labels)
+
     
     
     
