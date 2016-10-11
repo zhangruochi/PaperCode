@@ -186,7 +186,8 @@ def single(dataset_filename,label_filename):
     feature_range = dataset.shape[1]
     for loc in loc_of_first_feature:
         num = 0
-        max_k_aac = 0
+        max_k_aac = 0 
+        count = 0  #记录相等的次数
         best_estimator = -1   
         
         for k in range(feature_range - loc):  # 从 loc位置 开始选取k个特征
@@ -201,17 +202,21 @@ def single(dataset_filename,label_filename):
                     best_temp_estimator = item
      
             if max_estimator_aac > max_k_aac:
+                count = 0 
                 max_k_aac = max_estimator_aac   #得到的是从 loc 开始重启的最大值
                 num = k+1
                 best_estimator = best_temp_estimator
             
             
             if max_estimator_aac == max_k_aac:
+                count += 1
+                print(count)
                 if k+1 < num:
                     num = k+1
                     best_estimator = best_temp_estimator
 
-                continue
+                if count == 3:
+                    break
 
             else:
                 break
@@ -266,7 +271,7 @@ def all_dataset():
 
 
 if __name__ == '__main__':
-    single("ALL1.csv","ALL1class.csv")
+    single("Adenoma.csv","Adenomaclass.csv")
     
 
     
