@@ -124,6 +124,7 @@ def prepare(datset_filename,class_filename):
     dataset = load_data(datset_filename)
     labels = load_class(class_filename)
     dataset = rank_t_value(dataset,labels)
+    #将样本的顺序打乱  防止在交叉验证的时候出错
     return dataset,labels
 
 
@@ -171,6 +172,8 @@ def k_fold(y,k):
 #生成重启的位置
 def random_num_generator(num_of_feature):
     #random.seed(datetime.datetime.now())
+    random.seed(7)
+
     return [random.randint(0,num_of_feature) for i in range(num_of_feature // 2 )]   # 重启的组数为所有特征的一半
 
 
@@ -210,7 +213,7 @@ def single(dataset_filename,label_filename):
             
             if max_estimator_aac == max_k_aac:
                 count += 1
-                print(count)
+
                 if k+1 < num:
                     num = k+1
                     best_estimator = best_temp_estimator
@@ -234,21 +237,6 @@ def single(dataset_filename,label_filename):
        
     return max_aac_list         
 
-"""
-def svc_test(X,y):
-    estimator = SVC()
-    from sklearn.cross_validation import cross_val_score
-    from sklearn.grid_search import GridSearchCV
-
-    paramters = {"kernel":["linear","rbf"],
-                 "C": np.logspace(-4,4,10),
-                }
-    grid = GridSearchCV(estimator,paramters)
-    grid.fit(X,y)
-
-    print(grid.best_estimator_)
-"""
-
 
 def all_dataset():
     dataset_list = os.listdir('/Users/ZRC/Desktop/HLab/dataset/data')
@@ -269,6 +257,22 @@ def all_dataset():
     with open("output_info.pkl","wb") as f:
         pickle.dump(all_dataset_info,f)
 
+
+
+"""
+def svc_test(X,y):
+    estimator = SVC()
+    from sklearn.cross_validation import cross_val_score
+    from sklearn.grid_search import GridSearchCV
+
+    paramters = {"kernel":["linear","rbf"],
+                 "C": np.logspace(-4,4,10),
+                }
+    grid = GridSearchCV(estimator,paramters)
+    grid.fit(X,y)
+
+    print(grid.best_estimator_)
+"""
 
 if __name__ == '__main__':
     single("Adenoma.csv","Adenomaclass.csv")
