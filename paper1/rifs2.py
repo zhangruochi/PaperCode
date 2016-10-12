@@ -22,15 +22,18 @@ import pandas as pd
 import os
 import pickle
 import random
-import sys
-import datetime
 
+from scipy.stats import ttest_ind_from_stats
+
+from sklearn.cross_validation import KFold
 from sklearn.svm import SVC
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.grid_search import GridSearchCV
 from sklearn.linear_model import LogisticRegression
+
+
 #加载数据集
 def load_data(filename):
     full_path_name = os.path.join("/Users/ZRC/Desktop/HLab/dataset/data",filename)
@@ -38,7 +41,8 @@ def load_data(filename):
     name_index_dic = get_name_index(dataset)
     with open("name_index.pkl","wb") as f:
         pickle.dump(name_index_dic,f)
-    
+
+    dataset.columns = list(range(dataset.shape[1]))
     dataset = dataset.rename(index = name_index_dic)
     return dataset
 
@@ -49,7 +53,7 @@ def get_name_index(dataset):
     index = 0
     for name in dataset.index:
         name_index_dic[name] = index
-        index += 1
+        index += 1 
     return name_index_dic 
 
 
@@ -66,66 +70,44 @@ def load_class(filename):
         if label == 'P':
             result.append(1)    
 
-    labels.apply(func = convert)        
-
+    labels.apply(func = convert)     
     return np.array(result)
 
 
 
 # t_检验  得到每个特征的 t 值
 def t_test(dataset,labels):
-    
-    p_num = np.sum(labels)
-    n_num = len(labels) - p_num  #  计算正负类各自标签的数量
+    p_feature_data = dataset.loc[:,labels == 1]  #得到正类数据集
+    n_feature_data = dataset.loc[:,labels == 0]  #得到负类数据集
 
-    t_value = []
-    
-    def t_test_row(row):
-        p_feature_data,n_feature_data = [],[]
+    p_mean,n_mean = np.mean(p_feature_data,1),np.mean(n_feature_data,1)
+    p_std,n_std = np.std(p_feature_data,1),np.std(n_feature_data,1)
 
-        for index,label in enumerate(labels):
-            if label == 0:
-                n_feature_data.append(row[index])  
-            elif label == 1:
-                p_feature_data.append(row[index])
-                
-        p_mean,n_mean = np.mean(p_feature_data),np.mean(n_feature_data)
-        p_std,n_std = np.std(p_feature_data),np.std(n_feature_data)
-        
+    t_value,p_value = ttest_ind_from_stats(p_mean,p_std,p_feature_data.shape[1],n_mean,n_std,n_feature_data.shape[1])
+    p_value = pd.Series(data=p_value,index=list(range(len(p_value))))
 
-        t_value.append(t_test_algo(p_mean,n_mean,p_std,n_std,p_num,n_num))  #t 检验
-    
-    dataset.apply(func = t_test_row,axis = 1)
-
-    return t_value
+    return p_feature_data, n_feature_data, p_value
  
-#t 检验算法           
-def t_test_algo(p_mean,n_mean,p_std,n_std,p_num,n_num):
-    return abs(p_mean - n_mean) / ( ( (p_std ** 2 ) / p_num + (n_std ** 2) / n_num ) ** 0.5 )
 
 
 #根据 t 检验的结果的大小重新构造特征集
 def rank_t_value(dataset,labels):
-    t_value = t_test(dataset,labels)
-    list_t_value = []
+    p_feature_data,n_feature_data,p_value = t_test(dataset,labels)
+    sort_index = p_value.sort_values(ascending=True).index
+    print(sort_index)
 
-    for index,value in enumerate(t_value):
-        list_t_value.append((index,value))
+    p_feature_data = p_feature_data.reindex(sort_index)
+    n_feature_data = n_feature_data.reindex(sort_index)
 
-    from operator import itemgetter
-    sorted_tuple = sorted(list_t_value,key = itemgetter(1),reverse = True)
-    sorted_list = [item[0] for item in sorted_tuple]
-    dataset = dataset.reindex(sorted_list)
-
-    return dataset.T
+    return p_feature_data.T,n_feature_data.T
 
 
 def prepare(datset_filename,class_filename):
     dataset = load_data(datset_filename)
     labels = load_class(class_filename)
-    dataset = rank_t_value(dataset,labels)
+    p_feature_data,n_feature_data = rank_t_value(dataset,labels)
     #将样本的顺序打乱  防止在交叉验证的时候出错
-    return dataset,labels
+    return p_feature_data,n_feature_data,labels
 
 
 
@@ -134,12 +116,6 @@ def select_estimator(case):
 
     if case == 0:
         estimator = SVC()
-        """
-        paramters = {"kernel":["linear","rbf"],
-                     "C": np.logspace(-4,4,10),
-                    } 
-        estimator = GridSearchCV(estimator,paramters)
-        """
     elif case == 1:
         estimator = KNeighborsClassifier()
     elif case == 2:
@@ -152,93 +128,104 @@ def select_estimator(case):
     return estimator            
 
 #采用 K-Fold 交叉验证 得到 aac 
-def get_aac(estimator,X,y):
+def get_aac(estimator,p_feature_data,n_feature_data,y,seed_number):
     scores = []
-    k = 4
-    for train_index,test_index in k_fold(y,k):
-        estimator.fit(X.iloc[train_index,:],y[train_index])
-        scores.append(estimator.score(X.iloc[test_index,:],y[test_index]))
+    k = 3
+    p_kf = KFold(p_feature_data.shape[0],n_folds = k,shuffle = True,random_state = seed_number)
+    n_kf = KFold(n_feature_data.shape[0],n_folds = k,shuffle = True,random_state = seed_number)
+
+    for i in range(k):
+
+        p_train_data = p_feature_data.iloc[list(p_kf)[i][0],:]
+        p_test_data = p_feature_data.iloc[list(p_kf)[i][1],:]
+
+        n_train_data = n_feature_data.iloc[list(n_kf)[i][0],:]
+        n_test_data = n_feature_data.iloc[list(p_kf)[i][1],:]
+
+        X_train = p_train_data.append(n_train_data)
+        y_train = y[X_train.index]
+        estimator.fit(X_train,y_train)
+
+                
+        X_test = p_test_data.append(n_test_data)
+        y_test = y[X_test.index]
+        scores.append(estimator.score(X_test,y_test))
 
     return np.mean(scores)    
 
 # K-Fold  生成器
 def k_fold(y,k):
-    from sklearn.cross_validation import KFold
+
     kf = KFold(len(y),n_folds = k)
     for train_index,test_index in kf:
         yield train_index,test_index
         
 
 #生成重启的位置
-def random_num_generator(num_of_feature):
-    #random.seed(datetime.datetime.now())
-    random.seed(7)
-
+def random_num_generator(num_of_feature,seed_number):
+    random.seed(seed_number)
     return [random.randint(0,num_of_feature) for i in range(num_of_feature // 2 )]   # 重启的组数为所有特征的一半
 
 
 
-def single(dataset_filename,label_filename):
-    dataset,labels = prepare(dataset_filename,label_filename)
-    loc_of_first_feature = random_num_generator(dataset.shape[1]) # 重启的位置
+def single(dataset_filename,label_filename,seed_number):
+    p_feature_data,n_feature_data,labels = prepare(dataset_filename,label_filename)
+    loc_of_first_feature = random_num_generator(p_feature_data.shape[1],seed_number) # 重启的位置
 
     max_loc_aac = 0
     max_aac_list = []
-    estimator_list = [0,1,2,3,4]
+    estimator_list = [0,1,3,4]
+    feature_range = p_feature_data.shape[1]
 
-    feature_range = dataset.shape[1]
-    for loc in loc_of_first_feature:
-        num = 0
-        max_k_aac = 0 
-        count = 0  #记录相等的次数
-        best_estimator = -1   
-        
-        for k in range(feature_range - loc):  # 从 loc位置 开始选取k个特征
-            max_estimator_aac = 0
-            locs = [i for i in range(loc,loc+k+1)]
-            X = dataset.iloc[:,locs]
+    with open("{}_outpot.txt".format(dataset_filename.split(".")[0]),"w+") as infor_file:
+        for loc in loc_of_first_feature:
+            num = 0
+            max_k_aac = 0 
+            count = 0  #记录相等的次数
+            best_estimator = -1   
             
-            for item in estimator_list:
-                estimator_aac = get_aac(select_estimator(item),X,labels)
-                if estimator_aac > max_estimator_aac:
-                    max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用四个estimator 得到的最大值
-                    best_temp_estimator = item
-     
-            if max_estimator_aac > max_k_aac:
-                count = 0 
-                max_k_aac = max_estimator_aac   #得到的是从 loc 开始重启的最大值
-                num = k+1
-                best_estimator = best_temp_estimator
-            
-            
-            if max_estimator_aac == max_k_aac:
-                count += 1
+            for k in range(feature_range - loc):  # 从 loc位置 开始选取k个特征
+                max_estimator_aac = 0
+                locs = [i for i in range(loc,loc+k+1)]
 
-                if k+1 < num:
+                p_data = p_feature_data.iloc[:,locs]
+                n_data = n_feature_data.iloc[:,locs]
+
+                for item in estimator_list:
+                    estimator_aac = get_aac(select_estimator(item),p_data,n_data,labels,seed_number)
+                    if estimator_aac > max_estimator_aac:
+                        max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用四个estimator 得到的最大值
+                        best_temp_estimator = item
+         
+                if max_estimator_aac > max_k_aac:
+                    count = 0 
+                    max_k_aac = max_estimator_aac   #得到的是从 loc 开始重启的最大值
                     num = k+1
                     best_estimator = best_temp_estimator
-
-                if count == 3:
-                    break
-
-            else:
-                break
-
-            
-        if max_k_aac > max_loc_aac:
-            max_loc_aac = max_k_aac
-            max_aac_list = []
-            max_aac_list.append((loc,num,max_loc_aac,best_estimator))
-            print(max_aac_list)
-
-        if max_k_aac == max_loc_aac:
-            max_aac_list.append((loc,num,max_k_aac))
-
+                
+                else:
+                    count += 1
+                    if count == 3:
+                        break
        
+            if max_k_aac > max_loc_aac:
+                max_loc_aac = max_k_aac
+                max_aac_list = []
+                max_aac_list.append((loc,num,max_loc_aac,best_estimator))
+                print(">: {}\n".format(max_aac_list))
+                infor_file.write(">: {}\n".format(max_aac_list))
+                
+
+            elif max_k_aac == max_loc_aac:
+                max_aac_list.append((loc,num,max_loc_aac,best_estimator))
+                print("=: {}\n".format(max_aac_list))
+                infor_file.write("=: {}\n".format(max_aac_list))
+
     return max_aac_list         
 
 
 def all_dataset():
+    seed_number = 7
     dataset_list = os.listdir('/Users/ZRC/Desktop/HLab/dataset/data')
     label_list = os.listdir('/Users/ZRC/Desktop/HLab/dataset/class')
     try:
@@ -250,7 +237,7 @@ def all_dataset():
     all_dataset_info = {}    
     for dataset_filename,label_filename in zip(dataset_list,label_list):
         print(dataset_filename,label_filename)
-        max_aac_list = single(dataset_filename,label_filename)
+        max_aac_list = single(dataset_filename,label_filename,seed_number)
         print("")
         all_dataset_info[dataset_filename] = max_aac_list
 
@@ -275,8 +262,8 @@ def svc_test(X,y):
 """
 
 if __name__ == '__main__':
-    single("Adenoma.csv","Adenomaclass.csv")
-    
+    single("Adenoma.csv","Adenomaclass.csv",7)
+      
 
     
     
