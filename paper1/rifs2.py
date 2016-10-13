@@ -22,6 +22,7 @@ import pandas as pd
 import os
 import pickle
 import random
+import time
 
 from scipy.stats import ttest_ind_from_stats
 
@@ -94,7 +95,6 @@ def t_test(dataset,labels):
 def rank_t_value(dataset,labels):
     p_feature_data,n_feature_data,p_value = t_test(dataset,labels)
     sort_index = p_value.sort_values(ascending=True).index
-    print(sort_index)
 
     p_feature_data = p_feature_data.reindex(sort_index)
     n_feature_data = n_feature_data.reindex(sort_index)
@@ -128,19 +128,19 @@ def select_estimator(case):
     return estimator            
 
 #采用 K-Fold 交叉验证 得到 aac 
-def get_aac(estimator,p_feature_data,n_feature_data,y,seed_number):
+def get_aac(estimator,p_data,n_data,y,seed_number):
     scores = []
     k = 3
-    p_kf = KFold(p_feature_data.shape[0],n_folds = k,shuffle = True,random_state = seed_number)
-    n_kf = KFold(n_feature_data.shape[0],n_folds = k,shuffle = True,random_state = seed_number)
+    p_kf = KFold(p_data.shape[0],n_folds = k,shuffle = True,random_state = seed_number)
+    n_kf = KFold(n_data.shape[0],n_folds = k,shuffle = True,random_state = seed_number)
 
     for i in range(k):
 
-        p_train_data = p_feature_data.iloc[list(p_kf)[i][0],:]
-        p_test_data = p_feature_data.iloc[list(p_kf)[i][1],:]
+        p_train_data = p_data.iloc[list(p_kf)[i][0],:]
+        p_test_data = p_data.iloc[list(p_kf)[i][1],:]
 
-        n_train_data = n_feature_data.iloc[list(n_kf)[i][0],:]
-        n_test_data = n_feature_data.iloc[list(p_kf)[i][1],:]
+        n_train_data = n_data.iloc[list(n_kf)[i][0],:]
+        n_test_data = n_data.iloc[list(n_kf)[i][1],:]
 
         X_train = p_train_data.append(n_train_data)
         y_train = y[X_train.index]
@@ -164,20 +164,25 @@ def k_fold(y,k):
 #生成重启的位置
 def random_num_generator(num_of_feature,seed_number):
     random.seed(seed_number)
-    return [random.randint(0,num_of_feature) for i in range(num_of_feature // 2 )]   # 重启的组数为所有特征的一半
+    return random.sample(list(range(num_of_feature)),num_of_feature // 2 )   # 重启的组数为所有特征的一半
 
 
 
 def single(dataset_filename,label_filename,seed_number):
+    start = time.time()
     p_feature_data,n_feature_data,labels = prepare(dataset_filename,label_filename)
     loc_of_first_feature = random_num_generator(p_feature_data.shape[1],seed_number) # 重启的位置
 
     max_loc_aac = 0
     max_aac_list = []
-    estimator_list = [0,1,3,4]
+    estimator_list = [0,1,2,3,4]
     feature_range = p_feature_data.shape[1]
 
-    with open("{}_outpot.txt".format(dataset_filename.split(".")[0]),"w+") as infor_file:
+    if not os.path.exists("{}".format(seed_number)):
+        os.mkdir("{}".format(seed_number))
+
+
+    with open("{}/{}_outpot.txt".format(seed_number,dataset_filename.split(".")[0]),"w+") as infor_file:
         for loc in loc_of_first_feature:
             num = 0
             max_k_aac = 0 
@@ -221,6 +226,8 @@ def single(dataset_filename,label_filename,seed_number):
                 print("=: {}\n".format(max_aac_list))
                 infor_file.write("=: {}\n".format(max_aac_list))
 
+        end = time.time()
+        infor_file.write("using time: {}".format(end-start))
     return max_aac_list         
 
 
@@ -246,23 +253,10 @@ def all_dataset():
 
 
 
-"""
-def svc_test(X,y):
-    estimator = SVC()
-    from sklearn.cross_validation import cross_val_score
-    from sklearn.grid_search import GridSearchCV
 
-    paramters = {"kernel":["linear","rbf"],
-                 "C": np.logspace(-4,4,10),
-                }
-    grid = GridSearchCV(estimator,paramters)
-    grid.fit(X,y)
-
-    print(grid.best_estimator_)
-"""
 
 if __name__ == '__main__':
-    single("Adenoma.csv","Adenomaclass.csv",7)
+    all_dataset()
       
 
     
