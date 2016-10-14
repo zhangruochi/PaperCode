@@ -22,6 +22,7 @@ import pandas as pd
 import os
 import pickle
 import random
+import multiprocessing
 
 from scipy.stats import ttest_ind_from_stats
 
@@ -140,7 +141,7 @@ def get_aac(estimator,p_feature_data,n_feature_data,y,seed_number):
         p_test_data = p_feature_data.iloc[list(p_kf)[i][1],:]
 
         n_train_data = n_feature_data.iloc[list(n_kf)[i][0],:]
-        n_test_data = n_feature_data.iloc[list(p_kf)[i][1],:]
+        n_test_data = n_feature_data.iloc[list(n_kf)[i][1],:]
 
         X_train = p_train_data.append(n_train_data)
         y_train = y[X_train.index]
@@ -168,13 +169,15 @@ def random_num_generator(num_of_feature,seed_number):
 
 
 
-def single(dataset_filename,label_filename,seed_number):
+def single(args):
+    dataset_filename,label_filename = args[0],args[1]
+    seed_number = 0
     p_feature_data,n_feature_data,labels = prepare(dataset_filename,label_filename)
     loc_of_first_feature = random_num_generator(p_feature_data.shape[1],seed_number) # 重启的位置
 
     max_loc_aac = 0
     max_aac_list = []
-    estimator_list = [0,1,3,4]
+    estimator_list = [0,1,2,3,4]
     feature_range = p_feature_data.shape[1]
 
     with open("{}_outpot.txt".format(dataset_filename.split(".")[0]),"w+") as infor_file:
@@ -225,7 +228,6 @@ def single(dataset_filename,label_filename,seed_number):
 
 
 def all_dataset():
-    seed_number = 7
     dataset_list = os.listdir('/Users/ZRC/Desktop/HLab/dataset/data')
     label_list = os.listdir('/Users/ZRC/Desktop/HLab/dataset/class')
     try:
@@ -234,35 +236,19 @@ def all_dataset():
     except:
         pass
 
-    all_dataset_info = {}    
-    for dataset_filename,label_filename in zip(dataset_list,label_list):
-        print(dataset_filename,label_filename)
-        max_aac_list = single(dataset_filename,label_filename,seed_number)
-        print("")
-        all_dataset_info[dataset_filename] = max_aac_list
+    pool = multiprocessing.Pool(4)
+    file_list = list(zip(sorted(dataset_list),sorted(label_list)))
+    results = pool.map(single,file_list)
 
-    with open("output_info.pkl","wb") as f:
-        pickle.dump(all_dataset_info,f)
+    pool.close()
+    pool.join()
+    
+    with open("output.pkl","wb") as f:
+        pickle.dump(results,f)
 
-
-
-"""
-def svc_test(X,y):
-    estimator = SVC()
-    from sklearn.cross_validation import cross_val_score
-    from sklearn.grid_search import GridSearchCV
-
-    paramters = {"kernel":["linear","rbf"],
-                 "C": np.logspace(-4,4,10),
-                }
-    grid = GridSearchCV(estimator,paramters)
-    grid.fit(X,y)
-
-    print(grid.best_estimator_)
-"""
 
 if __name__ == '__main__':
-    single("Adenoma.csv","Adenomaclass.csv",7)
+    all_dataset()
       
 
     
