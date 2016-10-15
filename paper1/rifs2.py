@@ -23,6 +23,7 @@ import os
 import pickle
 import random
 import multiprocessing
+from functools import partial
 
 from scipy.stats import ttest_ind_from_stats
 
@@ -33,6 +34,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.grid_search import GridSearchCV
 from sklearn.linear_model import LogisticRegression
+
 
 
 #加载数据集
@@ -169,7 +171,7 @@ def random_num_generator(num_of_feature,seed_number):
 
 
 
-def single(args):
+def single(lock,args):
     dataset_filename,label_filename = args[0],args[1]
     seed_number = 0
     p_feature_data,n_feature_data,labels = prepare(dataset_filename,label_filename)
@@ -180,7 +182,7 @@ def single(args):
     estimator_list = [0,1,2,3,4]
     feature_range = p_feature_data.shape[1]
 
-    with open("{}_outpot.txt".format(dataset_filename.split(".")[0]),"w+") as infor_file:
+    
         for loc in loc_of_first_feature:
             num = 0
             max_k_aac = 0 
@@ -216,14 +218,19 @@ def single(args):
                 max_aac_list = []
                 max_aac_list.append((loc,num,max_loc_aac,best_estimator))
                 print(">: {}\n".format(max_aac_list))
-                infor_file.write(">: {}\n".format(max_aac_list))
+                with lock:
+                    infor_file = open("{}_outpot.txt".format(dataset_filename.split(".")[0]),"a")
+                    infor_file.write(">: {}\n".format(max_aac_list))
+                    infor_file.close()
                 
 
             elif max_k_aac == max_loc_aac:
                 max_aac_list.append((loc,num,max_loc_aac,best_estimator))
                 print("=: {}\n".format(max_aac_list))
-                infor_file.write("=: {}\n".format(max_aac_list))
-
+                with lock:
+                    infor_file = open("{}_outpot.txt".format(dataset_filename.split(".")[0]),"a")
+                    infor_file.write("=: {}\n".format(max_aac_list))
+                    infor_file.close()
     return max_aac_list         
 
 
@@ -238,6 +245,9 @@ def all_dataset():
 
     pool = multiprocessing.Pool(4)
     file_list = list(zip(sorted(dataset_list),sorted(label_list)))
+    lock = multiprocessing.Lock()
+    single_dataset = partial(single,lock)
+
     results = pool.map(single,file_list)
 
     pool.close()
@@ -248,6 +258,7 @@ def all_dataset():
 
 
 if __name__ == '__main__':
+
     all_dataset()
       
 
