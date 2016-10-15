@@ -5,10 +5,8 @@ Required packages
 - pandas
 - numpy
 - sklearn
-<<<<<<< HEAD
 - scipy
-=======
->>>>>>> c76cef2327f43b014cc0a4623fd214fc8a799272
+
 
 Info
 - name   : "zhangruochi"
@@ -175,22 +173,13 @@ def random_num_generator(num_of_feature,seed_number):
     return random.sample(list(range(num_of_feature)),num_of_feature // 2 )   # 重启的组数为所有特征的一半
 
 
-<<<<<<< HEAD
 #对每一个数据集进行运算
-def single(lock = None,name):
-    seed_number = 1
-
-    dataset_filename,label_filename = name[0],name[1]
-    print("dealing the {}".format(dataset_filename))
-    start = time.time()
-=======
-
 def single(lock,name):
+    seed_number = 1
+    start = time.time()
+
     dataset_filename,label_filename = name[0],name[1]
     print("dealing the {}".format(dataset_filename))
-    start = time.time()
-    seed_number = 0
->>>>>>> c76cef2327f43b014cc0a4623fd214fc8a799272
     p_feature_data,n_feature_data,labels = prepare(dataset_filename,label_filename)
     loc_of_first_feature = random_num_generator(p_feature_data.shape[1],seed_number) # 重启的位置
 
@@ -260,16 +249,10 @@ def single(lock,name):
     return max_aac_list         
 
 
-<<<<<<< HEAD
-#对17个数据集进行运算
+#对17个数据集进行一次运行
 def all_dataset():
     dataset_list = os.listdir('dataset/data')
     label_list = os.listdir('dataset/class')
-=======
-def all_dataset():
-    dataset_list = os.listdir('/Users/ZRC/Desktop/HLab/dataset/data')
-    label_list = os.listdir('/Users/ZRC/Desktop/HLab/dataset/class')
->>>>>>> c76cef2327f43b014cc0a4623fd214fc8a799272
     try:
         dataset_list.remove('.DS_Store')
         label_list.remove('.DS_Store')
@@ -286,14 +269,10 @@ def all_dataset():
 
     pool.close()
     pool.join()
-<<<<<<< HEAD
-
-=======
     
-    with open("output.pkl","wb") as f:
-        pickle.dump(results,f)
->>>>>>> c76cef2327f43b014cc0a4623fd214fc8a799272
-
+    with open("output.txt","a") as f:
+        f.write(str(results))
+        
 
 if __name__ == '__main__':
     all_dataset()
