@@ -14,6 +14,7 @@ Info
 
 Description
     RIFS
+    multiprocessing
 '''
 
 
@@ -23,6 +24,8 @@ import os
 import pickle
 import random
 import time
+import multiprocessing
+from functools import partial
 
 from scipy.stats import ttest_ind_from_stats
 
@@ -33,6 +36,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.grid_search import GridSearchCV
 from sklearn.linear_model import LogisticRegression
+
 
 
 #加载数据集
@@ -96,6 +100,7 @@ def rank_t_value(dataset,labels):
     p_feature_data,n_feature_data,p_value = t_test(dataset,labels)
     sort_index = p_value.sort_values(ascending=True).index
 
+
     p_feature_data = p_feature_data.reindex(sort_index)
     n_feature_data = n_feature_data.reindex(sort_index)
 
@@ -110,8 +115,7 @@ def prepare(datset_filename,class_filename):
     return p_feature_data,n_feature_data,labels
 
 
-
-#选择分类器 D-tree,SVM,NBayes,KNN 
+#选择分类器 D-tree,SVM,NBayes,KNN
 def select_estimator(case):
 
     if case == 0:
@@ -128,19 +132,19 @@ def select_estimator(case):
     return estimator            
 
 #采用 K-Fold 交叉验证 得到 aac 
-def get_aac(estimator,p_data,n_data,y,seed_number):
+def get_aac(estimator,p_feature_data,n_feature_data,y,seed_number):
     scores = []
     k = 3
-    p_kf = KFold(p_data.shape[0],n_folds = k,shuffle = True,random_state = seed_number)
-    n_kf = KFold(n_data.shape[0],n_folds = k,shuffle = True,random_state = seed_number)
+    p_kf = KFold(p_feature_data.shape[0],n_folds = k,shuffle = True,random_state = seed_number)
+    n_kf = KFold(n_feature_data.shape[0],n_folds = k,shuffle = True,random_state = seed_number)
 
     for i in range(k):
 
-        p_train_data = p_data.iloc[list(p_kf)[i][0],:]
-        p_test_data = p_data.iloc[list(p_kf)[i][1],:]
+        p_train_data = p_feature_data.iloc[list(p_kf)[i][0],:]
+        p_test_data = p_feature_data.iloc[list(p_kf)[i][1],:]
 
-        n_train_data = n_data.iloc[list(n_kf)[i][0],:]
-        n_test_data = n_data.iloc[list(n_kf)[i][1],:]
+        n_train_data = n_feature_data.iloc[list(n_kf)[i][0],:]
+        n_test_data = n_feature_data.iloc[list(n_kf)[i][1],:]
 
         X_train = p_train_data.append(n_train_data)
         y_train = y[X_train.index]
@@ -168,8 +172,11 @@ def random_num_generator(num_of_feature,seed_number):
 
 
 
-def single(dataset_filename,label_filename,seed_number):
+def single(lock,name):
+    dataset_filename,label_filename = name[0],name[1]
+    print("dealing the {}".format(dataset_filename))
     start = time.time()
+    seed_number = 0
     p_feature_data,n_feature_data,labels = prepare(dataset_filename,label_filename)
     loc_of_first_feature = random_num_generator(p_feature_data.shape[1],seed_number) # 重启的位置
 
@@ -178,61 +185,68 @@ def single(dataset_filename,label_filename,seed_number):
     estimator_list = [0,1,2,3,4]
     feature_range = p_feature_data.shape[1]
 
+
     if not os.path.exists("{}".format(seed_number)):
         os.mkdir("{}".format(seed_number))
 
+    for loc in loc_of_first_feature:
+        num = 0
+        max_k_aac = 0 
+        count = 0  #记录相等的次数
+        best_estimator = -1   
+        
+        for k in range(feature_range - loc):  # 从 loc位置 开始选取k个特征
+            max_estimator_aac = 0
+            locs = [i for i in range(loc,loc+k+1)]
 
-    with open("{}/{}_outpot.txt".format(seed_number,dataset_filename.split(".")[0]),"w+") as infor_file:
-        for loc in loc_of_first_feature:
-            num = 0
-            max_k_aac = 0 
-            count = 0  #记录相等的次数
-            best_estimator = -1   
+            p_data = p_feature_data.iloc[:,locs]
+            n_data = n_feature_data.iloc[:,locs]
+
+            for item in estimator_list:
+                estimator_aac = get_aac(select_estimator(item),p_data,n_data,labels,seed_number)
+                if estimator_aac > max_estimator_aac:
+                    max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用四个estimator 得到的最大值
+                    best_temp_estimator = item
+     
+            if max_estimator_aac > max_k_aac:
+                count = 0 
+                max_k_aac = max_estimator_aac   #得到的是从 loc 开始重启的最大值
+                num = k+1
+                best_estimator = best_temp_estimator
             
-            for k in range(feature_range - loc):  # 从 loc位置 开始选取k个特征
-                max_estimator_aac = 0
-                locs = [i for i in range(loc,loc+k+1)]
-
-                p_data = p_feature_data.iloc[:,locs]
-                n_data = n_feature_data.iloc[:,locs]
-
-                for item in estimator_list:
-                    estimator_aac = get_aac(select_estimator(item),p_data,n_data,labels,seed_number)
-                    if estimator_aac > max_estimator_aac:
-                        max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用四个estimator 得到的最大值
-                        best_temp_estimator = item
-         
-                if max_estimator_aac > max_k_aac:
-                    count = 0 
-                    max_k_aac = max_estimator_aac   #得到的是从 loc 开始重启的最大值
-                    num = k+1
-                    best_estimator = best_temp_estimator
-                
-                else:
-                    count += 1
-                    if count == 3:
-                        break
-       
-            if max_k_aac > max_loc_aac:
-                max_loc_aac = max_k_aac
-                max_aac_list = []
-                max_aac_list.append((loc,num,max_loc_aac,best_estimator))
-                print(">: {}\n".format(max_aac_list))
+            else:
+                count += 1
+                if count == 3:
+                    break
+   
+        if max_k_aac > max_loc_aac:
+            max_loc_aac = max_k_aac
+            max_aac_list = []
+            max_aac_list.append((loc,num,max_loc_aac,best_estimator))
+            print(">: {}\n".format(max_aac_list))
+            with lock:
+                infor_file = open("{}/{}_outpot.txt".format(seed_number,dataset_filename.split(".")[0]),"a")
                 infor_file.write(">: {}\n".format(max_aac_list))
-                
+                infor_file.close()
+            
 
-            elif max_k_aac == max_loc_aac:
-                max_aac_list.append((loc,num,max_loc_aac,best_estimator))
-                print("=: {}\n".format(max_aac_list))
+        elif max_k_aac == max_loc_aac:
+            max_aac_list.append((loc,num,max_loc_aac,best_estimator))
+            print("=: {}\n".format(max_aac_list))
+            with lock:
+                infor_file = open("{}/{}_outpot.txt".format(seed_number,dataset_filename.split(".")[0]),"a")
                 infor_file.write("=: {}\n".format(max_aac_list))
-
-        end = time.time()
-        infor_file.write("using time: {}".format(end-start))
+                infor_file.close()
+    
+    end = time.time()            
+    with lock:
+        infor_file = open("{}/{}_outpot.txt".format(dataset_filename.split(".")[0]),"a")
+        infor_file.write("using time: {}".format(end-start))  
+        infor_file.close()              
     return max_aac_list         
 
 
 def all_dataset():
-    seed_number = 7
     dataset_list = os.listdir('/Users/ZRC/Desktop/HLab/dataset/data')
     label_list = os.listdir('/Users/ZRC/Desktop/HLab/dataset/class')
     try:
@@ -241,21 +255,23 @@ def all_dataset():
     except:
         pass
 
-    all_dataset_info = {}    
-    for dataset_filename,label_filename in zip(dataset_list,label_list):
-        print(dataset_filename,label_filename)
-        max_aac_list = single(dataset_filename,label_filename,seed_number)
-        print("")
-        all_dataset_info[dataset_filename] = max_aac_list
+    pool = multiprocessing.Pool(4)
+    file_list = list(zip(sorted(dataset_list),sorted(label_list)))
 
-    with open("output_info.pkl","wb") as f:
-        pickle.dump(all_dataset_info,f)
+    lock = multiprocessing.Manager().Lock()
+    single_dataset = partial(single,lock)
 
+    results = pool.map(single_dataset,file_list)
 
-
+    pool.close()
+    pool.join()
+    
+    with open("output.pkl","wb") as f:
+        pickle.dump(results,f)
 
 
 if __name__ == '__main__':
+
     all_dataset()
       
 
