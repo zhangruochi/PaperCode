@@ -240,7 +240,7 @@ def single(lock,name):
     
     end = time.time()            
     with lock:
-        infor_file = open("{}/{}_outpot.txt".format(dataset_filename.split(".")[0]),"a")
+        infor_file = open("{}/{}_outpot.txt".format(seed_number,dataset_filename.split(".")[0]),"a")
         infor_file.write("using time: {}".format(end-start))  
         infor_file.close()              
     return max_aac_list         
@@ -271,7 +271,6 @@ def all_dataset():
 
 
 if __name__ == '__main__':
-
     all_dataset()
       
 
