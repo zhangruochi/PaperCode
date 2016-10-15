@@ -14,6 +14,7 @@ Info
 
 Description
     RIFS
+    multiprocessing
 '''
 
 
@@ -22,6 +23,7 @@ import pandas as pd
 import os
 import pickle
 import random
+import time
 import multiprocessing
 
 from scipy.stats import ttest_ind_from_stats
@@ -95,7 +97,7 @@ def t_test(dataset,labels):
 def rank_t_value(dataset,labels):
     p_feature_data,n_feature_data,p_value = t_test(dataset,labels)
     sort_index = p_value.sort_values(ascending=True).index
-    print(sort_index)
+
 
     p_feature_data = p_feature_data.reindex(sort_index)
     n_feature_data = n_feature_data.reindex(sort_index)
@@ -111,8 +113,7 @@ def prepare(datset_filename,class_filename):
     return p_feature_data,n_feature_data,labels
 
 
-
-#选择分类器 D-tree,SVM,NBayes,KNN 
+#选择分类器 D-tree,SVM,NBayes,KNN
 def select_estimator(case):
 
     if case == 0:
@@ -165,12 +166,14 @@ def k_fold(y,k):
 #生成重启的位置
 def random_num_generator(num_of_feature,seed_number):
     random.seed(seed_number)
-    return [random.randint(0,num_of_feature) for i in range(num_of_feature // 2 )]   # 重启的组数为所有特征的一半
+    return random.sample(list(range(num_of_feature)),num_of_feature // 2 )   # 重启的组数为所有特征的一半
 
 
 
 def single(args):
     dataset_filename,label_filename = args[0],args[1]
+    print("dealing the {}".format(dataset_filename))
+    start = time.time()
     seed_number = 0
     p_feature_data,n_feature_data,labels = prepare(dataset_filename,label_filename)
     loc_of_first_feature = random_num_generator(p_feature_data.shape[1],seed_number) # 重启的位置
@@ -180,7 +183,10 @@ def single(args):
     estimator_list = [0,1,2,3,4]
     feature_range = p_feature_data.shape[1]
 
-    with open("{}_outpot.txt".format(dataset_filename.split(".")[0]),"w+") as infor_file:
+    if not os.path.exists("{}".format(seed_number)):
+        os.mkdir("{}".format(seed_number))
+
+    with open("{}/{}_outpot.txt".format(seed_number,dataset_filename.split(".")[0]),"w+") as infor_file:
         for loc in loc_of_first_feature:
             num = 0
             max_k_aac = 0 
@@ -224,6 +230,8 @@ def single(args):
                 print("=: {}\n".format(max_aac_list))
                 infor_file.write("=: {}\n".format(max_aac_list))
 
+    end = time.time() 
+    infor_file.write("using time: {}".format(end-start))           
     return max_aac_list         
 
 
