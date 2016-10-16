@@ -37,8 +37,9 @@ from sklearn.cross_validation import KFold
 # 加载数据集
 def load_one_dataset(filename):
     full_path_name = os.path.join(
-        "/Users/ZRC/Desktop/paper/dataset/data", filename)
-    dataset = pd.read_csv(full_path_name).drop(' ',axis=1)
+        "/Users/ZRC/Desktop/HLab/dataset/data", filename)
+    #dataset = pd.read_csv(full_path_name).drop(' ',axis=1)
+    dataset = pd.read_csv(full_path_name).drop("Unnamed: 0",axis=1)
 
     return dataset
 
@@ -46,7 +47,7 @@ def load_one_dataset(filename):
 # 加载类标集
 def load_one_labels(filename):
     full_path_name = os.path.join(
-        "/Users/ZRC/Desktop/paper/dataset/class", filename)
+        "/Users/ZRC/Desktop/HLab/dataset/class", filename)
     labelset = pd.read_csv(full_path_name).loc[:, "Class"]
 
     def to_numeric(lebel):
@@ -174,7 +175,7 @@ def layer_second(row,layer_first_row):
 
 
 estimator_list = [3]
-dataset = load_one_dataset("Adenoma.csv").T
+dataset = load_one_dataset("t1d.csv").T
 #filtered_dataset, feature_name_index = variance_filter(dataset)
 y = load_one_labels("Adenomaclass.csv")
 length = dataset.shape[1]

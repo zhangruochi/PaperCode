@@ -170,8 +170,8 @@ def random_num_generator(num_of_feature,seed_number,percent):
     return random.sample(list(range(num_of_feature)),int(num_of_feature*percent))   # 重启的组数为所有特征的一半
 
 
-
-def single(args,percent):
+"""
+def single_multiprocessing(args,percent):
     seed_number = 7
     start = time.time()
     dataset_filename = args[0]
@@ -244,9 +244,11 @@ def single(args,percent):
         infor_file.write("using time: {}".format(end-start))  
         infor_file.close()          
 
-    return max_aac_list         
+    return max_aac_list 
 
-def test_dataset():
+
+
+def test_dataset_multiprocessing():
     dataset_filename = "Gastric1.csv"
     label_filename = "Gastric1class.csv"
     percents = [ i/10 for i in range(1,10)]
@@ -261,7 +263,84 @@ def test_dataset():
     
     with open("output.txt","a") as f:
         f.write(str(results))
-      
+
+"""
+
+def single(dataset_filename,label_filename,percent):
+    seed_number = 7
+    start = time.time()
+
+    p_feature_data,n_feature_data,labels = prepare(dataset_filename,label_filename)
+    loc_of_first_feature = random_num_generator(p_feature_data.shape[1],seed_number,percent) # 重启的位置
+
+    max_loc_aac = 0
+    max_aac_list = []
+    estimator_list = [0,1,2,3,4]
+    feature_range = p_feature_data.shape[1]
+
+    if not os.path.exists("{}".format(percent)):
+        os.mkdir("{}".format(percent))
+    
+    for loc in loc_of_first_feature:
+        num = 0
+        max_k_aac = 0 
+        count = 0  #记录相等的次数
+        best_estimator = -1   
+        
+        for k in range(feature_range - loc):  # 从 loc位置 开始选取k个特征
+            max_estimator_aac = 0
+            locs = [i for i in range(loc,loc+k+1)]
+
+            p_data = p_feature_data.iloc[:,locs]
+            n_data = n_feature_data.iloc[:,locs]
+
+            for item in estimator_list:
+                estimator_aac = get_aac(select_estimator(item),p_data,n_data,labels,seed_number)
+                if estimator_aac > max_estimator_aac:
+                    max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用四个estimator 得到的最大值
+                    best_temp_estimator = item
+     
+            if max_estimator_aac > max_k_aac:
+                count = 0 
+                max_k_aac = max_estimator_aac   #得到的是从 loc 开始重启的最大值
+                num = k+1
+                best_estimator = best_temp_estimator
+            
+            else:
+                count += 1
+                if count == 3:
+                    break
+   
+        if max_k_aac > max_loc_aac:
+            max_loc_aac = max_k_aac
+            max_aac_list = []
+            max_aac_list.append((loc,num,max_loc_aac,best_estimator))
+            print(">: {}\n".format(max_aac_list))
+            with open("{}/{}_outpot.txt".format(percent,dataset_filename.split(".")[0]),"a") as infor_file:
+                infor_file.write(">: {}\n".format(max_aac_list))
+
+        elif max_k_aac == max_loc_aac:
+            max_aac_list.append((loc,num,max_loc_aac,best_estimator))
+            print("=: {}\n".format(max_aac_list))
+            with open("{}/{}_outpot.txt".format(percent,dataset_filename.split(".")[0]),"a") as infor_file:
+                infor_file.write("=: {}\n".format(max_aac_list))
+
+    end = time.time()
+    with open("{}/{}_outpot.txt".format(percent,dataset_filename.split(".")[0]),"a") as infor_file:
+        infor_file.write("using time: {}".format(end-start))            
+
+    return max_aac_list       
+
+def test_dataset():
+    dataset_filename = "Gastric1.csv"
+    label_filename = "Gastric1class.csv"
+    percents = [ i/10 for i in range(1,5)]
+    for percent in percents:
+        single(dataset_filename,label_filename,percent)
+
+    with open("output.txt","a") as f:
+        f.write(str(results) + "\n")      
+
 
 if __name__ == '__main__':
     test_dataset()
