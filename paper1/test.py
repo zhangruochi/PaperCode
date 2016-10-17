@@ -329,17 +329,79 @@ def single(dataset_filename,label_filename,percent):
     with open("{}/{}_outpot.txt".format(percent,dataset_filename.split(".")[0]),"a") as infor_file:
         infor_file.write("using time: {}".format(end-start))            
 
-    return max_aac_list       
+    return max_aac_list 
+
+def single_stop(dataset_filename,label_filename,stop):
+    seed_number = 7
+    start = time.time()
+
+    p_feature_data,n_feature_data,labels = prepare(dataset_filename,label_filename)
+    loc_of_first_feature = random_num_generator(p_feature_data.shape[1],seed_number,0.4) # 重启的位置
+
+    max_loc_aac = 0
+    max_aac_list = []
+    estimator_list = [0,1,2,3,4]
+    feature_range = p_feature_data.shape[1]
+
+    if not os.path.exists("{}".format(stop)):
+        os.mkdir("{}".format(stop))
+    
+    for loc in loc_of_first_feature:
+        num = 0
+        max_k_aac = 0 
+        count = 0  #记录相等的次数
+        best_estimator = -1   
+        
+        for k in range(feature_range - loc):  # 从 loc位置 开始选取k个特征
+            max_estimator_aac = 0
+            locs = [i for i in range(loc,loc+k+1)]
+
+            p_data = p_feature_data.iloc[:,locs]
+            n_data = n_feature_data.iloc[:,locs]
+
+            for item in estimator_list:
+                estimator_aac = get_aac(select_estimator(item),p_data,n_data,labels,seed_number)
+                if estimator_aac > max_estimator_aac:
+                    max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用四个estimator 得到的最大值
+                    best_temp_estimator = item
+            
+            if max_estimator_aac > max_k_aac:
+                count = 0 
+                max_k_aac = max_estimator_aac   #得到的是从 loc 开始重启的最大值
+                num = k+1
+                best_estimator = best_temp_estimator
+            
+            else:
+                count += 1
+                if count == stop:
+                    break
+   
+        if max_k_aac > max_loc_aac:
+            max_loc_aac = max_k_aac
+            max_aac_list = []
+            max_aac_list.append((loc,num,max_loc_aac,best_estimator))
+            print(">: {}\n".format(max_aac_list))
+            with open("{}/{}_outpot.txt".format(stop,dataset_filename.split(".")[0]),"a") as infor_file:
+                infor_file.write(">: {}\n".format(max_aac_list))
+
+        elif max_k_aac == max_loc_aac:
+            max_aac_list.append((loc,num,max_loc_aac,best_estimator))
+            print("=: {}\n".format(max_aac_list))
+            with open("{}/{}_outpot.txt".format(stop,dataset_filename.split(".")[0]),"a") as infor_file:
+                infor_file.write("=: {}\n".format(max_aac_list))
+
+    end = time.time()
+    with open("{}/{}_outpot.txt".format(stop,dataset_filename.split(".")[0]),"a") as infor_file:
+        infor_file.write("using time: {}".format(end-start))            
+
+    return max_aac_list             
 
 def test_dataset():
-    dataset_filename = "Gastric1.csv"
-    label_filename = "Gastric1class.csv"
-    percents = [ i/10 for i in range(1,5)]
-    for percent in percents:
-        single(dataset_filename,label_filename,percent)
-
-    with open("output.txt","a") as f:
-        f.write(str(results) + "\n")      
+    dataset_filename = "Gastric2.csv"
+    label_filename = "Gastric2class.csv"
+    stop=1
+    single_stop(dataset_filename,label_filename,stop)
+      
 
 
 if __name__ == '__main__':
