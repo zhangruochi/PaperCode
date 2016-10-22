@@ -11,12 +11,11 @@ Required packages
 Info
 - name   : "zhangruochi"
 - email  : "zrc720@gmail.com"
-- date   : "2016.10.12"
-- Version : 2.0.0
+- date   : "2016.10.21"
+- Version : 1.0.0
 
 Description
-    RIFS
-    multiprocessing
+    other algorithms compared to RIFS
 '''
 
 
@@ -25,11 +24,11 @@ import pandas as pd
 import os
 import pickle
 import random
-import time
 import multiprocessing
 from functools import partial
 
 from scipy.stats import ttest_ind_from_stats
+from scipy.stats import wilcoxon
 
 from sklearn.cross_validation import KFold
 from sklearn.svm import SVC
@@ -93,6 +92,7 @@ def t_test(dataset,labels):
     t_value,p_value = ttest_ind_from_stats(p_mean,p_std,p_feature_data.shape[1],n_mean,n_std,n_feature_data.shape[1])
     p_value = pd.Series(data=p_value,index=list(range(len(p_value))))
 
+
     return p_feature_data, n_feature_data, p_value
  
 
@@ -101,7 +101,6 @@ def t_test(dataset,labels):
 def rank_t_value(dataset,labels):
     p_feature_data,n_feature_data,p_value = t_test(dataset,labels)
     sort_index = p_value.sort_values(ascending=True).index
-
 
     p_feature_data = p_feature_data.reindex(sort_index)
     n_feature_data = n_feature_data.reindex(sort_index)
@@ -136,7 +135,7 @@ def select_estimator(case):
 #采用 K-Fold 交叉验证 得到 aac 
 def get_aac(estimator,p_feature_data,n_feature_data,y,seed_number):
     scores = []
-    k = 3
+    k = 5
     p_kf = KFold(p_feature_data.shape[0],n_folds = k,shuffle = True,random_state = seed_number)
     n_kf = KFold(n_feature_data.shape[0],n_folds = k,shuffle = True,random_state = seed_number)
 
@@ -159,124 +158,60 @@ def get_aac(estimator,p_feature_data,n_feature_data,y,seed_number):
 
     return np.mean(scores)    
 
-# K-Fold  生成器
-def k_fold(y,k):
-
-    kf = KFold(len(y),n_folds = k)
-    for train_index,test_index in kf:
-        yield train_index,test_index
-        
-
-#生成重启的位置
-def random_num_generator(num_of_feature,seed_number):
-    random.seed(seed_number)
-    return random.sample(list(range(num_of_feature)),num_of_feature // 2 )   # 重启的组数为所有特征的一半
-
 
 #对每一个数据集进行运算
-def single(lock,name):
-    seed_number = 1
-    start = time.time()
-
-    dataset_filename,label_filename = name[0],name[1]
-    print("dealing the {}".format(dataset_filename))
-    p_feature_data,n_feature_data,labels = prepare(dataset_filename,label_filename)
-    loc_of_first_feature = random_num_generator(p_feature_data.shape[1],seed_number) # 重启的位置
-
-    max_loc_aac = 0
-    max_aac_list = []
+def single(datset_filename,class_filename,feature_range,seed_number):
     estimator_list = [0,1,2,3,4]
-    feature_range = p_feature_data.shape[1]
-
-
-    if not os.path.exists("{}".format(seed_number)):
-        os.mkdir("{}".format(seed_number))
-
-    for loc in loc_of_first_feature:
-        num = 0
-        max_k_aac = 0 
-        count = 0  #记录相等的次数
-        best_estimator = -1   
-        
-        for k in range(feature_range - loc):  # 从 loc位置 开始选取k个特征
-            max_estimator_aac = 0
-            locs = [i for i in range(loc,loc+k+1)]
-
-            p_data = p_feature_data.iloc[:,locs]
-            n_data = n_feature_data.iloc[:,locs]
-
-            for item in estimator_list:
-                estimator_aac = get_aac(select_estimator(item),p_data,n_data,labels,seed_number)
-                if estimator_aac > max_estimator_aac:
-                    max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用四个estimator 得到的最大值
-                    best_temp_estimator = item
-     
-            if max_estimator_aac > max_k_aac:
-                count = 0 
-                max_k_aac = max_estimator_aac   #得到的是从 loc 开始重启的最大值
-                num = k+1
-                best_estimator = best_temp_estimator
-            
-            else:
-                count += 1
-                if count == 3:
-                    break
-   
-        if max_k_aac > max_loc_aac:
-            max_loc_aac = max_k_aac
-            max_aac_list = []
-            max_aac_list.append((loc,num,max_loc_aac,best_estimator))
-            print(">: {}\n".format(max_aac_list))
-            with lock:
-                infor_file = open("{}/{}_outpot.txt".format(seed_number,dataset_filename.split(".")[0]),"a")
-                infor_file.write(">: {}\n".format(max_aac_list))
-                infor_file.close()
-            
-
-        elif max_k_aac == max_loc_aac:
-            max_aac_list.append((loc,num,max_loc_aac,best_estimator))
-            print("=: {}\n".format(max_aac_list))
-            with lock:
-                infor_file = open("{}/{}_outpot.txt".format(seed_number,dataset_filename.split(".")[0]),"a")
-                infor_file.write("=: {}\n".format(max_aac_list))
-                infor_file.close()
+    p_feature_data,n_feature_data,labels = prepare(datset_filename,class_filename)
     
-    end = time.time()            
-    with lock:
-        infor_file = open("{}/{}_outpot.txt".format(seed_number,dataset_filename.split(".")[0]),"a")
-        infor_file.write("using time: {}".format(end-start))  
-        infor_file.close()              
-    return max_aac_list         
+    max_estimator_aac = 0
+    for estimator in estimator_list:
+        estimator_aac = get_aac(select_estimator(estimator),p_feature_data.iloc[:,:feature_range],n_feature_data.iloc[:,:feature_range],labels,seed_number)
+        if estimator_aac > max_estimator_aac:
+            max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用四个estimator 得到的最大值
+
+    return max_estimator_aac
 
 
-#对17个数据集进行一次运行
+#得到特征子集的其实位置和特征子集的个数
+def get_ranked_subfeature():
+    with open("output.txt","r") as f:
+        ranked_subfeature = []
+        for line in f.readlines():
+            ranked_subfeature.append(int(line.split(", ")[1]))
+    return ranked_subfeature  
+
+
 def all_dataset():
     dataset_list = os.listdir('dataset/data')
     label_list = os.listdir('dataset/class')
+
     try:
         dataset_list.remove('.DS_Store')
         label_list.remove('.DS_Store')
     except:
         pass
 
-    pool = multiprocessing.Pool(4)
-    file_list = list(zip(sorted(dataset_list),sorted(label_list)))
+    ranked_subfeature = get_ranked_subfeature()  #['1', '1', '7', '3', '3', '8', '2', '0', '6', '6', '9', '6', '6', '4', '2', '1', '3', '9', '4']
 
-    lock = multiprocessing.Manager().Lock()
-    single_dataset = partial(single,lock)
-
-    results = pool.map(single_dataset,file_list)
-
-    pool.close()
-    pool.join()
+    all_seed_output = []
+    for seed_number in range(20): 
+        print(seed_number)
+        index = 0
+        output_list = []
+        for dataset_filename,label_filename in zip(dataset_list,label_list):
+            acc = single(dataset_filename,label_filename,ranked_subfeature[index],seed_number)
+            print(dataset_filename,acc)
+            index += 1
+            output_list.append(acc)
+        all_seed_output.append(output_list)
     
-    with open("output.txt","a") as f:
-        f.write(str(results))
-        
+    print(np.array(all_seed_output).mean(0))        
+
 
 if __name__ == '__main__':
     all_dataset()
-      
+
 
     
     

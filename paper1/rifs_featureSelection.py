@@ -5,6 +5,8 @@ Required packages
 - pandas
 - numpy
 - sklearn
+- scipy
+
 
 Info
 - name   : "zhangruochi"
@@ -14,6 +16,8 @@ Info
 
 Description
     RIFS
+    multiprocessing
+    ultimate
 '''
 
 
@@ -23,6 +27,7 @@ import os
 import pickle
 import random
 import multiprocessing
+import time
 from functools import partial
 
 from scipy.stats import ttest_ind_from_stats
@@ -89,6 +94,7 @@ def t_test(dataset,labels):
     t_value,p_value = ttest_ind_from_stats(p_mean,p_std,p_feature_data.shape[1],n_mean,n_std,n_feature_data.shape[1])
     p_value = pd.Series(data=p_value,index=list(range(len(p_value))))
 
+
     return p_feature_data, n_feature_data, p_value
  
 
@@ -97,9 +103,12 @@ def t_test(dataset,labels):
 def rank_t_value(dataset,labels):
     p_feature_data,n_feature_data,p_value = t_test(dataset,labels)
     sort_index = p_value.sort_values(ascending=True).index
-    print(sort_index)
+
+    with open("p_rank.pkl","wb") as f:
+        pickle.dump(sort_index,f)
 
     p_feature_data = p_feature_data.reindex(sort_index)
+    #print(p_feature_data)  //根据 p值的排序
     n_feature_data = n_feature_data.reindex(sort_index)
 
     return p_feature_data.T,n_feature_data.T
@@ -108,14 +117,13 @@ def rank_t_value(dataset,labels):
 def prepare(datset_filename,class_filename):
     dataset = load_data(datset_filename)
     labels = load_class(class_filename)
-    p_feature_data,n_feature_data = rank_t_value(dataset,labels)
+    p_feature_data,n_feature_data = rank_t_value(dataset,labels)ß
     #将样本的顺序打乱  防止在交叉验证的时候出错
     return p_feature_data,n_feature_data,labels
 
 
-
-#选择分类器 D-tree,SVM,NBayes,KNN 
-def select_estimator(case):
+#选择分类器 D-tree,SVM,NBayes,KNN
+def select_estimator(case):ß
 
     if case == 0:
         estimator = SVC()
@@ -167,13 +175,18 @@ def k_fold(y,k):
 #生成重启的位置
 def random_num_generator(num_of_feature,seed_number):
     random.seed(seed_number)
-    return [random.randint(0,num_of_feature) for i in range(num_of_feature // 2 )]   # 重启的组数为所有特征的一半
+    result = random.sample(list(range(num_of_feature)),int(num_of_feature * 0.4 -1))   # 重启的组数为所有特征的一半
+    result.append(0)
+    return result
 
 
+#对每一个数据集进行运算
+def single(lock,name):
+    seed_number = 7
+    start = time.time()
 
-def single(lock,args):
-    dataset_filename,label_filename = args[0],args[1]
-    seed_number = 0
+    dataset_filename,label_filename = name[0],name[1]
+    print("dealing the {}".format(dataset_filename))
     p_feature_data,n_feature_data,labels = prepare(dataset_filename,label_filename)
     loc_of_first_feature = random_num_generator(p_feature_data.shape[1],seed_number) # 重启的位置
 
@@ -182,61 +195,71 @@ def single(lock,args):
     estimator_list = [0,1,2,3,4]
     feature_range = p_feature_data.shape[1]
 
-    
-        for loc in loc_of_first_feature:
-            num = 0
-            max_k_aac = 0 
-            count = 0  #记录相等的次数
-            best_estimator = -1   
+
+    if not os.path.exists("{}".format(seed_number)):
+        os.mkdir("{}".format(seed_number))
+
+    for loc in loc_of_first_feature:
+        num = 0
+        max_k_aac = 0 
+        count = 0  #记录相等的次数
+        best_estimator = -1   
+        
+        for k in range(feature_range - loc):  # 从 loc位置 开始选取k个特征
+            max_estimator_aac = 0
+            locs = [i for i in range(loc,loc+k+1)]
+
+            p_data = p_feature_data.iloc[:,locs]
+            n_data = n_feature_data.iloc[:,locs]
+
+            for item in estimator_list:
+                estimator_aac = get_aac(select_estimator(item),p_data,n_data,labels,seed_number)
+                if estimator_aac > max_estimator_aac:
+                    max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用四个estimator 得到的最大值
+                    best_temp_estimator = item
+     
+            if max_estimator_aac > max_k_aac:
+                count = 0 
+                max_k_aac = max_estimator_aac   #得到的是从 loc 开始重启的最大值
+                num = k+1
+                best_estimator = best_temp_estimator
             
-            for k in range(feature_range - loc):  # 从 loc位置 开始选取k个特征
-                max_estimator_aac = 0
-                locs = [i for i in range(loc,loc+k+1)]
+            else:
+                count += 1
+                if count == 3:
+                    break
+   
+        if max_k_aac > max_loc_aac:
+            max_loc_aac = max_k_aac
+            max_aac_list = []
+            max_aac_list.append((loc,num,max_loc_aac,best_estimator))
+            print(">: {}\n".format(max_aac_list))
+            with lock:
+                infor_file = open("{}/{}_outpot.txt".format(seed_number,dataset_filename.split(".")[0]),"a")
+                infor_file.write(">: {}\n".format(max_aac_list))
+                infor_file.close()
+            
 
-                p_data = p_feature_data.iloc[:,locs]
-                n_data = n_feature_data.iloc[:,locs]
-
-                for item in estimator_list:
-                    estimator_aac = get_aac(select_estimator(item),p_data,n_data,labels,seed_number)
-                    if estimator_aac > max_estimator_aac:
-                        max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用四个estimator 得到的最大值
-                        best_temp_estimator = item
-         
-                if max_estimator_aac > max_k_aac:
-                    count = 0 
-                    max_k_aac = max_estimator_aac   #得到的是从 loc 开始重启的最大值
-                    num = k+1
-                    best_estimator = best_temp_estimator
-                
-                else:
-                    count += 1
-                    if count == 3:
-                        break
-       
-            if max_k_aac > max_loc_aac:
-                max_loc_aac = max_k_aac
-                max_aac_list = []
-                max_aac_list.append((loc,num,max_loc_aac,best_estimator))
-                print(">: {}\n".format(max_aac_list))
-                with lock:
-                    infor_file = open("{}_outpot.txt".format(dataset_filename.split(".")[0]),"a")
-                    infor_file.write(">: {}\n".format(max_aac_list))
-                    infor_file.close()
-                
-
-            elif max_k_aac == max_loc_aac:
-                max_aac_list.append((loc,num,max_loc_aac,best_estimator))
-                print("=: {}\n".format(max_aac_list))
-                with lock:
-                    infor_file = open("{}_outpot.txt".format(dataset_filename.split(".")[0]),"a")
-                    infor_file.write("=: {}\n".format(max_aac_list))
-                    infor_file.close()
+        elif max_k_aac == max_loc_aac:
+            max_aac_list.append((loc,num,max_loc_aac,best_estimator))
+            print("=: {}\n".format(max_aac_list))
+            with lock:
+                infor_file = open("{}/{}_outpot.txt".format(seed_number,dataset_filename.split(".")[0]),"a")
+                infor_file.write("=: {}\n".format(max_aac_list))
+                infor_file.close()
+    
+    end = time.time()            
+    with lock:
+        infor_file = open("{}/{}_outpot.txt".format(seed_number,dataset_filename.split(".")[0]),"a")
+        infor_file.write("using time: {}".format(end-start))  
+        infor_file.close()              
     return max_aac_list         
 
 
+#对17个数据集进行一次运行
 def all_dataset():
-    dataset_list = os.listdir('/Users/ZRC/Desktop/HLab/dataset/data')
-    label_list = os.listdir('/Users/ZRC/Desktop/HLab/dataset/class')
+    dataset_list = os.listdir('dataset/data')
+    label_list = os.listdir('dataset/class')
     try:
         dataset_list.remove('.DS_Store')
         label_list.remove('.DS_Store')
@@ -245,21 +268,22 @@ def all_dataset():
 
     pool = multiprocessing.Pool(4)
     file_list = list(zip(sorted(dataset_list),sorted(label_list)))
-    lock = multiprocessing.Lock()
+
+    lock = multiprocessing.Manager().Lock()
     single_dataset = partial(single,lock)
 
-    results = pool.map(single,file_list)
+    results = pool.map(single_dataset,file_list)
 
     pool.close()
     pool.join()
     
-    with open("output.pkl","wb") as f:
-        pickle.dump(results,f)
-
+    with open("output.txt","a") as f:
+        f.write(str(results))
+        
 
 if __name__ == '__main__':
-
     all_dataset()
+    
       
 
     

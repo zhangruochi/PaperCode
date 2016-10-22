@@ -397,10 +397,10 @@ def single_stop(dataset_filename,label_filename,stop):
     return max_aac_list             
 
 def test_dataset():
-    dataset_filename = "Gastric2.csv"
-    label_filename = "Gastric2class.csv"
-    stop=1
-    single_stop(dataset_filename,label_filename,stop)
+    dataset_filename = "Gastric1.csv"
+    label_filename = "Gastric1class.csv"
+    for stop in range(4,6):
+        single_stop(dataset_filename,label_filename,stop)
       
 
 
