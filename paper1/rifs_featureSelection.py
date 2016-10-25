@@ -226,7 +226,7 @@ def single(lock,name):
             
             else:
                 count += 1
-                if count == 3:
+                if count == 2:
                     break
    
         if max_k_aac > max_loc_aac:
