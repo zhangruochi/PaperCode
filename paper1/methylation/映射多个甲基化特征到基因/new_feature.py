@@ -8,20 +8,35 @@ import pickle
 
 #得到原始的特征与特征所在染色体的位置  eg:{'cg00000292': ['16', '28797486', '28797825']}
 def get_feature():
+    from collections import defaultdict
+    return_dict = defaultdict(list)
+
     dataset = pd.read_csv("for_trans.csv",sep='\t',index_col='ID')
-    dataset_index  = dataset.index     #20006
-    feature_dict = dict()
-    for index, row in dataset.iterrows():
-      feature_dict[index] = [item for item in row.values[0].split(" ")]
-    return dataset_index,feature_dict
+    dataset_index = dataset.index
+    for index,row in dataset.iterrows():
+        return_dict[index].append(row.values[0].split(" ")[0])
+    
+            
+    report_dataset = pd.read_table("report_location.txt",index_col = "#feat_name")
+    count = 0 
+    feat_name_list = []
+    for index,row in report_dataset.iterrows():
+        if index in feat_name_list:
+            count -= 1
+        return_dict[dataset_index[count]].append((row["mapped_start"],row["mapped_stop"]))
+        count += 1 
+        feat_name_list.append(index)      
+    return return_dict
 
 
 def remove_n(data):
     return data.strip("\n")
 
+
+
 #初步处理数据 生成临时文件  得到mRNA及其数据的列表
 def get_mRNA(chr_fileanme):
-    with open(chr_fileanme) as f:
+    with open(chr_fileanme) as f:   #打开染色体数据文件
         if not os.path.exists("temp_output"):
             os.mkdir("temp_output")
         with open("temp_output/{}.txt".format(os.path.split(chr_fileanme)[1]),"a") as result_file:
@@ -45,6 +60,18 @@ def get_mRNA(chr_fileanme):
                                 break
                 else:
                     break
+
+
+#遍历所有染色体的文件 保存到临时文件夹
+def save_temp_file():    
+    dirname = os.path.join("Autism","GRCh")
+    for filename in os.listdir(dirname):
+        if filename == ".DS_Store":
+            continue
+        full_filename = os.path.join("Autism","GRCh",filename)
+        get_mRNA(full_filename)
+
+
 
 def get_id(string):
     return string[string.find("GeneID"):].split(":")[-1].strip('"')
@@ -91,16 +118,6 @@ def get_id_loc(temp_file):
       
     return result_dict   
 
-
-
-#初步清晰所有染色体的文件 保存到临时文件夹
-def save_temp_file():    
-    dirname = os.path.join("Autism","GRCh")
-    for filename in os.listdir(dirname):
-        if filename == ".DS_Store":
-            continue
-        full_filename = os.path.join("Autism","GRCh",filename)
-        get_mRNA(full_filename)
             
 #根据所有染色体的临时文件 生成字典 
 def get_all_chr_dic():
@@ -123,21 +140,29 @@ def get_feature_relation():
         chr_dict = pickle.load(f)
     #{1:{'126695': [26949556, 26960484],...},.....}
 
-    dataset_index,feature_dict = get_feature()    #{'cg13277160': ['2', '208197158', '208200384']....}
+    feature_dict = get_feature()    #{'cg13277160': ['2', ('208197158', '208200384'),('208197158', '208200384')]....}   需要被转换的所有 feature
     cg_ge_relation = []
     for feature,infor in feature_dict.items():
         for gene_id,loc_list in chr_dict[infor[0]].items():
-            if int(infor[1]) >= loc_list[0] and int(infor[2]) <= loc_list[1]:
-                cg_ge_relation.append((gene_id,feature))
-                print(feature,gene_id)
+            for i in range(1,len(infor)):
+                try:
+                    if int(infor[i][0]) >= loc_list[0] and int(infor[i][1]) <= loc_list[1]:
+                        cg_ge_relation.append((gene_id,feature))
+                except:        
+                    print(gene_id,feature,infor[i],loc_list[1]) 
+
+
 
     print(len(cg_ge_relation))
     with open("cg_ge_relation.pkl","wb") as f:
-        pickle.dump(cg_ge_relation,f)       #10333
+        pickle.dump(cg_ge_relation,f)       #10333   如果甲基化的数据能够映射到基因上 则生成元素[('cg13277160','126695')]
 
+
+#得到最终的映射字典
 def deal_relation():
     with open("cg_ge_relation.pkl","rb") as f:
         infor_list = pickle.load(f)
+
     from collections import defaultdict   
     result_dict = defaultdict(list)
     
@@ -146,16 +171,10 @@ def deal_relation():
     
     with open("relation_ultimate.pkl","wb") as f:    
         pickle.dump(result_dict,f)
+        
     return result_dict
-                
 
-
-
-
-
-
-
-
+            
 
 if __name__ == '__main__':
     deal_relation()

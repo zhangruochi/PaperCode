@@ -47,8 +47,8 @@ def load_data(filename):
     dataset.fillna(method="bfill",axis = 0,inplace =True)
     labels,mask = processing_label(dataset)
     dataset = dataset.iloc[:,mask]
-    print(dataset)
-
+    print(dataset.shape)
+    """
     with open("relation_ultimate.pkl","rb") as f:
         relation = pickle.load(f)
 
@@ -62,7 +62,7 @@ def load_data(filename):
     dataset.columns = list(range(dataset.shape[1]))
     dataset = dataset.rename(index = name_index_dic)
     return dataset,labels
-
+    """
 def processing_label(dataset):
     labels = []
     raw_labels = dataset.columns.tolist()
@@ -278,8 +278,8 @@ def single(dataset_filename):
         
 
 if __name__ == '__main__':
-    #load_data("GSE27044_Matrix_Normalized_AllSampleBetaPrime.txt")
-    single("GSE27044_Matrix_Normalized_AllSampleBetaPrime.txt")
+    load_data("GSE27044_Matrix_Normalized_AllSampleBetaPrime.txt")
+    #single("GSE27044_Matrix_Normalized_AllSampleBetaPrime.txt")
 
     """
                 EBSC_CTL1.Avg_Beta  11299.s1.Avg_Beta  11596.s1.Avg_Beta  \
