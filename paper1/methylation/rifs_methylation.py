@@ -47,11 +47,12 @@ def load_data(filename):
     dataset.fillna(method="bfill",axis = 0,inplace =True)
     labels,mask = processing_label(dataset)
     dataset = dataset.iloc[:,mask]
-    print(dataset.shape)
-    """
+
+    
     with open("relation_ultimate.pkl","rb") as f:
         relation = pickle.load(f)
 
+    print(len(relation))    
     result_dict = {}    
     for new_feature, raw_feature_list in relation.items():
         result_dict[new_feature] = dataset.loc[raw_feature_list,:].mean()
@@ -62,7 +63,7 @@ def load_data(filename):
     dataset.columns = list(range(dataset.shape[1]))
     dataset = dataset.rename(index = name_index_dic)
     return dataset,labels
-    """
+    
 def processing_label(dataset):
     labels = []
     raw_labels = dataset.columns.tolist()
@@ -205,7 +206,7 @@ def random_num_generator(num_of_feature,seed_number):
 
 #对每一个数据集进行运算
 def single(dataset_filename):
-    seed_number = 7
+    seed_number = 0
     start = time.time()
 
     print("dealing the {}".format(dataset_filename))
@@ -278,8 +279,8 @@ def single(dataset_filename):
         
 
 if __name__ == '__main__':
-    load_data("GSE27044_Matrix_Normalized_AllSampleBetaPrime.txt")
-    #single("GSE27044_Matrix_Normalized_AllSampleBetaPrime.txt")
+    #load_data("GSE27044_Matrix_Normalized_AllSampleBetaPrime.txt")
+    single("GSE27044_Matrix_Normalized_AllSampleBetaPrime.txt")
 
     """
                 EBSC_CTL1.Avg_Beta  11299.s1.Avg_Beta  11596.s1.Avg_Beta  \

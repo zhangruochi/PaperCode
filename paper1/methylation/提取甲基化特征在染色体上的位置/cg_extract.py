@@ -31,6 +31,7 @@ def load_data():
         used_dataset.loc[index,"CPG_ISLAND_LOCATIONS"] = np.NaN  
 
     used_dataset.dropna(axis = 0,how='any',inplace = True)
+    print(used_dataset.shape) #(20006, 1)    有一部分数据不存在位置
     used_dataset.to_csv("for_trans.csv",sep='\t') 
 
 #处理临时文件得到最终的结果
@@ -44,5 +45,5 @@ def get_unfransformed_dataset():
 
 
 if __name__ == '__main__':
-    get_unfransformed_dataset()
+    load_data()
 
