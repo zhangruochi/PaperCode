@@ -1,0 +1,38 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: test - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\m1316\AppData\Local\Temp\RSP377F.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Fp"Debug/test.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Program Files (x86)\Microsoft Visual Studio\MyProjects\test\testView.cpp"
+]
+Creating command line "cl.exe @C:\Users\m1316\AppData\Local\Temp\RSP377F.tmp" 
+Creating temporary file "C:\Users\m1316\AppData\Local\Temp\RSP3780.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/test.pdb" /debug /machine:I386 /out:"Debug/test.exe" /pdbtype:sept 
+".\Debug\MainFrm.obj"
+".\Debug\StdAfx.obj"
+".\Debug\test.obj"
+".\Debug\testDoc.obj"
+".\Debug\testView.obj"
+".\Debug\test.res"
+]
+Creating command line "link.exe @C:\Users\m1316\AppData\Local\Temp\RSP3780.tmp"
+<h3>Output Window</h3>
+Compiling...
+testView.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\MyProjects\test\testView.cpp(237) : warning C4244: '=' : conversion from 'long' to 'float', possible loss of data
+Linking...
+
+
+
+<h3>Results</h3>
+test.exe - 0 error(s), 1 warning(s)
+</pre>
+</body>
+</html>
