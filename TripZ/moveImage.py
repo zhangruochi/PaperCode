@@ -38,6 +38,7 @@ def move_images(folder_path):
             os.system("cp {} result/".format(os.path.join(os.getcwd(),big_folder_name,filename)))    
         
 
+
     #测试  看转移后的文件夹中的 image 的数量和 sub 文件夹中image 的数量是否相同
     if len(os.listdir("result")) == len(small_folder_list):
         print("\n\n moving {} successful! \n\n".format(big_folder_name))     
