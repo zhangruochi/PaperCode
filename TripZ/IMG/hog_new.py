@@ -216,13 +216,22 @@ def sort_feature(feature_dict,chunk_size):
     return feature        
 
     
-def get_feature(foldername):
+def get_feature(foldername,degree = None, factor = None):
     image_folder = foldername
     all_feature = []
-    for filename in os.listdir(image_folder):
+    for filename in sorted(os.listdir(image_folder)):
         if filename.endswith(".jpg"):
             print(filename)
-            im = np.array(Image.open(os.path.join(image_folder,filename)).convert("L"))
+            im = Image.open(os.path.join(image_folder,filename))
+            
+            if degree:
+                im = im.rotate(degree)
+            if factor:
+                size = im.size[0] / factor, im.size[1] / factor
+                im.thumbnail(size)    
+
+            im = np.array(im.convert("L"))    
+
             magnitude,direction = get_magnitude(im)
 
             all_start_point,chunk_size = get_all_start_point(magnitude)  #[[(20, 35)], [(16, 27), (20, 27), (24, 27), (24, 35), (16, 35), (16, 43), (20, 43), (24, 43)], [(12, 19), (16, 19),......
@@ -233,7 +242,7 @@ def get_feature(foldername):
         all_feature.append(feature)    
     feature = np.array(all_feature)
 
-    with open("{}.pkl".format(foldername.split('.')[0]),"wb") as f:
+    with open("{}_two.pkl".format(foldername.split('.')[0]),"wb") as f:
         pickle.dump(feature,f)
     
     return feature    
@@ -254,6 +263,53 @@ def select_estimator(case):
         estimator = LogisticRegression()    
 
     return estimator
+
+
+
+def get_acc(features_a,features_b):
+    feature_a_dict = dict()
+    feature_b_dict = dict()
+
+    index = 0
+    for feature in features_a:
+        feature_a_dict[index] = feature
+        index += 1
+        
+    index = 0    
+    for feature in features_b:
+        feature_b_dict[index] = feature
+        index += 1    
+ 
+    count = 0  
+
+    for key_a,value_a in feature_a_dict.items():
+        min_distance = float("inf")  
+        position = -1
+        for key_b,value_b in feature_b_dict.items():
+            current_distance = np.sqrt(np.sum(np.square(value_a - value_b)))
+            print(current_distance)
+            if current_distance < min_distance:
+                min_distance = current_distance
+                position = key_b
+
+        exit()    
+        if key_a == position:
+            count += 1    
+
+    return count / features_a.shape[0]            
+
+
+
+def test_distance():
+    with open("Normal_Sub_two.pkl","rb") as f:
+        features_a  = pickle.load(f)
+
+    with open("Normal_Sub.pkl","rb") as f:
+        features_b  = pickle.load(f)  
+
+      
+    acc = get_acc(features_a,features_b)
+    print(acc)    
 
 
 #主函数
@@ -324,4 +380,5 @@ def main_rifs():
 
             
 if __name__ == '__main__':
-    main()
+    test_distance()
+    #get_feature("Normal_Sub",factor = 0.5)
