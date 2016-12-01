@@ -40,7 +40,7 @@ def load_one_dataset(filename):
         "/Users/ZRC/Desktop/HLab/dataset/data", filename)
     #dataset = pd.read_csv(full_path_name).drop(' ',axis=1)
     dataset = pd.read_csv(full_path_name).drop("Unnamed: 0",axis=1)
-
+    print(dataset.shape)
     return dataset
 
 
@@ -176,9 +176,12 @@ def layer_second(row,layer_first_row):
 
 estimator_list = [3]
 dataset = load_one_dataset("t1d.csv").T
+print(dataset.shape)
 #filtered_dataset, feature_name_index = variance_filter(dataset)
-y = load_one_labels("Adenomaclass.csv")
+y = load_one_labels("t1dclass.csv")
+print(y)
 length = dataset.shape[1]
+print(length)
 layer_first_dataset = dataset.drop(dataset.columns[-1],axis=1,inplace=False)  #第一层循环丢掉最后一个特征
 
 jobs = multiprocessing.JoinableQueue(1000)
@@ -199,7 +202,6 @@ for process in process_list:
 
 
 layer_first_dataset.apply(func = layer_first)  #add_task  进程开始执行
-
 
 for process in process_list:
     process.join()

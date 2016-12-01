@@ -21,6 +21,7 @@ class App(ttk.Frame):
         self.master.geometry("1000x650+50+20")
         self.pack(fill=tk.BOTH,expand=1)
         
+        
         #添加菜单
         menubar = tk.Menu(self.master)
         self.master.config(menu = menubar)
@@ -31,7 +32,6 @@ class App(ttk.Frame):
         menu_button_help.add_command(label="Website")
         menubar.add_cascade(label="Main",menu=menu_button_main)
         menubar.add_cascade(label="Help",menu=menu_button_help)
-
 
 
         #分块
