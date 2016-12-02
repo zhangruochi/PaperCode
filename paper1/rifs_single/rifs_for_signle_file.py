@@ -222,7 +222,7 @@ def single(dataset_filename,label_filename, seed = 7, percent = 0.4, stop = 3):
         
 
 if __name__ == '__main__':
-    single("Adenoma.csv","Adenomaclass.csv")
+    single("ALL2.csv","ALL2class.csv")
     
       
 
