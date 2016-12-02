@@ -181,11 +181,11 @@ def main():
     #创建4个进程  
     for i in range(4):   
         process = multiprocessing.Process(target = worker)
+        process.daemon = True    #设置为守护进程
         process_list.append(process)
 
     #所有进程开始执行 使其处于等待状态    
     for process in process_list:
-        process.daemon = True    #设置为守护进程
         process.start()    
 
     layer_first_dataset = dataset.drop(dataset.columns[-1],axis=1,inplace=False)  #第一层循环丢掉最后一个特征
