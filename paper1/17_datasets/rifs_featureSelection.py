@@ -12,11 +12,12 @@ Info
 - name   : "zhangruochi"
 - email  : "zrc720@gmail.com"
 - date   : "2016.12.02"
-- Version : 1.0.0
+- Version : 2.0.0
 
 Description
     RIFS
-    single file
+    检验17个数据集
+    ultimate
 '''
 
 
@@ -25,10 +26,12 @@ import pandas as pd
 import os
 import pickle
 import random
+import multiprocessing
 import time
 from functools import partial
 
 from scipy.stats import ttest_ind_from_stats
+
 from sklearn.model_selection import StratifiedKFold
 from sklearn.svm import SVC
 from sklearn.naive_bayes import GaussianNB
@@ -40,7 +43,8 @@ from sklearn.linear_model import LogisticRegression
 
 #加载数据集
 def load_data(filename):
-    dataset = pd.read_csv(filename,index_col=0)
+    full_path_name = os.path.join("/Users/ZRC/Desktop/HLab/dataset/data",filename)
+    dataset = pd.read_csv(full_path_name,index_col=0)
     name_index_dic = get_name_index(dataset)
     with open("name_index.pkl","wb") as f:
         pickle.dump(name_index_dic,f)
@@ -63,7 +67,8 @@ def get_name_index(dataset):
 
 #加载标签
 def load_class(filename):
-    class_set = pd.read_csv(filename,index_col = 0)
+    full_path_name = os.path.join("/Users/ZRC/Desktop/HLab/dataset/class",filename)
+    class_set = pd.read_csv(full_path_name,index_col = 0)
     labels = class_set["Class"]
     result = []
     
@@ -75,7 +80,6 @@ def load_class(filename):
 
     labels.apply(func = convert)     
     return np.array(result)
-
 
 
 # t_检验  得到每个特征的 t 值
@@ -161,6 +165,7 @@ def single(dataset_filename,label_filename, seed = 7, percent = 0.4, stop = 3):
     start = time.time()
     print("dealing the {}".format(dataset_filename))
 
+
     dataset,labels = prepare(dataset_filename,label_filename)
     loc_of_first_feature = random_num_generator(dataset.shape[1], seed_number, percent) # 重启的位置
 
@@ -168,6 +173,8 @@ def single(dataset_filename,label_filename, seed = 7, percent = 0.4, stop = 3):
     max_aac_list = []
     feature_range = dataset.shape[1]
 
+    if not os.path.exists("{}".format(seed)):
+        os.mkdir("{}".format(seed))
 
     for loc in loc_of_first_feature:
         num = 0
@@ -203,26 +210,44 @@ def single(dataset_filename,label_filename, seed = 7, percent = 0.4, stop = 3):
             max_aac_list.append((loc,num,max_loc_aac,best_estimator))
             print(">: {}\n".format(max_aac_list))
 
-            with open("result.txt","a") as infor_file:
-                infor_file.write(">: {}\n".format(max_aac_list))
+            infor_file = open("{}/{}_result.txt".format(seed_number,dataset_filename.split(".")[0]),"a")
+            infor_file.write(">: {}\n".format(max_aac_list))
+            infor_file.close()
+            
 
         elif max_k_aac == max_loc_aac:
             max_aac_list.append((loc,num,max_loc_aac,best_estimator))
             print("=: {}\n".format(max_aac_list))
             
-            with open("result.txt","a") as infor_file:
-                infor_file.write("=: {}\n".format(max_aac_list))
+            infor_file = open("{}/{}_result.txt".format(seed_number,dataset_filename.split(".")[0]),"a")
+            infor_file.write("=: {}\n".format(max_aac_list))
+            infor_file.close()
     
     end = time.time()            
-    with open("result.txt","a") as infor_file:
-        infor_file.write("using time: {}".format(end-start))  
+    infor_file = open("{}/{}_result.txt".format(seed_number,dataset_filename.split(".")[0]),"a")
+    infor_file.write("using time: {}".format(end-start))  
+    infor_file.close() 
 
     return max_aac_list         
 
-        
+
+#对17个数据集进行一次运行
+def all_dataset():
+    dataset_list = os.listdir('dataset/data')
+    label_list = os.listdir('dataset/class')
+    try:
+        dataset_list.remove('.DS_Store')
+        label_list.remove('.DS_Store')
+    except:
+        pass
+
+
+    for dataset_filename,labels_filename in zip(sorted(dataset_list),sorted(label_list)):
+        single(dataset_filename,labels_filename)
+            
 
 if __name__ == '__main__':
-    single("Adenoma.csv","Adenomaclass.csv")
+    all_dataset()
     
       
 
