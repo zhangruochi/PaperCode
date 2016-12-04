@@ -30,12 +30,11 @@ from functools import partial
 from sklearn.linear_model import Ridge
 from sklearn.ensemble import RandomForestClassifier
 
-from sklearn.cross_validation import KFold
+from sklearn.model_selection import StratifiedKFold
 from sklearn.svm import SVC
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.grid_search import GridSearchCV
 from sklearn.linear_model import LogisticRegression
 
 
@@ -83,24 +82,19 @@ def load_class(filename):
 
 # 选择重要性程度大的特征
 def rank_importance_value(dataset,labels):
-    p_feature_data = dataset.loc[:,labels == 1]  #得到正类数据集
-    n_feature_data = dataset.loc[:,labels == 0]  #得到负类数据集
-
     t_dataset = dataset.T
     selector = RandomForestClassifier()
     selector.fit(t_dataset,labels)
-
-    p_feature_data = p_feature_data[selector.feature_importances_ != 0].T
-    n_feature_data = n_feature_data[selector.feature_importances_ != 0].T
+    dataset = dataset[selector.feature_importances_ != 0].T
     
-    return p_feature_data, n_feature_data
+    return dataset
  
 
 def prepare(datset_filename,class_filename):
     dataset = load_data(datset_filename)
     labels = load_class(class_filename)
-    p_feature_data,n_feature_data = rank_importance_value(dataset,labels)
-    return p_feature_data,n_feature_data,labels
+    dataset = rank_importance_value(dataset,labels)
+    return dataset,labels
 
 
 #选择分类器 D-tree,SVM,NBayes,KNN
@@ -120,40 +114,25 @@ def select_estimator(case):
     return estimator            
 
 #采用 K-Fold 交叉验证 得到 aac 
-def get_aac(estimator,p_feature_data,n_feature_data,y,seed_number):
-    scores = []
-    k = 5
-    p_kf = KFold(p_feature_data.shape[0],n_folds = k,shuffle = True,random_state = seed_number)
-    n_kf = KFold(n_feature_data.shape[0],n_folds = k,shuffle = True,random_state = seed_number)
-
-    for i in range(k):
-
-        p_train_data = p_feature_data.iloc[list(p_kf)[i][0],:]
-        p_test_data = p_feature_data.iloc[list(p_kf)[i][1],:]
-
-        n_train_data = n_feature_data.iloc[list(n_kf)[i][0],:]
-        n_test_data = n_feature_data.iloc[list(n_kf)[i][1],:]
-
-        X_train = p_train_data.append(n_train_data)
-        y_train = y[X_train.index]
+def get_aac(estimator,X,y,seed_number,skf):
+    
+    for train_index,test_index in skf.split(X,y):
+        X_train, X_test = X.ix[train_index], X.ix[test_index]
+        y_train, y_test = y[train_index], y[test_index]
         estimator.fit(X_train,y_train)
+        scores = estimator.score(X_test,y_test)
 
-                
-        X_test = p_test_data.append(n_test_data)
-        y_test = y[X_test.index]
-        scores.append(estimator.score(X_test,y_test))
-
-    return np.mean(scores)    
+    return np.mean(scores)
 
 
-#对每一个数据集进行运算
 def single(datset_filename,class_filename,seed_number):
     estimator_list = [0,1,2,3,4]
-    p_feature_data,n_feature_data,labels = prepare(datset_filename,class_filename)
-    
+    skf = StratifiedKFold(n_splits = 3)
+    dataset,labels = prepare(datset_filename,class_filename)
+    print(dataset.shape)
     max_estimator_aac = 0
     for estimator in estimator_list:
-        estimator_aac = get_aac(select_estimator(estimator),p_feature_data,n_feature_data,labels,seed_number)
+        estimator_aac = get_aac(select_estimator(estimator),dataset,labels,seed_number,skf)
         if estimator_aac > max_estimator_aac:
             max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用四个estimator 得到的最大值
 
@@ -182,9 +161,7 @@ def all_dataset():
             output_list.append(acc)
         all_seed_output.append(output_list)
     
-    print(np.array(all_seed_output).mean(0))  
-    with open("wilcon_out.pkl","wb") as f:
-        pickle.dump(np.array(all_seed_output).mean(0),f)
+    print(np.array(all_seed_output).mean(0)) 
 
         
 

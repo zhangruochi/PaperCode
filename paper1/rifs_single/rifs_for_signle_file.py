@@ -102,7 +102,7 @@ def rank_t_value(dataset,labels):
         pickle.dump(sort_index,f)
 
     dataset = dataset.reindex(sort_index)
-    #print(dataset)  //根据 p值的排序
+    print(dataset)  #根据 p值的排序
 
     return dataset.T
 
@@ -223,6 +223,8 @@ def single(dataset_filename,label_filename, seed = 7, percent = 0.4, stop = 3):
 
 if __name__ == '__main__':
     single("ALL2.csv","ALL2class.csv")
+
+
     
       
 

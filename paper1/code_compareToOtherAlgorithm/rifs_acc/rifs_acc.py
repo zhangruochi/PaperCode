@@ -128,11 +128,11 @@ def get_rank_dict(dataset,labels):
 
 #得到实际 feature 的位置
 def deal_output(dataset,labels,ranked_subfeature):
-    rank_dict = get_rank_dict(dataset,labels)         
+    rank_dict = get_rank_dict(dataset,labels)     
     feature_list = []
     start = int(ranked_subfeature[0])
     for i in range(int(ranked_subfeature[1])):
-        feature_list.append(rank_dict[start+i])
+        feature_list.append(rank_dict[start+i]) 
     return feature_list         
 
 
@@ -170,10 +170,9 @@ def get_aac(estimator,X,y,seed_number,skf):
 def single(dataset,labels,feature_list,all_results,seed_number):
     estimator_list = [0,1,2,3,4]
     skf = StratifiedKFold(n_splits = 3)
-
     max_estimator_aac = -1
     for index in estimator_list:
-        estimator_aac = get_aac(select_estimator(index),dataset.T,labels,seed_number,skf)
+        estimator_aac = get_aac(select_estimator(index),dataset.iloc[feature_list,:].T,labels,seed_number,skf)
         if estimator_aac > max_estimator_aac:
             max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用四个estimator 得到的最大值
             
@@ -197,8 +196,6 @@ def all_dataset():
         pass
 
     ranked_subfeature_list = get_ranked_subfeature() #[['11', '1'], ['0', '1'], ['139', '7'], ['14', '3'].......
-    #print(ranked_subfeature_list)
-      
     all_seeds_result = []
     for seed_number in list(range(0,20)):
         index = 0
@@ -207,7 +204,6 @@ def all_dataset():
             dataset = load_data(dataset_filename)
             labels = load_class(label_filename)
             feature_list = deal_output(dataset,labels,ranked_subfeature_list[index])  
-
             print(seed_number,dataset_filename)
             single(dataset,labels,feature_list,all_results,seed_number)
             index += 1
@@ -224,7 +220,6 @@ def all_dataset():
 if __name__ == '__main__':
     all_dataset()
     
-
     
 
     
