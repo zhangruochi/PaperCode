@@ -102,8 +102,6 @@ def rank_t_value(dataset,labels):
         pickle.dump(sort_index,f)
 
     dataset = dataset.reindex(sort_index)
-    print(dataset)  #根据 p值的排序
-
     return dataset.T
 
 
