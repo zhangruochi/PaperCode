@@ -1,8 +1,9 @@
 from scipy import io
-import matplotlib.pyplot as plt 
+#import matplotlib.pyplot as plt 
 import os
 import numpy as np
 import pandas as pd
+import pickle
 
 
 from sklearn.svm import SVC
@@ -10,6 +11,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import StratifiedKFold
 
 
@@ -29,8 +31,8 @@ def graph_trans_dataset(dataset):
     plt.show()
 """
 
-
-#加载数据文件
+ 
+#加载单个文件
 def load_dataset(Folder_name,filename):
     dataset_mat = io.loadmat(os.path.join(Folder_name,filename))
     data_struct = dataset_mat['dataStruct']
@@ -68,22 +70,27 @@ def select_estimator(case):
         estimator = LogisticRegression()    
     return estimator
 
+
+
+#分类函数
 def classfier(dataset,labels):    
     estimator_list = [0,1,2,3,4]
-    skf = StratifiedKFold(n_splits = 5)
-    scores = []
+    skf = StratifiedKFold(n_splits = 3)
     names = ["SVM","KNeighbors","DecisionTree","Naives_Bayes","LogisticRegression"]
-
-    for train_index, test_index in skf.split(dataset,labels):
-        for estimator_index in estimator_list:
-            estimator = select_estimator(estimator_index)
+    index = 0
+   
+    for estimator_index in estimator_list:
+        scores = []
+        estimator = select_estimator(estimator_index)
+        for train_index, test_index in skf.split(dataset,labels):
             estimator.fit(dataset[train_index],labels[train_index])
-            socre = estimator.score(dataset[test_index],labels[test_index])
-            print(names[estimator_index],score)
-            scores.append(socre)
-    print("the mean accuracy is: {}".format(np.mean(socres)))
+            score = estimator.score(dataset[test_index],labels[test_index])
+            scores.append(score)
+        print("{}: {}".format(names[index],np.mean(scores)))
+        index += 1
 
 
+#主函数
 def main():
     #虚拟起始的向量  
     result_vector = np.zeros(160)
@@ -94,17 +101,20 @@ def main():
     for filename in os.listdir(N_folder_name):
         if filename == ".DS_Store":
             continue
+        print(filename)    
         dataset = load_dataset(N_folder_name,filename)
         vector = change_one_file(dataset)
         result_vector = np.vstack((result_vector,vector))
         N_labels.append(0)    
 
+    print(result_vector.shape)    
     #Positive  dataset 和 labels
     P_labels = []
     P_folder_name = "P_Folder"
     for filename in os.listdir(P_folder_name):
         if filename == ".DS_Store":
             continue
+        print(filename)      
         dataset = load_dataset(P_folder_name,filename)
         vector = change_one_file(dataset)
         P_labels.append(1)
@@ -115,11 +125,43 @@ def main():
 
     print(labels.shape)
     print(dataset.shape)
+    with open("dataset.pkl","wb") as f:
+        pickle.dump(dataset,f)
+
+    with open("labels.pkl","wb") as f:
+        pickle.dump(labels,f)   
 
     #分类
-    classfier(dataset,labels)
+    classfier(np.angle(dataset),labels)
 
 
+
+#测试
+def test_acc():
+    with open("dataset.pkl","rb") as f:
+        dataset = pickle.load(f)
+
+    with open("labels.pkl","rb") as f:
+        labels = pickle.load(f)
+
+    dataset = np.angle(dataset)
+    print(dataset.shape)
+    
+
+    estimator = RandomForestClassifier()
+    estimator.fit(dataset,labels)
+    new_dataset = dataset[:,estimator.feature_importances_ != 0]
+    print(new_dataset.shape)
+    
+    from sklearn.model_selection import cross_val_score
+    print(cross_val_score(estimator,new_dataset,labels))
+
+
+    #[ 0.66666667  0.56565657  0.48979592]
+    
+
+
+    
 
 
 
@@ -130,6 +172,7 @@ def main():
 
         
 if __name__ == '__main__': 
-    ff_main()
+    #main()
+    test_acc()
     
 

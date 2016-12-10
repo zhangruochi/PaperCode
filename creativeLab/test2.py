@@ -1,9 +1,13 @@
+import pickle
 import numpy as np
-a = np.zeros(16)
-print(type(a))
 
-b = np.zeros((16))
-print(type(b))
+with open("dataset.pkl","rb") as f:
+    dataset = pickle.load(f)
+
+with open("labels.pkl","rb") as f:
+    labels = pickle.load(f)
 
 
-print(np.vstack((a,b)))
+dataset = np.hstack((dataset.real,dataset.imag))
+print(dataset.shape)
+print(labels)
