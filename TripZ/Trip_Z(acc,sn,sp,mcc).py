@@ -13,11 +13,11 @@ Required packages
 Info
 - name   : "zhangruochi"
 - email  : "zrc720@gmail.com"
-- date   : "2017.02.15"
+- date   : "2017.02.23"
 - Version : 3.0.0
 
 Description
-    Trip-Z 算法的实现
+    Trip-Z 分类标准为acc,sn,sp,mcc
 '''
 
 
@@ -40,8 +40,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import StratifiedKFold
-
 from sklearn.metrics import precision_recall_fscore_support
+from sklearn.metrics import matthews_corrcoef
 
 
 #根据像素矩阵得到梯度矩阵以及相应的值的矩阵
@@ -53,8 +53,7 @@ def get_magnitude(im,sigma = 5):
     filters.gaussian_filter(im, (sigma,sigma), (1,0), imy)
     magnitude = np.sqrt(imx**2+imy**2)   #梯度幅值
     direction = np.arctan(imy/imx)       #梯度方向
-    
-    direction = np.nan_to_num(direction)
+    direction[np.isnan(direction) | np.isinf(direction)] = 0
     
     return magnitude,direction
 
@@ -164,7 +163,10 @@ def transform_feature(raw_feature_list,k=9):
         for chunk in circle:
             feature_list = []
             for i in range(k):
-                feature_list.append(sum(chunk[i]))    
+                if len(chunk[i]) != 0:
+                    feature_list.append(sum(chunk[i])/len(chunk[i])) 
+                if len(chunk[i]) == 0: 
+                    feature_list.append(0)       
             #print(tmp_feature)  #每个chunk9个值, [-42.776486557553589, -33.977213583081131, -12.29493586581221, -5.5682229960047227, 0.15148943481737917, 3.4264964356761385, 7.9017645609536578, 13.918112670444323, 44.62213014473717]
             tmp_feature.append(feature_list)   
         #print(tmp_feature)   #4k个cell在此bin的平均值
@@ -176,12 +178,10 @@ def transform_feature(raw_feature_list,k=9):
         result += feature    
     return result
  
+
     
-def get_feature(foldername,degree = None, factor = None):
-#------ 参数设定-----------    
-    scale = 7   #层数
-    bins =  18   #多少个 bins
-#-------------------------
+def get_feature(foldername,scale = 5,bins = 9,degree = None):
+    
     image_folder = foldername
     all_feature = []
     for filename in sorted(os.listdir(image_folder)):
@@ -191,12 +191,8 @@ def get_feature(foldername,degree = None, factor = None):
             
             if degree:
                 im = im.rotate(degree)
-            if factor:
-                size = im.size[0] / factor, im.size[1] / factor
-                im.thumbnail(size)    
 
             im = np.array(im.convert("L"))    
-
             magnitude,direction = get_magnitude(im)
 
             all_start_point,chunk_size = get_all_start_point(magnitude,scale_factor = scale)  #[[(20, 35)], [(16, 27), (20, 27), (24, 27), (24, 35), (16, 35), (16, 43), (20, 43), (24, 43)], [(12, 19), (16, 19),......
@@ -224,28 +220,67 @@ def select_estimator(case):
     elif case == 3:
         estimator = GaussianNB()
     elif case == 4:
-        estimator = LogisticRegression()    
+        estimator = LogisticRegression()   
+    elif case == 5:
+        estimator = KNeighborsClassifier()     
 
     return estimator
 
 
+def evaluate(estimator,X,y,skf):
+    acc_list,sn_list,sp_list,mcc_list = [],[],[],[]
+    for train_index, test_index in skf.split(X, y):
+        estimator.fit(X[train_index],y[train_index])
+        y_predict = estimator.predict(X[test_index])
+        y_true = y[test_index]
+
+        #索引
+        predict_index_p = (y_predict == 1)  #预测为正类的
+        predict_index_n = (y_predict == 0)  #预测为负类
+
+        index_p = (y_true==1)  #实际为正类
+        index_n = (y_true==0)  #实际为负类
+
+        Tp = sum(y_true[predict_index_p])       #正确预测的正类  （实际为正类 预测为正类）
+        Tn = sum([1 for x in list(y_true[predict_index_n]) if x == 0]) #正确预测的负类   (实际为负类 预测为负类)
+        Fn = sum(y_predict[index_n])       #错误预测的负类  （实际为负类 预测为正类）
+        Fp = sum(y_true[predict_index_n])       #错误预测的正类   (实际为正类 预测为负类)
+
+        acc = (Tp+Tn)/(Tp+Tn+Fp+Fn)
+        sn = Tp/(Tp+Fn)
+        sp = Tn/(Tn+Fp)
+        mcc = matthews_corrcoef(y_true,y_predict)
+
+        acc_list.append(acc)
+        sn_list.append(sn)
+        sp_list.append(sp)
+        mcc_list.append(mcc)
+
+    return np.mean(acc_list),np.mean(sn_list),np.mean(sp_list),np.mean(mcc_list)
+
+
 #主函数
 def main():
+#------- 参数设定 -----------------------------------------------------------
+    
+    n_foldername = "Gastric_ulcer_Sub"
+    p_foldername = "Normal_Sub"
     n = 5    #采用 n 折交叉验证
     
+    n_feature = get_feature(n_foldername,scale = 5, bins = 9)
+    p_feature = get_feature(p_foldername)    #什么都不设定默认为 scale = 5, bins = 9
     
-    n_foldername = "Gastritis_Sub"
-    p_foldername = "Normal_Sub"
+#---------------------------------------------------------------------------   
+    """
+    with open("Gastric_ulcer_Sub_two.pkl","rb") as f:
+        n_feature = pickle.load(f)
 
-    n_feature = get_feature(n_foldername)
-    p_feature = get_feature(p_foldername)
-     
-    
+    with open("Normal_Sub_two.pkl","rb") as f:
+        p_feature = pickle.load(f)    
+    """
 
     dataset = np.vstack((n_feature,p_feature))   
-
-
-    print("dataset shape:",dataset.shape)  
+    print("\ndataset shape:",dataset.shape)  
     #生成类标
     labels = []
     for i in range(n_feature.shape[0]):
@@ -253,16 +288,17 @@ def main():
     for i in range(p_feature.shape[0]):
         labels.append(1)
 
-    estimator_list = [0,1,2,3,4]
+    labels = np.array(labels)    
+    estimator_list = [0,1,2,3,4,5]
     skf = StratifiedKFold(n_splits= n,random_state = 7)
 
-    score_func_list = ["accuracy","recall","roc_auc"]
-    for score_func in score_func_list:
-        print(score_func+": ")
-        for i in estimator_list:
-            score = cross_val_score(select_estimator(i),dataset,labels,scoring = score_func ,cv=skf).mean()
-            print(score)  
-
+    for i in estimator_list:    
+        acc,sn,sp,mcc = evaluate(select_estimator(i),dataset,labels,skf)
+        print("Acc: ",acc)
+        print("Sn: ",sn)
+        print("Sp: ",sp)
+        print("Mcc: ",mcc)
+        print("\n")
 
 
             

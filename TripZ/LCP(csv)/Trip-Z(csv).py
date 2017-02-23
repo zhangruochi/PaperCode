@@ -40,17 +40,18 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import StratifiedKFold
+from sklearn.metrics import matthews_corrcoef
+import warnings
 
-from sklearn.metrics import precision_recall_fscore_support
 
 
 #读取 csv 文件
 def read_csv_file(p_filename,n_filename):
     
-    p_dataset = pd.read_csv(p_filename)
-    n_dataset = pd.read_csv(n_filename)
-
+    p_dataset = pd.read_csv(p_filename,header =None)
+    n_dataset = pd.read_csv(n_filename, header = None)
     dataset = np.vstack((p_dataset,n_dataset))
+
 
     #print(p_dataset.shape)
     #print(n_dataset.shape)
@@ -85,6 +86,39 @@ def select_estimator(case):
     return estimator
 
 
+def evaluate(estimator,X,y,skf):
+    warnings.filterwarnings("ignore")
+    acc_list,sn_list,sp_list,mcc_list = [],[],[],[]
+    for train_index, test_index in skf.split(X, y):
+        estimator.fit(X[train_index],y[train_index])
+        y_predict = estimator.predict(X[test_index])
+        y_true = y[test_index]
+
+        #索引
+        predict_index_p = (y_predict == 1)  #预测为正类的
+        predict_index_n = (y_predict == 0)  #预测为负类
+
+        index_p = (y_true==1)  #实际为正类
+        index_n = (y_true==0)  #实际为负类
+
+        Tp = sum(y_true[predict_index_p])       #正确预测的正类  （实际为正类 预测为正类）
+        Tn = sum([1 for x in list(y_true[predict_index_n]) if x == 0]) #正确预测的负类   (实际为负类 预测为负类)
+        Fn = sum(y_predict[index_n])       #错误预测的负类  （实际为负类 预测为正类）
+        Fp = sum(y_true[predict_index_n])       #错误预测的正类   (实际为正类 预测为负类)
+
+        acc = (Tp+Tn)/(Tp+Tn+Fp+Fn)
+        sn = Tp/(Tp+Fn)
+        sp = Tn/(Tn+Fp)
+        mcc = matthews_corrcoef(y_true,y_predict)
+
+        acc_list.append(acc)
+        sn_list.append(sn)
+        sp_list.append(sp)
+        mcc_list.append(mcc)
+
+    return np.mean(acc_list),np.mean(sn_list),np.mean(sp_list),np.mean(mcc_list)
+
+
 #主函数
 def main():
 #-------------参数------------------    
@@ -96,21 +130,25 @@ def main():
     dataset,labels = read_csv_file(p_filename,n_filename)   
     print("dataset shape:",dataset.shape)  
     
+    labels = np.array(labels)    
     estimator_list = [0,1,2,3,4,5]
     skf = StratifiedKFold(n_splits= n,random_state = 7)
 
-    score_func_list = ["accuracy","recall","roc_auc"]
-    for score_func in score_func_list:
-        print(score_func+": ")
-        for i in estimator_list:
-            score = cross_val_score(select_estimator(i),dataset,labels,scoring = score_func ,cv=skf).mean()
-            print(score)  
+    for i in estimator_list:    
+        acc,sn,sp,mcc = evaluate(select_estimator(i),dataset,labels,skf)
+        print("Acc: ",acc)
+        print("Sn: ",sn)
+        print("Sp: ",sp)
+        print("Mcc: ",mcc)
+        print("\n")
 
 
 
             
 if __name__ == '__main__':
     main()
+    
+
 
 
 
