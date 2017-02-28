@@ -125,12 +125,12 @@ def select_estimator(case):
 
 #采用 K-Fold 交叉验证 得到 aac 
 def get_aac(estimator,X,y,skf):
+    scores = []
     for train_index,test_index in skf.split(X,y):
         X_train, X_test = X.ix[train_index], X.ix[test_index]
         y_train, y_test = y[train_index], y[test_index]
         estimator.fit(X_train,y_train)
-        scores = estimator.score(X_test,y_test)
-
+        scores.append(estimator.score(X_test,y_test))
     return np.mean(scores)    
         
 
