@@ -108,10 +108,10 @@ def variance_filter(dataset, per=0.6):
 
 def main():
 #------------------接口-------------------------------
-    k = 3
+    k = 10
     skf = StratifiedKFold(n_splits=k)      #3折交叉验证 
 
-    estimator_list = [3]
+    estimator_list = [0,1,2,3,4]
 
     dataset = load_one_dataset("t1d.csv").T #(36,7377)
     y = load_one_labels("t1dclass.csv")
@@ -178,8 +178,8 @@ def main():
 #-------------------辅助函数----------------------------
 
 
-    #创建4个进程  
-    for i in range(4):   
+    #创建cpu_count个进程  
+    for i in range(multiprocessing.cpu_count()):   
         process = multiprocessing.Process(target = worker)
         process.daemon = True    #设置为守护进程
         process_list.append(process)

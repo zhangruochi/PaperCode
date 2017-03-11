@@ -246,6 +246,9 @@ def evaluate(estimator,X,y,skf):
         Fn = sum(y_predict[index_n])       #错误预测的负类  （实际为负类 预测为正类）
         Fp = sum(y_true[predict_index_n])       #错误预测的正类   (实际为正类 预测为负类)
 
+        print((Tp+Tn+Fn+Fp) == len(y_predict))
+        exit()
+
         acc = (Tp+Tn)/(Tp+Tn+Fp+Fn)
         sn = Tp/(Tp+Fn)
         sp = Tn/(Tn+Fp)

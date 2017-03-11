@@ -1,0 +1,27 @@
+#main function
+[main]
+algorithm = ["HOG","LBP"]
+folder = "image_dataset"
+image_size =  (500,500)  #"(width, height)"
+njob = 1
+image_format = ["jpg","png"]    #format
+save_format = ["gzip","csv"]  #"csv","gzip","pickle","json"
+
+ 
+
+# HOG Parameters
+[HOG]
+orientations = 9
+pixels_per_cell = (8, 8)
+cells_per_block = (3, 3)
+visualise = False
+transform_sqrt = False
+feature_vector = True
+normalise = None
+
+#LBP Parameters
+[LBP]
+P = 24   #(int) Number of circularly symmetric neighbour set points (quantization of the angular space).
+R = 8   #(float) Radius of circle (spatial resolution of the operator)
+method = "uniform"   #{"ror", "uniform", "var"}
+
