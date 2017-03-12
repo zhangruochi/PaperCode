@@ -1,11 +1,19 @@
 #main function
 [main]
-algorithm = ["HOG","LBP"]
+algorithm = ["HOG","LBP","SALIENCY","ORB"]
 folder = "image_dataset"
-image_size =  (500,500)  #"(width, height)"
+image_size = (500,500)          #"(width, height)"  None   
 njob = 1
+pca = False
 image_format = ["jpg","png"]    #format
-save_format = ["gzip","csv"]  #"csv","gzip","pickle","json"
+save_format = ["gzip","csv"]    #"csv","gzip","pickle","json","excel", "txt"
+
+
+#PCA Parameters
+[PCA]
+n_components = None     # int  min(n_samples, n_features)
+svd_solver = "auto"     # "auto", "full", "arpack", "randomized"
+tol = 0                 # float >= 0
 
  
 
@@ -21,7 +29,26 @@ normalise = None
 
 #LBP Parameters
 [LBP]
-P = 24   #(int) Number of circularly symmetric neighbour set points (quantization of the angular space).
-R = 8   #(float) Radius of circle (spatial resolution of the operator)
-method = "uniform"   #{"ror", "uniform", "var"}
+p = 24                    #(int) Number of circularly symmetric neighbour set points (quantization of the angular space).
+r = 8                     #(float) Radius of circle (spatial resolution of the operator)
+method = "uniform"        #"ror", "uniform", "var"
+
+
+
+#CENSURE Parameters
+[CENSURE]
+min_scale = 1
+max_scale = 7
+mode = "DoB" # "DoB", "Octagon", "STAR"
+
+
+#ORB Parameters
+[ORB]
+downscale=1.2
+n_scales=8
+n_keypoints=500
+fast_n=9
+fast_threshold=0.08
+harris_k=0.04
+
 

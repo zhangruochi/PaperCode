@@ -4,7 +4,6 @@ LCP
 SIFT
 Saliency
 Haar-like
-libsvm
 
 
 并行读取

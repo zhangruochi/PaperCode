@@ -1,5 +1,6 @@
+#encoding: utf-8
 from sklearn.decomposition import PCA
-import configparser
+import ConfigParser 
 import os
 import numpy as np
 import time
@@ -15,6 +16,11 @@ except ImportError:
 
 import my_hog
 import my_lbp
+import my_saliency 
+from my_pca import implement_pca
+import my_censure
+import my_orb
+
 
 class ImageProcess(object):
     def __init__(self):
@@ -23,7 +29,7 @@ class ImageProcess(object):
 
     #参数配置文件    
     def get_options(self):
-        cf = configparser.ConfigParser()
+        cf = ConfigParser.ConfigParser()
         cf.read('config.cof')
         
         option_dict = dict()
@@ -38,8 +44,15 @@ class ImageProcess(object):
         for algorithm in self.option_dict["algorithm"]:
             if algorithm == "HOG":
                 algorithms.append(my_hog.HOG())
-            if algorithm == "LBP":
+            elif algorithm == "LBP":
                 algorithms.append(my_lbp.LBP())
+            elif algorithm == "SALIENCY":
+                algorithms.append(my_saliency.SALIENCY()) 
+            elif algorithm == "CENSURE":
+                algorithms.append(my_censure.MYCENSURE()) 
+            elif algorithm == "ORB":
+                algorithms.append(my_orb.MYORB())
+
 
         return algorithms          
 
@@ -63,7 +76,7 @@ class ImageProcess(object):
                 feature = algorithm.read_image(os.path.join(self.option_dict["folder"],file),size)
                 feature_list.append(feature)
 
-        feature_list = np.array(feature_list)          
+        feature_list = np.array(feature_list)    
                 
         return feature_list,name_list
 
@@ -75,6 +88,7 @@ class ImageProcess(object):
         algorithm_list = self.get_algorithm()
         if self.option_dict["njob"] == 1:
             for algorithm in algorithm_list:
+                print(algorithm)
                 if dataset_index == 0:
                     left,name_list = self.image_read(algorithm)
                     dataset_index += 1    
@@ -92,11 +106,15 @@ class ImageProcess(object):
                 else:
                     left = np.hstack((left,self.image_read(algorithm)[0]))
         else:
-            print("you should write the true value if njob")                
-      
+            print("you should write the true value if njob")     
+
+
+        if self.option_dict["pca"]:
+            left = implement_pca(left)               
+        print(left.shape)
+
         dataset = pd.DataFrame(data=left.T,index= list(range(left.shape[1])),columns=name_list)  
         
-        print(dataset.shape)
         return dataset  
             
 
@@ -154,7 +172,6 @@ class ImageProcess(object):
         
 
 
-    
     
     #所有图片读取
     def run(self):

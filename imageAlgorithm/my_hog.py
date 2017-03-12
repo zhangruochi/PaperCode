@@ -1,23 +1,28 @@
+#encoding: utf-8
 import os
 from skimage.feature import hog
 from PIL import Image
-import configparser
+import ConfigParser 
 import numpy as np
+
+
 
 
 class HOG(object):
 
     def get_options(self):
-        cf = configparser.ConfigParser()
+        cf = ConfigParser.ConfigParser()
         cf.read('config.cof')
         
         option_dict = dict()
+
         for key,value in cf.items("HOG"):
             option_dict[key] = eval(value)
 
         #print(option_dict)    
-        return option_dict    
-     
+        return option_dict
+    
+
 
     def read_image(self,image_name,size):
         #读取配置文件
@@ -29,8 +34,8 @@ class HOG(object):
             im = np.array(Image.open(image_name).convert("L"))
 
         options["image"] = im    
-    
         feature = hog(**options)
+
         return feature        
 
          

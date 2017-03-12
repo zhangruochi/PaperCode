@@ -1,14 +1,15 @@
+#encoding: utf-8
 import os
 from skimage.feature import local_binary_pattern
 from PIL import Image
-import configparser
+import ConfigParser 
 import numpy as np
 
 
 class LBP(object):
 
     def get_options(self):
-        cf = configparser.ConfigParser()
+        cf = ConfigParser.ConfigParser()
         cf.read('config.cof')
         
         option_dict = dict()
