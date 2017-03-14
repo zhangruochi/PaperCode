@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <meta charset="utf-8">
+    <!-- 引入 ECharts 文件 -->
+    <script src="echarts.js"></script>
+</header>
+<body>
+    <!-- 准备 DOM -->
+    <div id="randomly_re-start_strategy_1" style="width: 900px;height: 600px"></div>
+
+    <script type="text/javascript">
+    var firstChart = echarts.init(document.getElementById("randomly_re-start_strategy_1")) 
+    
+    first_option = {
+
+        //backgroundColor: '#CFCFCF',
+
+        title: { 
+            text:"IFS(k) Vs IFS(0)",
+            //textAlign: "middle",
+        },
+
+
+        toolbox: {
+
+        　　show: true,
+        　　
+            feature: {
+            　　saveAsImage: {
+            　　　　show:true,
+                   type: "png",
+            　　　　excludeComponents :['toolbox'],
+            　　　　pixelRatio: 5
+　　　　        }
+　　　　     }
+        },
+
+        color: ["#030303","#848484"],
+    
+        legend: {
+            show: true,
+            data: [{name:"IFS(K)",
+                    textStyle:{
+                        color: "#030303"
+                    }},
+                   {name:"IFS(0)",
+                    textStyle:{
+                        color: "#848484"
+                    }}
+            ]
+        },
+
+
+        xAxis: {
+            data:["ALL2","ALL3"]
+        },
+
+        yAxis:{
+            type: "value",
+            min:  0.6,
+            max:  0.9,
+            name: "Max Acc",
+            boundaryGap: false,
+        },
+
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+
+        series:[
+            {   
+                name: "IFS(K)",
+                type: "bar",
+                barWidth: '20%',
+                data: [{value: 0.795}, {value: 0.863}]
+            },
+
+            {
+                name: "IFS(0)",
+                type: "bar",
+                barWidth: '20%',
+                data: [{value: 0.770}, {value: 0.850}]
+            }
+        ],
+    }
+
+    firstChart.setOption(first_option);
+
+
+    </script>
+
+
+    
+</body>
+</html>

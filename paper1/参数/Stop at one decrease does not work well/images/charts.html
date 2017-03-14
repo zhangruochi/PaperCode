@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <meta charset="utf-8">
+    <!-- 引入 ECharts 文件 -->
+    <script src="echarts.js"></script>
+</header>
+<body>
+    <!-- 准备 DOM -->
+    <div id="Stop_at_one_decrease_does_not_work_well_1" style="width: 600px;height: 400px"></div>
+    <div id="Stop_at_one_decrease_does_not_work_well_2" style="width: 600px;height: 400px"></div>
+    <div id="data" style="width: 600px;height: 400px"></div>
+
+
+    <script type="text/javascript">
+    var firstChart = echarts.init(document.getElementById("Stop_at_one_decrease_does_not_work_well_1")) 
+    
+    first_option = {
+
+        //backgroundColor: '#CFCFCF',
+
+        title: { 
+            text:"Colon",
+            //textAlign: "middle",
+            left: "center",
+        },
+
+        color:["#030303"],
+        toolbox: {
+
+        　　show: true,
+            feature: {
+            　　saveAsImage: {
+            　　　　show:true,
+                   type: "png",
+            　　　　excludeComponents :['toolbox'],
+            　　　　pixelRatio: 5
+　　　　        }
+　　　　     }
+        },
+
+        //legend: {
+        //    data: ["MAcc"]
+        //},
+
+        xAxis: {
+            type: "category",
+            boundaryGap: false,
+            //name: "Colon",
+            //nameLocation: "middle",
+            data:["37","38","39","40","41","42"],
+        },
+
+        yAxis:{
+            type: "value",
+            min:  0.5,
+            max:  1.0,
+            name: "Max Acc",
+            boundaryGap: false,
+        },
+
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+
+        series:[
+            {   
+                name: "MAcc",
+                type: "line",
+                data: [0.757,0.836,0.855,{value:0.840, symbol: "triangle", symbolSize:10,},0.869,0.869]
+            }
+        ],
+    }
+
+    firstChart.setOption(first_option);
+
+
+    var secondChart = echarts.init(document.getElementById("Stop_at_one_decrease_does_not_work_well_2"))
+
+    second_option = {
+
+        //backgroundColor: '#CFCFCF',
+
+        title: { 
+            text:"T1d",
+            //textAlign: "middle",
+            left: "center",
+        },
+        color: ["#030303"],
+
+        toolbox: {
+
+        　　show: true,
+        　
+            feature: {
+            　　saveAsImage: {
+            　　　　show:true,
+                   type: "png",
+            　　　　excludeComponents :['toolbox'],
+            　　　　pixelRatio: 5,
+　　　　        }
+　　　　     }
+        },
+
+
+        //legend: {
+        //    data: ["MAcc"]
+        //},
+
+        xAxis: {
+            type: "category",
+            boundaryGap: false,
+            //name: "T1d",
+            //nameLocation: "middle",
+            data:["757","758","759","760","761","762"],
+        },
+
+        yAxis:{
+            type: "value",
+            min:  0.5,
+            max:  1.0,
+            name: "Max Acc",
+            boundaryGap: false,
+        },
+
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+
+        series:[
+            {   
+                name: "MAcc",
+                type: "line",
+                /*
+                lineStyle: {
+                    normal: {
+                        color: "#969696",
+                        width: 4,
+                    }
+                },
+                */
+                data: [0.656,0.667,{value:0.654, symbol: "triangle", symbolSize:10,},0.708,0.742,0.786]
+            }
+        ],
+    }
+
+    secondChart.setOption(second_option);
+
+
+    </script>
+
+
+    
+</body>
+</html>
