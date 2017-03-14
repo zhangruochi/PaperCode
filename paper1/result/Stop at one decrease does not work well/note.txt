@@ -1,0 +1,19 @@
+Stop at one decrease does not work well
+
+
+数据集：         Colon
+交叉验证：       10折
+分类算法：       SVM, KNN, Decision Tree, Naive Bayes, Logistic Regression
+哪几个特征：     第37个特征开始，一共3个特征时，分类准确率为0.855
+加一个特征后（即，第37个特征开始，一共4个特征时）分类准确率为0.840.
+加二个特征后（即，第37个特征开始，一共5个特征时）分类准确率为0.869.
+
+
+
+
+数据集：         t1d
+交叉验证：       10折
+分类算法：       SVM, KNN, Decision Tree, Naive Bayes, Logistic Regression
+哪几个特征：     第757个特征开始，一共2个特征时，分类准确率为0.667. 
+加一个特征后（即，第757个特征开始，一共3个特征时）分类准确率为0.654.
+加二个特征后（即，第757个特征开始，一共4个特征时）分类准确率为0.708.

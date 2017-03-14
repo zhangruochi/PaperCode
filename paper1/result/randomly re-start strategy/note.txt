@@ -1,0 +1,21 @@
+random re-start the IFS strategy
+
+
+数据集：         ALL2
+交叉验证：       10折
+分类算法：       SVM, KNN, Decision Tree, Naive Bayes, Logistic Regression
+哪几个特征：     第31个特征开始，一共2个特征
+分类准确性：     0.795
+从0开始的分类性能如何：   0.770
+
+
+
+
+
+数据集：         ALL3.csv
+交叉验证：       10折
+分类算法：       SVM, KNN, Decision Tree, Naive Bayes, Logistic Regression
+哪几个特征：     第443个开始，一共4个特征
+分类准确性：     0.863   
+从0开始的分类性能如何：   0.850
+ 

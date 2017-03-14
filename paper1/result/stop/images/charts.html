@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <meta charset="utf-8">
+    <!-- 引入 ECharts 文件 -->
+    <script src="echarts.js"></script>
+</header>
+<body>
+    <!-- 准备 DOM -->
+    <div id="How_Many" style="width: 600px;height: 400px"></div>
+
+
+    <script type="text/javascript">
+    var firstChart = echarts.init(document.getElementById("How_Many")) 
+    
+    first_option = {
+
+        //backgroundColor: '#CFCFCF',
+
+        //title: { 
+        //    text:"Different percent of starting points",
+            //textAlign: "middle",
+        //    left: "center",
+        //},
+        toolbox: {
+
+        　　show: true,
+        　　
+            feature: {
+            　　saveAsImage: {
+            　　　　show:true,
+                   type: "png",
+            　　　　excludeComponents :['toolbox'],
+            　　　　pixelRatio: 5
+　　　　        }
+　　　　     }
+        },
+
+        color: ["#030303","#030303","#030303","#030303"],
+
+        legend: {
+            data: [{name: "ALL1"},{name: "ALL2"},{name: "ALL3"},{name: "ALL4"}]
+        },
+
+        xAxis: {
+            type: "category",
+            boundaryGap: false,
+            data:["1","2","3","4","5"],
+        },
+
+        yAxis:{
+            type: "value",
+            min:  0.7,
+            max:  1.0,
+            name: "Max Acc",
+            boundaryGap: false,
+        },
+
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+
+        series:[
+            {   
+                name: "ALL1",
+                type: "line",
+                symbol: 'circle',
+                symbolSize: 8,
+                lineStyle: {normal: {width: 4,shadowBlur: {shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10}}},
+                label: {
+                normal: {
+                    show: true,
+                    position: 'top',
+                    offset:[20,30]
+                    }
+                },
+                data: [1.0,1.0,1.0,1.0,1.0]
+            },
+
+            {   
+                name: "ALL2",
+                type: "line",
+                symbol: 'rect',
+                symbolSize: 8,
+                lineStyle: {normal: {width: 4,shadowBlur: {shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10}}},
+                label: {
+                normal: {
+                    show: true,
+                    position: 'top',
+                    offset:[20,30]
+                    }
+                },
+                data: [0.795,0.795,0.795,0.799,0.799]
+            },
+
+            {   
+                name: "ALL3",
+                type: "line",
+                symbol: "triangle",
+                symbolSize: 8,
+                lineStyle: {normal: {width: 4,shadowBlur: {shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10}}},
+                label: {
+                normal: {
+                    show: true,
+                    position: 'top',
+                    offset:[20,30]
+                    }
+                },
+                data: [0.856,0.856,0.856,0.883,0.883]
+            },
+
+            {   
+                name: "ALL4",
+                type: "line",
+                symbol: "diamond",
+                symbolSize: 8,
+                lineStyle: {normal: {width: 4,shadowBlur: {shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowBlur: 10}}},
+                label: {
+                normal: {
+                    show: true,
+                    position: 'top',
+                    offset:[20,30]
+                    }
+                },
+                data: [0.903,0.930,0.939,0.939,0.939]
+            }
+        ],
+    }
+
+    firstChart.setOption(first_option);
+
+
+    </script>
+
+
+    
+</body>
+</html>
