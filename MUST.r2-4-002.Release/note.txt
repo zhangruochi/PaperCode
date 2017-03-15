@@ -1,0 +1,8 @@
+软件安装的具体步骤：
+    1. 安装 Bio/SeqIO 这个库已经相关依赖。
+    2. 安装 Blast ，这一步要注意，文章中说使用的是NCBI BLASTALL version 2.2.25，而我实际发现这个版本还是太新了，里面已经没有 formatdb，megablast 这些软件，导致程序出错。我在网上找到了2.2.11这个版本，可以运行成功。 这些老版本的 blast 在 NCBI 的网站上已经不提供了，我找到一个 mirror 网站，就是在这个上面下载的，链接是：http://mirrors.vbi.vt.edu/mirrors/ftp.ncbi.nih.gov/blast/executables/legacy/
+    3.  必须安装 blat 这个工具，文章中却没有提到。 我是在这个链接上下载的最新版blatSrc35源码编译的 https://users.soe.ucsc.edu/~kent/src/，编译的过程中会出错，因为需要安装 libpng-dev 这个依赖。
+    
+    下面的百度云链接是 Blast2.2.11 和 blat， 将这两个库添加到软件包中一起发布会更好。
+    
+    链接: https://pan.baidu.com/s/1miHiVMS 密码: 5nic
