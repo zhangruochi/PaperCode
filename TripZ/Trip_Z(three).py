@@ -262,20 +262,19 @@ def get_aac(estimator,X,y,skf):
 
         #print(y_true)
         #print(y_predict)
-        #print(np.mean(y_true == y_predict))
-        all_scores.append(np.mean(y_true == y_predict))
 
-        for class_ in range(4):
+        all_scores.append(np.mean(sum(y_true == y_predict)))
+
+        for class_ in range(3):
             if class_ == 0:
                ulcer_scores.append(get_single_score(y_true,y_predict,class_))
             elif class_ == 1:
                 polyp_socres.append(get_single_score(y_true,y_predict,class_))
             elif class_ == 2:
                 Gastritis_socres.append(get_single_score(y_true,y_predict,class_))
-            elif class_ == 3:
-                normal_scores.append(get_single_score(y_true,y_predict,class_))        
+        
                    
-    return np.mean(all_scores),np.mean(ulcer_scores),np.mean(polyp_socres),np.mean(Gastritis_socres),np.mean(normal_scores)
+    return np.mean(all_scores),np.mean(ulcer_scores),np.mean(polyp_socres),np.mean(Gastritis_socres)
 
 
 #主函数
@@ -287,18 +286,18 @@ def main():
     n_foldername_1 = "Gastric_ulcer_P"
     n_foldername_2 = "Gastric_polyp_P"
     n_foldername_3 = "Gastritis_P"
-    p_foldername   =   "Normal_P"
+    #p_foldername   =   "Normal_P"
     
 
     n_feature_1 = get_feature(n_foldername_1,scale = 5, bins = 9)
     n_feature_2 = get_feature(n_foldername_2,scale = 5, bins = 9)
     n_feature_3 = get_feature(n_foldername_3,scale = 5, bins = 9)
-    p_feature =   get_feature(p_foldername)    #什么都不设定默认为 scale = 5, bins = 9
+    #p_feature =   get_feature(p_foldername)    #什么都不设定默认为 scale = 5, bins = 9
 #---------------------------------------------------------------------------   
      
     dataset = np.vstack((n_feature_1,n_feature_2)) 
     dataset = np.vstack((dataset,n_feature_3))   
-    dataset = np.vstack((dataset,p_feature))   
+    #dataset = np.vstack((dataset,p_feature))   
 
     print("\ndataset shape:",dataset.shape)  
     #生成类标
@@ -309,11 +308,11 @@ def main():
         labels.append(1)
     for i in range(n_feature_3.shape[0]):
         labels.append(2)        
-    for i in range(p_feature.shape[0]):
-        labels.append(3)
+    #for i in range(p_feature.shape[0]):
+    #    labels.append(3)
 
     labels = np.array(labels)    
-    """
+
 
 
     with open("dataset.pkl","wb") as f:
@@ -329,17 +328,17 @@ def main():
 
     with open("label.pkl","rb") as f:
         labels = pickle.load(f)
-    
+    """
     
     estimator_list = [1,2,3,4,5]
     skf = StratifiedKFold(n_splits= n, shuffle=True, random_state = 7)
     for i in estimator_list:    
-        four_acc,ulcer_acc, polyp_acc, Gastritis_acc,normal_acc = get_aac(OneVsOneClassifier(select_estimator(i)),dataset,labels,skf)
-        print("Four acc: ",four_acc)
+        four_acc,ulcer_acc, polyp_acc, Gastritis_acc = get_aac(OneVsOneClassifier(select_estimator(i)),dataset,labels,skf)
+        print("Three acc: ",four_acc)
         print("    ulcer_acc: ",ulcer_acc)
         print("    polyp_acc: ",polyp_acc)
         print("    Gastritis_acc: ",Gastritis_acc)
-        print("    normal_acc: ",normal_acc)
+        #print("    normal_acc: ",normal_acc)
         print("")
 
 
