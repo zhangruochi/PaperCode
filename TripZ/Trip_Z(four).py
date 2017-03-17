@@ -13,7 +13,7 @@ Required packages
 Info
 - name   : "zhangruochi"
 - email  : "zrc720@gmail.com"
-- date   : "2017.02.18"
+- date   : "2017.03.16"
 - Version : 3.0.0
 
 Description
@@ -41,7 +41,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import StratifiedKFold
 from sklearn.multiclass import OneVsOneClassifier
-from sklearn.metrics import matthews_corrcoef
+from sklearn.decomposition import PCA
 
 
 #根据像素矩阵得到梯度矩阵以及相应的值的矩阵
@@ -278,22 +278,31 @@ def get_aac(estimator,X,y,skf):
     return np.mean(all_scores),np.mean(ulcer_scores),np.mean(polyp_socres),np.mean(Gastritis_socres),np.mean(normal_scores)
 
 
+#利用 pca 降维度
+def using_pca(dataset):
+    pca = PCA(n_components= 50)
+    pca_dataset = pca.fit_transform(dataset)
+    #print(pca_dataset.shape)
+    return pca_dataset
+
+
+
+
 #主函数
-def main():
+def main(seed):
 #------- 参数设定 -----------------------------------------------------------
     n = 10    #采用 n 折交叉验证
-    
     
     n_foldername_1 = "Gastric_ulcer_P"
     n_foldername_2 = "Gastric_polyp_P"
     n_foldername_3 = "Gastritis_P"
-    p_foldername   =   "Normal_P"
+    p_foldername   = "Normal_P"
     
 
-    n_feature_1 = get_feature(n_foldername_1,scale = 5, bins = 9)
-    n_feature_2 = get_feature(n_foldername_2,scale = 5, bins = 9)
-    n_feature_3 = get_feature(n_foldername_3,scale = 5, bins = 9)
-    p_feature =   get_feature(p_foldername)    #什么都不设定默认为 scale = 5, bins = 9
+    n_feature_1 = get_feature(n_foldername_1,scale = 6, bins = 18)
+    n_feature_2 = get_feature(n_foldername_2,scale = 6, bins = 18)
+    n_feature_3 = get_feature(n_foldername_3,scale = 6, bins = 18)
+    p_feature =   get_feature(p_foldername,scale = 6, bins = 18)    #什么都不设定默认为 scale = 5, bins = 9
 #---------------------------------------------------------------------------   
      
     dataset = np.vstack((n_feature_1,n_feature_2)) 
@@ -313,9 +322,7 @@ def main():
         labels.append(3)
 
     labels = np.array(labels)    
-    """
-
-
+    
     with open("dataset.pkl","wb") as f:
         pickle.dump(dataset,f)
 
@@ -323,16 +330,18 @@ def main():
         pickle.dump(labels,f)   
 
     """
-
     with open("dataset.pkl","rb") as f:
         dataset = pickle.load(f)
 
     with open("label.pkl","rb") as f:
         labels = pickle.load(f)
-    
+    """   
+
+    dataset = using_pca(dataset)
+    print(dataset.shape)
     
     estimator_list = [1,2,3,4,5]
-    skf = StratifiedKFold(n_splits= n, shuffle=True, random_state = 7)
+    skf = StratifiedKFold(n_splits= n, shuffle=True, random_state = seed)
     for i in estimator_list:    
         four_acc,ulcer_acc, polyp_acc, Gastritis_acc,normal_acc = get_aac(OneVsOneClassifier(select_estimator(i)),dataset,labels,skf)
         print("Four acc: ",four_acc)
@@ -344,9 +353,16 @@ def main():
 
 
 
+def twenty_seed():
+    
+    for seed in range(20):
+        print(seed)
+        main(seed)
+
+
             
 if __name__ == '__main__':
-    main()
+    twenty_seed()
 
 
 

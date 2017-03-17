@@ -1,3 +1,4 @@
+#encoding: utf-8
 '''
 python3
 
@@ -13,7 +14,7 @@ Required packages
 Info
 - name   : "zhangruochi"
 - email  : "zrc720@gmail.com"
-- date   : "2017.02.23"
+- date   : "2017.03.17"
 - Version : 3.0.0
 
 Description
@@ -42,6 +43,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import matthews_corrcoef
+from sklearn.ensemble import RandomForestClassifier
 
 
 #根据像素矩阵得到梯度矩阵以及相应的值的矩阵
@@ -223,7 +225,6 @@ def select_estimator(case):
         estimator = LogisticRegression()   
     elif case == 5:
         estimator = KNeighborsClassifier()     
-
     return estimator
 
 
@@ -246,13 +247,23 @@ def evaluate(estimator,X,y,skf):
         Fn = sum(y_predict[index_n])       #错误预测的负类  （实际为负类 预测为正类）
         Fp = sum(y_true[predict_index_n])       #错误预测的正类   (实际为正类 预测为负类)
 
-        print((Tp+Tn+Fn+Fp) == len(y_predict))
-        exit()
+        try:
+            acc = (Tp+Tn)/(Tp+Tn+Fp+Fn)
+        except:
+            acc = 0
+        try:    
+            sn = Tp/(Tp+Fn)
+        except:
+            sn = 0
+        try:    
+            sp = Tn/(Tn+Fp)
+        except:
+            sp = 0
 
-        acc = (Tp+Tn)/(Tp+Tn+Fp+Fn)
-        sn = Tp/(Tp+Fn)
-        sp = Tn/(Tn+Fp)
-        mcc = matthews_corrcoef(y_true,y_predict)
+        try:        
+            mcc = matthews_corrcoef(y_true,y_predict)
+        except:
+            mcc = 0    
 
         acc_list.append(acc)
         sn_list.append(sn)
@@ -263,25 +274,20 @@ def evaluate(estimator,X,y,skf):
 
 
 #主函数
-def main():
+def main(seed,n_filename):
 #------- 参数设定 -----------------------------------------------------------
     
-    n_foldername = "Gastric_ulcer_Sub"
-    p_foldername = "Normal_Sub"
-    n = 5    #采用 n 折交叉验证
+    n_foldername = n_filename
+    p_foldername = "Normal_P"
+    n = 10    #采用 n 折交叉验证
     
-    n_feature = get_feature(n_foldername,scale = 5, bins = 9)
-    p_feature = get_feature(p_foldername)    #什么都不设定默认为 scale = 5, bins = 9
+    n_feature = get_feature(n_foldername,scale = 6, bins = 18)
+    p_feature = get_feature(p_foldername,scale = 6, bins = 18)    #什么都不设定默认为 scale = 5, bins = 9
     
 #---------------------------------------------------------------------------   
-    """
-    with open("Gastric_ulcer_Sub_two.pkl","rb") as f:
-        n_feature = pickle.load(f)
-
-    with open("Normal_Sub_two.pkl","rb") as f:
-        p_feature = pickle.load(f)    
-    """
-
+    
+    print(n_feature.shape)
+    print(p_feature.shape)
     dataset = np.vstack((n_feature,p_feature))   
     print("\ndataset shape:",dataset.shape)  
     #生成类标
@@ -290,10 +296,26 @@ def main():
         labels.append(0)
     for i in range(p_feature.shape[0]):
         labels.append(1)
+    labels = np.array(labels)
 
-    labels = np.array(labels)    
+
+    with open("dataset.pkl","wb") as f:
+        pickle.dump(dataset,f)
+
+    with open("labels.pkl","wb") as f:
+        pickle.dump(labels,f)
+
+
+    """
+    with open("dataset.pkl","rb") as f:
+        dataset = pickle.load(f)
+
+    with open("labels.pkl","rb") as f:
+        labels = pickle.load(f)
+    """
+
     estimator_list = [0,1,2,3,4,5]
-    skf = StratifiedKFold(n_splits= n,random_state = 7)
+    skf = StratifiedKFold(n_splits= n,random_state = seed)
 
     for i in estimator_list:    
         acc,sn,sp,mcc = evaluate(select_estimator(i),dataset,labels,skf)
@@ -302,11 +324,20 @@ def main():
         print("Sp: ",sp)
         print("Mcc: ",mcc)
         print("\n")
+   
+
+def twenty_seed():
+    filename_list = ["Gastric_polyp_P","Gastric_ulcer_P","Gastritis_P"]
+    for n_filename in filename_list:
+        print(n_filename)
+        for seed in range(20):
+            print(seed)
+            main(seed,n_filename)
 
 
             
 if __name__ == '__main__':
-    main()
+    twenty_seed()
 
 
 
