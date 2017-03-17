@@ -7,133 +7,264 @@
 </header>
 <body>
     <!-- 准备 DOM -->
-    <div id="How_Many" style="width: 600px;height: 400px"></div>
+   <div id="one" style="width: 600px;height: 400px"></div>
+   <div id="two" style="width: 600px;height: 400px"></div>
+   <div id="three" style="width: 600px;height: 400px"></div>
+   <div id="four" style="width: 600px;height: 400px"></div>
+   <div id="five" style="width: 600px;height: 400px"></div>
+
+
+
     <script type="text/javascript">
+    var firstChart = echarts.init(document.getElementById("one")) 
+    var secondChart = echarts.init(document.getElementById("two")) 
+    var thirdChart = echarts.init(document.getElementById("three")) 
+    var fourChart = echarts.init(document.getElementById("four")) 
+    var fiveChart = echarts.init(document.getElementById("five")) 
     
-    var firstChart = echarts.init(document.getElementById("How_Many")) 
-    
-    first_option = {
+    option_1 = {
+    title: {
+        text: 'Period 1'
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data:["case","control"]
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        //boundaryGap: false,
+        data: ['1','2','3','4','5']
+    },
 
-        //backgroundColor: '#CFCFCF',
+    yAxis: {
+        type: 'value',
+        min: 0,
+        max: 40,
+    },
 
-        //title: { 
-        //    text:"Different percent of starting points",
-            //textAlign: "middle",
-        //    left: "center",
-        //},
-        toolbox: {
-
-        　　show: true,
-            type: "png",
-        　　
-            feature: {
-            　　saveAsImage: {
-            　　　　show:true,
-            　　　　excludeComponents :['toolbox'],
-            　　　　pixelRatio: 5
-　　　　        }
-　　　　     }
+    series: [
+        {
+            name:'case',
+            type:'line',
+            data:[1.436, 0.700, 0.242, 0.301, 0.085]
         },
+        {
+            name:'control',
+            type:'line',
+            data:[1.290, 0.162, 0.377, 0.223, 0.215]
+        }
+    ]
+};
 
-        color: ["#030303","#030303","#030303","#030303"],
+option_2 = {
+    title: {
+        text: 'Period 2'
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data:["case","control"]
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        //boundaryGap: false,
+        data: ['1','2','3','4','5']
+    },
 
-        legend: {
-            data: [{name: "ALL1"},{name: "ALL2"},{name: "ALL3"},{name: "ALL4"}]
+    yAxis: {
+        type: 'value',
+        min: 0,
+        max: 40,
+    },
+
+    series: [
+        {
+            name:'case',
+            type:'line',
+            data:[1.162, 0.532, 0.058, 0.204, 0.353]
         },
+        {
+            name:'control',
+            type:'line',
+            data:[0.069, 0.352, 0.105, 0.243, 0.275]
+        }
+    ]
+};
 
-        xAxis: {
-            type: "category",
-            boundaryGap: false,
-            data:["10%","20%","30%","40%","50%","60%"],
+
+option_3 = {
+    title: {
+        text: 'Period 3'
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data:["case","control"]
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        //boundaryGap: false,
+        data: ['1','2','3','4','5']
+    },
+
+    yAxis: {
+        type: 'value',
+        min: 0,
+        max: 40,
+    },
+
+    series: [
+        {
+            name:'case',
+            type:'line',
+            data:[2.186, 0.378, 0.413, 0.333, 0.399]
         },
+        {
+            name:'control',
+            type:'line',
+            data:[0.303, 0.307, 0.187, 0.108, 0.406]
+        }
+    ]
+};
 
-        yAxis:{
-            type: "value",
-            min:  0.7,
-            max:  1.0,
-            name: "Max Acc",
-            boundaryGap: false,
+option_4 = {
+    title: {
+        text: 'Period 4'
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data:["case","control"]
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        //boundaryGap: false,
+        data: ['1','2','3','4','5']
+    },
+
+    yAxis: {
+        type: 'value',
+        min: 0,
+        max: 40,
+    },
+
+    series: [
+        {
+            name:'case',
+            type:'line',
+            data:[6.272, 0.148, 34.530, 0.412, 0.421]
         },
+        {
+            name:'control',
+            type:'line',
+            data:[0.134, 0.119, 0.321, 0.214, 0.219]
+        }
+    ]
+};
 
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
+option_5 = {
+    title: {
+        text: 'Period 5'
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data:["case","control"]
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        //boundaryGap: false,
+        data: ['1','2','3','4','5']
+    },
+
+    yAxis: {
+        type: 'value',
+        min: 0,
+        max: 40,
+    },
+
+    series: [
+        {
+            name:'case',
+            type:'line',
+            data:[1.705, 7.641, 0.030, 0.539, 0.203]
         },
+        {
+            name:'control',
+            type:'line',
+            data:[0.196, 0.534, 0.644, 0.239, 0.324]
+        }
+    ]
+};
 
-        series:[
-            {   
-                name: "ALL1",
-                type: "line",
-                symbol: 'circle',
-                symbolSize: 8,
-                lineStyle: {normal: {width: 2,shadowBlur: {shadowColor: 'rgba(0, 0, 0, 0.5)',
-    shadowBlur: 10}}},
-                label: {
-                normal: {
-                    show: true,
-                    position: 'top',
-                    offset:[10,20]
-                    }
-                },
-                data: [1.0,1.0,1.0,1.0,1.0,1.0]
-            },
 
-            {   
-                name: "ALL2",
-                type: "line",
-                symbol: 'rect',
-                symbolSize: 8,
-                lineStyle: {normal: {width: 2,shadowBlur: {shadowColor: 'rgba(0, 0, 0, 0.5)',
-    shadowBlur: 10}}},
-                label: {
-                normal: {
-                    show: true,
-                    position: 'top',
-                    offset:[10,20]
-                    }
-                },
-                data: [0.799,0.799,0.799,0.806,0.806,0.806]
-            },
 
-            {   
-                name: "ALL3",
-                type: "line",
-                symbol: "triangle",
-                symbolSize: 8,
-                lineStyle: {normal: {width: 2, shadowBlur: {shadowColor: 'rgba(0, 0, 0, 0.5)',
-    shadowBlur: 10}}},
-                label: {
-                normal: {
-                    show: true,
-                    position: 'top',
-                    offset:[10,20]
-                    }
-                },
-                data: [0.883,0.883,0.883,0.883,0.883,0.883]
-            },
-
-            {   
-                name: "ALL4",
-                type: "line",
-                symbol: 'diamond',
-                symbolSize: 8,
-                lineStyle: {normal: {width: 2,shadowBlur: {shadowColor: 'rgba(0, 0, 0, 0.5)',
-    shadowBlur: 10}}},
-                label: {
-                normal: {
-                    show: true,
-                    position: 'top',
-                    offset:[10,20]
-                    }
-                },
-                data: [0.939,0.939,0.939,0.939,0.949,0.949]
-            }
-        ],
-    }
-
-    firstChart.setOption(first_option);
+    firstChart.setOption(option_1);
+    secondChart.setOption(option_2);
+    thirdChart.setOption(option_3);
+    fourChart.setOption(option_4);
+    fiveChart.setOption(option_5);
 
 
     </script>
