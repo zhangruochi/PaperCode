@@ -1,0 +1,679 @@
+0
+
+dataset shape: (573, 198)
+(573, 198)
+Four acc:  0.884743432355
+    ulcer_acc:  0.776267066267
+    polyp_acc:  0.821937564499
+    Gastritis_acc:  0.796666666667
+    normal_acc:  1.0
+
+Four acc:  0.834579887901
+    ulcer_acc:  0.751226551227
+    polyp_acc:  0.802620124973
+    Gastritis_acc:  0.542770562771
+    normal_acc:  1.0
+
+Four acc:  0.853485487003
+    ulcer_acc:  0.807878787879
+    polyp_acc:  0.753311403509
+    Gastritis_acc:  0.602142857143
+    normal_acc:  1.0
+
+Four acc:  0.830179027346
+    ulcer_acc:  0.733347763348
+    polyp_acc:  0.771086232739
+    Gastritis_acc:  0.58818986569
+    normal_acc:  1.0
+
+Four acc:  0.795711714332
+    ulcer_acc:  0.742222222222
+    polyp_acc:  0.64011043495
+    Gastritis_acc:  0.580595238095
+    normal_acc:  1.0
+
+1
+
+dataset shape: (573, 198)
+(573, 198)
+Four acc:  0.867230846097
+    ulcer_acc:  0.78101010101
+    polyp_acc:  0.823625116713
+    Gastritis_acc:  0.722023809524
+    normal_acc:  1.0
+
+Four acc:  0.822121771407
+    ulcer_acc:  0.765663780664
+    polyp_acc:  0.774795751634
+    Gastritis_acc:  0.53868964369
+    normal_acc:  1.0
+
+Four acc:  0.867248118703
+    ulcer_acc:  0.843643578644
+    polyp_acc:  0.766454829141
+    Gastritis_acc:  0.721428571429
+    normal_acc:  1.0
+
+Four acc:  0.834559091795
+    ulcer_acc:  0.77126984127
+    polyp_acc:  0.769215686275
+    Gastritis_acc:  0.597034632035
+    normal_acc:  1.0
+
+Four acc:  0.795834980896
+    ulcer_acc:  0.721666666667
+    polyp_acc:  0.634259834369
+    Gastritis_acc:  0.641547619048
+    normal_acc:  1.0
+
+2
+
+dataset shape: (573, 198)
+(573, 198)
+Four acc:  0.884740132569
+    ulcer_acc:  0.803133255633
+    polyp_acc:  0.797253304831
+    Gastritis_acc:  0.863095238095
+    normal_acc:  1.0
+
+Four acc:  0.818715693649
+    ulcer_acc:  0.73380952381
+    polyp_acc:  0.804587557695
+    Gastritis_acc:  0.502121212121
+    normal_acc:  1.0
+
+Four acc:  0.8708262607
+    ulcer_acc:  0.861825396825
+    polyp_acc:  0.755076221079
+    Gastritis_acc:  0.749047619048
+    normal_acc:  1.0
+
+Four acc:  0.814604785435
+    ulcer_acc:  0.744696969697
+    polyp_acc:  0.749075540473
+    Gastritis_acc:  0.517876984127
+    normal_acc:  1.0
+
+Four acc:  0.804828770028
+    ulcer_acc:  0.79119047619
+    polyp_acc:  0.638436382458
+    Gastritis_acc:  0.657142857143
+    normal_acc:  1.0
+
+3
+
+dataset shape: (573, 198)
+(573, 198)
+Four acc:  0.872400985461
+    ulcer_acc:  0.765202020202
+    polyp_acc:  0.813214370769
+    Gastritis_acc:  0.780079365079
+    normal_acc:  1.0
+
+Four acc:  0.816502814605
+    ulcer_acc:  0.759632034632
+    polyp_acc:  0.791096820276
+    Gastritis_acc:  0.480436507937
+    normal_acc:  1.0
+
+Four acc:  0.856890567367
+    ulcer_acc:  0.837993395493
+    polyp_acc:  0.757046403889
+    Gastritis_acc:  0.602738095238
+    normal_acc:  1.0
+
+Four acc:  0.823734397095
+    ulcer_acc:  0.763560606061
+    polyp_acc:  0.762827506171
+    Gastritis_acc:  0.551663059163
+    normal_acc:  1.0
+
+Four acc:  0.7992929324
+    ulcer_acc:  0.78
+    polyp_acc:  0.638440567823
+    Gastritis_acc:  0.6
+    normal_acc:  1.0
+
+4
+
+dataset shape: (573, 198)
+(573, 198)
+Four acc:  0.870589403214
+    ulcer_acc:  0.786066156066
+    polyp_acc:  0.789721474402
+    Gastritis_acc:  0.781904761905
+    normal_acc:  1.0
+
+Four acc:  0.82395395401
+    ulcer_acc:  0.761612554113
+    polyp_acc:  0.797335972851
+    Gastritis_acc:  0.509285159285
+    normal_acc:  1.0
+
+Four acc:  0.865871157358
+    ulcer_acc:  0.864841269841
+    polyp_acc:  0.762546379975
+    Gastritis_acc:  0.640119047619
+    normal_acc:  1.0
+
+Four acc:  0.816427096645
+    ulcer_acc:  0.698636363636
+    polyp_acc:  0.762700510704
+    Gastritis_acc:  0.549220779221
+    normal_acc:  1.0
+
+Four acc:  0.800913350802
+    ulcer_acc:  0.847857142857
+    polyp_acc:  0.639365781053
+    Gastritis_acc:  0.64
+    normal_acc:  1.0
+
+5
+
+dataset shape: (573, 198)
+(573, 198)
+Four acc:  0.878282750604
+    ulcer_acc:  0.745540570541
+    polyp_acc:  0.824956386063
+    Gastritis_acc:  0.815476190476
+    normal_acc:  1.0
+
+Four acc:  0.81331731912
+    ulcer_acc:  0.756666666667
+    polyp_acc:  0.756651134813
+    Gastritis_acc:  0.510229215229
+    normal_acc:  1.0
+
+Four acc:  0.851544038621
+    ulcer_acc:  0.819603174603
+    polyp_acc:  0.734504530557
+    Gastritis_acc:  0.613333333333
+    normal_acc:  1.0
+
+Four acc:  0.823618727495
+    ulcer_acc:  0.727550505051
+    polyp_acc:  0.76782967033
+    Gastritis_acc:  0.577435064935
+    normal_acc:  1.0
+
+Four acc:  0.79225808797
+    ulcer_acc:  0.756666666667
+    polyp_acc:  0.630720758308
+    Gastritis_acc:  0.5625
+    normal_acc:  1.0
+
+6
+
+dataset shape: (573, 198)
+(573, 198)
+Four acc:  0.849725856802
+    ulcer_acc:  0.762674825175
+    polyp_acc:  0.752966976264
+    Gastritis_acc:  0.703333333333
+    normal_acc:  1.0
+
+Four acc:  0.832649140518
+    ulcer_acc:  0.770584415584
+    polyp_acc:  0.806706798104
+    Gastritis_acc:  0.528510656011
+    normal_acc:  1.0
+
+Four acc:  0.853138338381
+    ulcer_acc:  0.849852369852
+    polyp_acc:  0.744838567006
+    Gastritis_acc:  0.603333333333
+    normal_acc:  1.0
+
+Four acc:  0.815798813755
+    ulcer_acc:  0.73753968254
+    polyp_acc:  0.773273006234
+    Gastritis_acc:  0.511550671551
+    normal_acc:  1.0
+
+Four acc:  0.800203999452
+    ulcer_acc:  0.783333333333
+    polyp_acc:  0.653803827751
+    Gastritis_acc:  0.594444444444
+    normal_acc:  1.0
+
+7
+
+dataset shape: (573, 198)
+(573, 198)
+Four acc:  0.864270285991
+    ulcer_acc:  0.793953823954
+    polyp_acc:  0.781875028043
+    Gastritis_acc:  0.698095238095
+    normal_acc:  1.0
+
+Four acc:  0.823826362303
+    ulcer_acc:  0.783676046176
+    polyp_acc:  0.803711125476
+    Gastritis_acc:  0.503388000888
+    normal_acc:  1.0
+
+Four acc:  0.862699662658
+    ulcer_acc:  0.836850649351
+    polyp_acc:  0.763343097727
+    Gastritis_acc:  0.63619047619
+    normal_acc:  1.0
+
+Four acc:  0.827529821579
+    ulcer_acc:  0.743282828283
+    polyp_acc:  0.749467541403
+    Gastritis_acc:  0.602579365079
+    normal_acc:  1.0
+
+Four acc:  0.789106168269
+    ulcer_acc:  0.725595238095
+    polyp_acc:  0.624740155175
+    Gastritis_acc:  0.59753968254
+    normal_acc:  1.0
+
+8
+
+dataset shape: (573, 198)
+(573, 198)
+Four acc:  0.851985259094
+    ulcer_acc:  0.734155844156
+    polyp_acc:  0.792248437837
+    Gastritis_acc:  0.685079365079
+    normal_acc:  1.0
+
+Four acc:  0.82205037859
+    ulcer_acc:  0.755333555334
+    polyp_acc:  0.8049504662
+    Gastritis_acc:  0.516291486291
+    normal_acc:  1.0
+
+Four acc:  0.872802282258
+    ulcer_acc:  0.844448329448
+    polyp_acc:  0.769957983193
+    Gastritis_acc:  0.705833333333
+    normal_acc:  1.0
+
+Four acc:  0.813492459431
+    ulcer_acc:  0.709594017094
+    polyp_acc:  0.773039215686
+    Gastritis_acc:  0.526111111111
+    normal_acc:  1.0
+
+Four acc:  0.792447424816
+    ulcer_acc:  0.785317460317
+    polyp_acc:  0.632961145135
+    Gastritis_acc:  0.576785714286
+    normal_acc:  1.0
+
+9
+
+dataset shape: (573, 198)
+(573, 198)
+Four acc:  0.855049510765
+    ulcer_acc:  0.743065268065
+    polyp_acc:  0.773354464593
+    Gastritis_acc:  0.671666666667
+    normal_acc:  1.0
+
+Four acc:  0.822462348422
+    ulcer_acc:  0.705397380397
+    polyp_acc:  0.786449220714
+    Gastritis_acc:  0.572536630037
+    normal_acc:  1.0
+
+Four acc:  0.865354218925
+    ulcer_acc:  0.845108225108
+    polyp_acc:  0.760047176765
+    Gastritis_acc:  0.666666666667
+    normal_acc:  1.0
+
+Four acc:  0.832243742292
+    ulcer_acc:  0.744373959374
+    polyp_acc:  0.797064016994
+    Gastritis_acc:  0.557478354978
+    normal_acc:  1.0
+
+Four acc:  0.801049592793
+    ulcer_acc:  0.793333333333
+    polyp_acc:  0.650760991116
+    Gastritis_acc:  0.688214285714
+    normal_acc:  1.0
+
+10
+
+dataset shape: (573, 198)
+(573, 198)
+Four acc:  0.857063629
+    ulcer_acc:  0.763034188034
+    polyp_acc:  0.780553525758
+    Gastritis_acc:  0.718571428571
+    normal_acc:  1.0
+
+Four acc:  0.810134126028
+    ulcer_acc:  0.704772727273
+    polyp_acc:  0.791574463119
+    Gastritis_acc:  0.469422799423
+    normal_acc:  1.0
+
+Four acc:  0.862132099549
+    ulcer_acc:  0.831565656566
+    polyp_acc:  0.754163039739
+    Gastritis_acc:  0.635833333333
+    normal_acc:  1.0
+
+Four acc:  0.816769920125
+    ulcer_acc:  0.753333333333
+    polyp_acc:  0.748331591775
+    Gastritis_acc:  0.540808080808
+    normal_acc:  1.0
+
+Four acc:  0.80156858194
+    ulcer_acc:  0.813888888889
+    polyp_acc:  0.650105213627
+    Gastritis_acc:  0.58380952381
+    normal_acc:  1.0
+
+11
+
+dataset shape: (573, 198)
+(573, 198)
+Four acc:  0.880975179834
+    ulcer_acc:  0.802761405261
+    polyp_acc:  0.810442036464
+    Gastritis_acc:  0.776031746032
+    normal_acc:  1.0
+
+Four acc:  0.806133313199
+    ulcer_acc:  0.756547619048
+    polyp_acc:  0.732620973797
+    Gastritis_acc:  0.469401154401
+    normal_acc:  1.0
+
+Four acc:  0.861959037917
+    ulcer_acc:  0.840670995671
+    polyp_acc:  0.745064312529
+    Gastritis_acc:  0.66
+    normal_acc:  1.0
+
+Four acc:  0.830623323891
+    ulcer_acc:  0.734554334554
+    polyp_acc:  0.774847067707
+    Gastritis_acc:  0.647777777778
+    normal_acc:  1.0
+
+Four acc:  0.790678842316
+    ulcer_acc:  0.728333333333
+    polyp_acc:  0.631607229536
+    Gastritis_acc:  0.604285714286
+    normal_acc:  1.0
+
+12
+
+dataset shape: (573, 198)
+(573, 198)
+Four acc:  0.867446105834
+    ulcer_acc:  0.838930513931
+    polyp_acc:  0.803806022409
+    Gastritis_acc:  0.664642857143
+    normal_acc:  1.0
+
+Four acc:  0.797796004277
+    ulcer_acc:  0.723200688201
+    polyp_acc:  0.731477272727
+    Gastritis_acc:  0.439292929293
+    normal_acc:  1.0
+
+Four acc:  0.869293510329
+    ulcer_acc:  0.836124708625
+    polyp_acc:  0.762010144325
+    Gastritis_acc:  0.723333333333
+    normal_acc:  1.0
+
+Four acc:  0.833346541797
+    ulcer_acc:  0.739061216561
+    polyp_acc:  0.788794138868
+    Gastritis_acc:  0.58148989899
+    normal_acc:  1.0
+
+Four acc:  0.788918080494
+    ulcer_acc:  0.729166666667
+    polyp_acc:  0.645639101808
+    Gastritis_acc:  0.562023809524
+    normal_acc:  1.0
+
+13
+
+dataset shape: (573, 198)
+(573, 198)
+Four acc:  0.883491788288
+    ulcer_acc:  0.782449494949
+    polyp_acc:  0.817385436631
+    Gastritis_acc:  0.838888888889
+    normal_acc:  1.0
+
+Four acc:  0.809939438682
+    ulcer_acc:  0.748358585859
+    polyp_acc:  0.775401243493
+    Gastritis_acc:  0.499825174825
+    normal_acc:  1.0
+
+Four acc:  0.862501899241
+    ulcer_acc:  0.829848484848
+    polyp_acc:  0.765312961892
+    Gastritis_acc:  0.649523809524
+    normal_acc:  1.0
+
+Four acc:  0.816867263797
+    ulcer_acc:  0.712619047619
+    polyp_acc:  0.758455905979
+    Gastritis_acc:  0.555555555556
+    normal_acc:  1.0
+
+Four acc:  0.804884940953
+    ulcer_acc:  0.822380952381
+    polyp_acc:  0.653113955288
+    Gastritis_acc:  0.605158730159
+    normal_acc:  1.0
+
+14
+
+dataset shape: (573, 198)
+(573, 198)
+Four acc:  0.862174297654
+    ulcer_acc:  0.75968975469
+    polyp_acc:  0.788355313417
+    Gastritis_acc:  0.738571428571
+    normal_acc:  1.0
+
+Four acc:  0.816858613512
+    ulcer_acc:  0.737012987013
+    polyp_acc:  0.779019607843
+    Gastritis_acc:  0.524954906205
+    normal_acc:  1.0
+
+Four acc:  0.864074573288
+    ulcer_acc:  0.842002164502
+    polyp_acc:  0.757422047766
+    Gastritis_acc:  0.681904761905
+    normal_acc:  1.0
+
+Four acc:  0.80628580244
+    ulcer_acc:  0.699545454545
+    polyp_acc:  0.762487700208
+    Gastritis_acc:  0.527420634921
+    normal_acc:  1.0
+
+Four acc:  0.790570797644
+    ulcer_acc:  0.732142857143
+    polyp_acc:  0.635491084049
+    Gastritis_acc:  0.62753968254
+    normal_acc:  1.0
+
+15
+
+dataset shape: (573, 198)
+(573, 198)
+Four acc:  0.897090204391
+    ulcer_acc:  0.841287878788
+    polyp_acc:  0.802349009779
+    Gastritis_acc:  0.913333333333
+    normal_acc:  1.0
+
+Four acc:  0.82166760347
+    ulcer_acc:  0.795292207792
+    polyp_acc:  0.794594017094
+    Gastritis_acc:  0.501843711844
+    normal_acc:  1.0
+
+Four acc:  0.860283669697
+    ulcer_acc:  0.812932067932
+    polyp_acc:  0.757211902305
+    Gastritis_acc:  0.665
+    normal_acc:  1.0
+
+Four acc:  0.819614838595
+    ulcer_acc:  0.701669441669
+    polyp_acc:  0.756868958785
+    Gastritis_acc:  0.572301587302
+    normal_acc:  1.0
+
+Four acc:  0.783573826176
+    ulcer_acc:  0.74380952381
+    polyp_acc:  0.627323549829
+    Gastritis_acc:  0.5825
+    normal_acc:  1.0
+
+16
+
+dataset shape: (573, 198)
+(573, 198)
+Four acc:  0.85404997404
+    ulcer_acc:  0.717710622711
+    polyp_acc:  0.820413902403
+    Gastritis_acc:  0.67
+    normal_acc:  1.0
+
+Four acc:  0.813178029021
+    ulcer_acc:  0.803196248196
+    polyp_acc:  0.762904905982
+    Gastritis_acc:  0.504045954046
+    normal_acc:  1.0
+
+Four acc:  0.863962231438
+    ulcer_acc:  0.836673881674
+    polyp_acc:  0.757304394298
+    Gastritis_acc:  0.712976190476
+    normal_acc:  1.0
+
+Four acc:  0.811821416354
+    ulcer_acc:  0.739123376623
+    polyp_acc:  0.736404245909
+    Gastritis_acc:  0.540772005772
+    normal_acc:  1.0
+
+Four acc:  0.803233249161
+    ulcer_acc:  0.782777777778
+    polyp_acc:  0.658349428349
+    Gastritis_acc:  0.603174603175
+    normal_acc:  1.0
+
+17
+
+dataset shape: (573, 198)
+(573, 198)
+Four acc:  0.867646115714
+    ulcer_acc:  0.785493395493
+    polyp_acc:  0.788266991007
+    Gastritis_acc:  0.736904761905
+    normal_acc:  1.0
+
+Four acc:  0.825704014832
+    ulcer_acc:  0.777095959596
+    polyp_acc:  0.782986637975
+    Gastritis_acc:  0.54875
+    normal_acc:  1.0
+
+Four acc:  0.864419475446
+    ulcer_acc:  0.853484848485
+    polyp_acc:  0.75800339083
+    Gastritis_acc:  0.643333333333
+    normal_acc:  1.0
+
+Four acc:  0.810045208926
+    ulcer_acc:  0.740577755578
+    polyp_acc:  0.743815239198
+    Gastritis_acc:  0.49898989899
+    normal_acc:  1.0
+
+Four acc:  0.789521437886
+    ulcer_acc:  0.710555555556
+    polyp_acc:  0.630543153351
+    Gastritis_acc:  0.579404761905
+    normal_acc:  1.0
+
+18
+
+dataset shape: (573, 198)
+(573, 198)
+Four acc:  0.854898270595
+    ulcer_acc:  0.716398046398
+    polyp_acc:  0.786673116615
+    Gastritis_acc:  0.71630952381
+    normal_acc:  1.0
+
+Four acc:  0.794349974879
+    ulcer_acc:  0.729206349206
+    polyp_acc:  0.749762753586
+    Gastritis_acc:  0.457579365079
+    normal_acc:  1.0
+
+Four acc:  0.860875104983
+    ulcer_acc:  0.847301587302
+    polyp_acc:  0.74470477082
+    Gastritis_acc:  0.739285714286
+    normal_acc:  1.0
+
+Four acc:  0.824969765948
+    ulcer_acc:  0.73067987568
+    polyp_acc:  0.806872313703
+    Gastritis_acc:  0.539935064935
+    normal_acc:  1.0
+
+Four acc:  0.783122958025
+    ulcer_acc:  0.750595238095
+    polyp_acc:  0.62897447868
+    Gastritis_acc:  0.580952380952
+    normal_acc:  1.0
+
+19
+
+dataset shape: (573, 198)
+(573, 198)
+Four acc:  0.897076007856
+    ulcer_acc:  0.805058275058
+    polyp_acc:  0.827249987714
+    Gastritis_acc:  0.895714285714
+    normal_acc:  1.0
+
+Four acc:  0.80063656964
+    ulcer_acc:  0.76904040404
+    polyp_acc:  0.746784098255
+    Gastritis_acc:  0.437041847042
+    normal_acc:  1.0
+
+Four acc:  0.860790736738
+    ulcer_acc:  0.868492063492
+    polyp_acc:  0.753187352051
+    Gastritis_acc:  0.625476190476
+    normal_acc:  1.0
+
+Four acc:  0.823876157372
+    ulcer_acc:  0.713333333333
+    polyp_acc:  0.743704113224
+    Gastritis_acc:  0.603849206349
+    normal_acc:  1.0
+
+Four acc:  0.7945845859
+    ulcer_acc:  0.797380952381
+    polyp_acc:  0.640485290072
+    Gastritis_acc:  0.55880952381
+    normal_acc:  1.0
