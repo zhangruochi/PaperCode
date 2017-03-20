@@ -13,7 +13,7 @@ Required packages
 Info
 - name   : "zhangruochi"
 - email  : "zrc720@gmail.com"
-- date   : "2017.02.19"
+- date   : "2017.03.20"
 - Version : 3.0.0
 
 Description
@@ -41,7 +41,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import matthews_corrcoef
-import warnings
+from sklearn.multiclass import OneVsOneClassifier
 
 
 
@@ -93,6 +93,27 @@ def select_estimator(case):
     return estimator
 
 
+def get_single_score(y_true,y_predict,class_):
+    #某个类别的个数 
+    sum_count = 0
+    for label in y_predict:
+        if label == class_:
+            sum_count += 1
+
+    true_count = 0         
+    #这个类别预测准确的个数        
+    for i in range(len(y_true)):
+        if y_predict[i] == class_ and y_predict[i] == y_true[i]:
+            true_count += 1
+
+    if sum_count == 0:  
+        single_score = 0
+    else:          
+        single_score = true_count/sum_count        
+    #print("   subclass{} acc: ".format(str(class_)) + str(single_score))
+    
+    return single_score
+
 #采用 K-Fold 交叉验证 得到 aac 
 def get_aac(estimator,X,y,skf):
     all_scores, ulcer_scores, polyp_socres, Gastritis_socres,normal_scores = [],[],[],[],[]
@@ -127,8 +148,8 @@ def get_aac(estimator,X,y,skf):
 def main():
 #-------------参数------------------    
     n = 10    #采用 n 折交叉验证
-    n_filename_1 = "Gastric_ulcer_P.csv"
-    n_filename_2 = "Gastric_polyp_P.csv"
+    n_filename_1 = "Gastric_ucler_P.csv"
+    n_filename_2 = "Gastirc_polyp_P.csv"
     n_filename_3 = "Gastritis_P.csv"
     p_filename   = "Normal_P.csv"
 #-------------参数------------------  
@@ -136,18 +157,19 @@ def main():
         
 
     dataset,labels = read_csv_file(p_filename,n_filename_1,n_filename_2,n_filename_3)   
-    print("dataset shape:",dataset.shape)  
+ 
       
     estimator_list = [0,1,2,3,4,5]
     skf = StratifiedKFold(n_splits= n,random_state = 7)
 
     for i in estimator_list:    
-        acc,sn,sp,mcc = evaluate(select_estimator(i),dataset,labels,skf)
-        print("Acc: ",acc)
-        print("Sn: ",sn)
-        print("Sp: ",sp)
-        print("Mcc: ",mcc)
-        print("\n")
+        four_acc,ulcer_acc, polyp_acc, Gastritis_acc,normal_acc = get_aac(OneVsOneClassifier(select_estimator(i)),dataset,labels,skf)
+        print("Four acc: ",four_acc)
+        print("    ulcer_acc: ",ulcer_acc)
+        print("    polyp_acc: ",polyp_acc)
+        print("    Gastritis_acc: ",Gastritis_acc)
+        print("    normal_acc: ",normal_acc)
+        print("")
 
 
 
