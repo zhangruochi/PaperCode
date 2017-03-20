@@ -106,10 +106,22 @@ def evaluate(estimator,X,y,skf):
         Fn = sum(y_predict[index_n])       #错误预测的负类  （实际为负类 预测为正类）
         Fp = sum(y_true[predict_index_n])       #错误预测的正类   (实际为正类 预测为负类)
 
-        acc = (Tp+Tn)/(Tp+Tn+Fp+Fn)
-        sn = Tp/(Tp+Fn)
-        sp = Tn/(Tn+Fp)
-        mcc = matthews_corrcoef(y_true,y_predict)
+        try:
+            acc = (Tp+Tn)/(Tp+Tn+Fp+Fn)
+        except:
+            acc = 0
+        try:    
+            sn = Tp/(Tp+Fn)
+        except:
+            sn = 0
+        try:        
+            sp = Tn/(Tn+Fp)
+        except:
+            sp = 0
+        try:        
+            mcc = matthews_corrcoef(y_true,y_predict)
+        except:
+            mcc = 0    
 
         acc_list.append(acc)
         sn_list.append(sn)
@@ -122,7 +134,7 @@ def evaluate(estimator,X,y,skf):
 #主函数
 def main():
 #-------------参数------------------    
-    n = 5    #采用 n 折交叉验证
+    n = 10    #采用 n 折交叉验证
     p_filename = "Gastirc_polyp_P.csv"
     n_filename = "Gastirc_polyp_N.csv"
 #-------------参数------------------       

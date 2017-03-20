@@ -1,0 +1,2703 @@
+Gastric_polyp_P
+0
+(158, 198)
+(243, 198)
+
+dataset shape: (401, 198)
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9875
+Sn:  1.0
+Sp:  0.97619047619
+Mcc:  0.977664316335
+
+
+Acc:  0.980057848655
+Sn:  0.988307692308
+Sp:  0.974117647059
+Mcc:  0.961167181937
+
+
+Acc:  0.96012195122
+Sn:  1.0
+Sp:  0.934267040149
+Mcc:  0.933826546798
+
+
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9675
+Sn:  0.996
+Sp:  0.957142857143
+Mcc:  0.948320578188
+
+
+1
+(158, 198)
+(243, 198)
+
+dataset shape: (401, 198)
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9875
+Sn:  1.0
+Sp:  0.97619047619
+Mcc:  0.977664316335
+
+
+Acc:  0.980057848655
+Sn:  0.988307692308
+Sp:  0.974117647059
+Mcc:  0.961167181937
+
+
+Acc:  0.96012195122
+Sn:  1.0
+Sp:  0.934267040149
+Mcc:  0.933826546798
+
+
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9675
+Sn:  0.996
+Sp:  0.957142857143
+Mcc:  0.948320578188
+
+
+2
+(158, 198)
+(243, 198)
+
+dataset shape: (401, 198)
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9875
+Sn:  1.0
+Sp:  0.97619047619
+Mcc:  0.977664316335
+
+
+Acc:  0.980057848655
+Sn:  0.988307692308
+Sp:  0.974117647059
+Mcc:  0.961167181937
+
+
+Acc:  0.96012195122
+Sn:  1.0
+Sp:  0.934267040149
+Mcc:  0.933826546798
+
+
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9675
+Sn:  0.996
+Sp:  0.957142857143
+Mcc:  0.948320578188
+
+
+3
+(158, 198)
+(243, 198)
+
+dataset shape: (401, 198)
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9875
+Sn:  1.0
+Sp:  0.97619047619
+Mcc:  0.977664316335
+
+
+Acc:  0.980057848655
+Sn:  0.988307692308
+Sp:  0.974117647059
+Mcc:  0.961167181937
+
+
+Acc:  0.96012195122
+Sn:  1.0
+Sp:  0.934267040149
+Mcc:  0.933826546798
+
+
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9675
+Sn:  0.996
+Sp:  0.957142857143
+Mcc:  0.948320578188
+
+
+4
+(158, 198)
+(243, 198)
+
+dataset shape: (401, 198)
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9875
+Sn:  1.0
+Sp:  0.97619047619
+Mcc:  0.977664316335
+
+
+Acc:  0.980057848655
+Sn:  0.988307692308
+Sp:  0.974117647059
+Mcc:  0.961167181937
+
+
+Acc:  0.96012195122
+Sn:  1.0
+Sp:  0.934267040149
+Mcc:  0.933826546798
+
+
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9675
+Sn:  0.996
+Sp:  0.957142857143
+Mcc:  0.948320578188
+
+
+5
+(158, 198)
+(243, 198)
+
+dataset shape: (401, 198)
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9875
+Sn:  1.0
+Sp:  0.97619047619
+Mcc:  0.977664316335
+
+
+Acc:  0.980057848655
+Sn:  0.988307692308
+Sp:  0.974117647059
+Mcc:  0.961167181937
+
+
+Acc:  0.96012195122
+Sn:  1.0
+Sp:  0.934267040149
+Mcc:  0.933826546798
+
+
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9675
+Sn:  0.996
+Sp:  0.957142857143
+Mcc:  0.948320578188
+
+
+6
+(158, 198)
+(243, 198)
+
+dataset shape: (401, 198)
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9875
+Sn:  1.0
+Sp:  0.97619047619
+Mcc:  0.977664316335
+
+
+Acc:  0.980057848655
+Sn:  0.988307692308
+Sp:  0.974117647059
+Mcc:  0.961167181937
+
+
+Acc:  0.96012195122
+Sn:  1.0
+Sp:  0.934267040149
+Mcc:  0.933826546798
+
+
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9675
+Sn:  0.996
+Sp:  0.957142857143
+Mcc:  0.948320578188
+
+
+7
+(158, 198)
+(243, 198)
+
+dataset shape: (401, 198)
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9875
+Sn:  1.0
+Sp:  0.97619047619
+Mcc:  0.977664316335
+
+
+Acc:  0.980057848655
+Sn:  0.988307692308
+Sp:  0.974117647059
+Mcc:  0.961167181937
+
+
+Acc:  0.96012195122
+Sn:  1.0
+Sp:  0.934267040149
+Mcc:  0.933826546798
+
+
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9675
+Sn:  0.996
+Sp:  0.957142857143
+Mcc:  0.948320578188
+
+
+8
+(158, 198)
+(243, 198)
+
+dataset shape: (401, 198)
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9875
+Sn:  1.0
+Sp:  0.97619047619
+Mcc:  0.977664316335
+
+
+Acc:  0.980057848655
+Sn:  0.988307692308
+Sp:  0.974117647059
+Mcc:  0.961167181937
+
+
+Acc:  0.96012195122
+Sn:  1.0
+Sp:  0.934267040149
+Mcc:  0.933826546798
+
+
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9675
+Sn:  0.996
+Sp:  0.957142857143
+Mcc:  0.948320578188
+
+
+9
+(158, 198)
+(243, 198)
+
+dataset shape: (401, 198)
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9875
+Sn:  1.0
+Sp:  0.97619047619
+Mcc:  0.977664316335
+
+
+Acc:  0.980057848655
+Sn:  0.988307692308
+Sp:  0.974117647059
+Mcc:  0.961167181937
+
+
+Acc:  0.96012195122
+Sn:  1.0
+Sp:  0.934267040149
+Mcc:  0.933826546798
+
+
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9675
+Sn:  0.996
+Sp:  0.957142857143
+Mcc:  0.948320578188
+
+
+10
+(158, 198)
+(243, 198)
+
+dataset shape: (401, 198)
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9875
+Sn:  1.0
+Sp:  0.97619047619
+Mcc:  0.977664316335
+
+
+Acc:  0.980057848655
+Sn:  0.988307692308
+Sp:  0.974117647059
+Mcc:  0.961167181937
+
+
+Acc:  0.96012195122
+Sn:  1.0
+Sp:  0.934267040149
+Mcc:  0.933826546798
+
+
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9675
+Sn:  0.996
+Sp:  0.957142857143
+Mcc:  0.948320578188
+
+
+11
+(158, 198)
+(243, 198)
+
+dataset shape: (401, 198)
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9875
+Sn:  1.0
+Sp:  0.97619047619
+Mcc:  0.977664316335
+
+
+Acc:  0.980057848655
+Sn:  0.988307692308
+Sp:  0.974117647059
+Mcc:  0.961167181937
+
+
+Acc:  0.96012195122
+Sn:  1.0
+Sp:  0.934267040149
+Mcc:  0.933826546798
+
+
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9675
+Sn:  0.996
+Sp:  0.957142857143
+Mcc:  0.948320578188
+
+
+12
+(158, 198)
+(243, 198)
+
+dataset shape: (401, 198)
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9875
+Sn:  1.0
+Sp:  0.97619047619
+Mcc:  0.977664316335
+
+
+Acc:  0.980057848655
+Sn:  0.988307692308
+Sp:  0.974117647059
+Mcc:  0.961167181937
+
+
+Acc:  0.96012195122
+Sn:  1.0
+Sp:  0.934267040149
+Mcc:  0.933826546798
+
+
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9675
+Sn:  0.996
+Sp:  0.957142857143
+Mcc:  0.948320578188
+
+
+13
+(158, 198)
+(243, 198)
+
+dataset shape: (401, 198)
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9875
+Sn:  1.0
+Sp:  0.97619047619
+Mcc:  0.977664316335
+
+
+Acc:  0.980057848655
+Sn:  0.988307692308
+Sp:  0.974117647059
+Mcc:  0.961167181937
+
+
+Acc:  0.96012195122
+Sn:  1.0
+Sp:  0.934267040149
+Mcc:  0.933826546798
+
+
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9675
+Sn:  0.996
+Sp:  0.957142857143
+Mcc:  0.948320578188
+
+
+14
+(158, 198)
+(243, 198)
+
+dataset shape: (401, 198)
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9875
+Sn:  1.0
+Sp:  0.97619047619
+Mcc:  0.977664316335
+
+
+Acc:  0.980057848655
+Sn:  0.988307692308
+Sp:  0.974117647059
+Mcc:  0.961167181937
+
+
+Acc:  0.96012195122
+Sn:  1.0
+Sp:  0.934267040149
+Mcc:  0.933826546798
+
+
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9675
+Sn:  0.996
+Sp:  0.957142857143
+Mcc:  0.948320578188
+
+
+15
+(158, 198)
+(243, 198)
+
+dataset shape: (401, 198)
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9875
+Sn:  1.0
+Sp:  0.97619047619
+Mcc:  0.977664316335
+
+
+Acc:  0.980057848655
+Sn:  0.988307692308
+Sp:  0.974117647059
+Mcc:  0.961167181937
+
+
+Acc:  0.96012195122
+Sn:  1.0
+Sp:  0.934267040149
+Mcc:  0.933826546798
+
+
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9675
+Sn:  0.996
+Sp:  0.957142857143
+Mcc:  0.948320578188
+
+
+16
+(158, 198)
+(243, 198)
+
+dataset shape: (401, 198)
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9875
+Sn:  1.0
+Sp:  0.97619047619
+Mcc:  0.977664316335
+
+
+Acc:  0.980057848655
+Sn:  0.988307692308
+Sp:  0.974117647059
+Mcc:  0.961167181937
+
+
+Acc:  0.96012195122
+Sn:  1.0
+Sp:  0.934267040149
+Mcc:  0.933826546798
+
+
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9675
+Sn:  0.996
+Sp:  0.957142857143
+Mcc:  0.948320578188
+
+
+17
+(158, 198)
+(243, 198)
+
+dataset shape: (401, 198)
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9875
+Sn:  1.0
+Sp:  0.97619047619
+Mcc:  0.977664316335
+
+
+Acc:  0.980057848655
+Sn:  0.988307692308
+Sp:  0.974117647059
+Mcc:  0.961167181937
+
+
+Acc:  0.96012195122Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+
+Sn:  1.0
+Sp:  0.934267040149
+Mcc:  0.933826546798
+
+
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9675
+Sn:  0.996
+Sp:  0.957142857143
+Mcc:  0.948320578188
+
+
+18
+(158, 198)
+(243, 198)
+
+dataset shape: (401, 198)
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9875
+Sn:  1.0
+Sp:  0.97619047619
+Mcc:  0.977664316335
+
+
+Acc:  0.980057848655
+Sn:  0.988307692308
+Sp:  0.974117647059
+Mcc:  0.961167181937
+
+
+Acc:  0.96012195122
+Sn:  1.0
+Sp:  0.934267040149
+Mcc:  0.933826546798
+
+
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9675
+Sn:  0.996
+Sp:  0.957142857143
+Mcc:  0.948320578188
+
+
+19
+(158, 198)
+(243, 198)
+
+dataset shape: (401, 198)
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9875
+Sn:  1.0
+Sp:  0.97619047619
+Mcc:  0.977664316335
+
+
+Acc:  0.980057848655
+Sn:  0.988307692308
+Sp:  0.974117647059
+Mcc:  0.961167181937
+
+
+Acc:  0.96012195122
+Sn:  1.0
+Sp:  0.934267040149
+Mcc:  0.933826546798
+
+
+Acc:  0.97
+Sn:  1.0
+Sp:  0.957142857143
+Mcc:  0.953452248382
+
+
+Acc:  0.9675
+Sn:  0.996
+Sp:  0.957142857143
+Mcc:  0.948320578188
+
+
+Gastric_ulcer_P
+0
+(98, 198)
+(243, 198)
+
+dataset shape: (341, 198)
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.988235294118
+Sn:  1.0
+Sp:  0.971428571429
+Mcc:  0.977151674981
+
+
+Acc:  0.988146167558
+Sn:  0.991833333333
+Sp:  0.980909090909
+Mcc:  0.971548120836
+
+
+Acc:  0.953109243697
+Sn:  1.0
+Sp:  0.910606060606
+Mcc:  0.921910121903
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+1
+(98, 198)
+(243, 198)
+
+dataset shape: (341, 198)
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.988235294118
+Sn:  1.0
+Sp:  0.971428571429
+Mcc:  0.977151674981
+
+
+Acc:  0.988146167558
+Sn:  0.991833333333
+Sp:  0.980909090909
+Mcc:  0.971548120836
+
+
+Acc:  0.953109243697
+Sn:  1.0
+Sp:  0.910606060606
+Mcc:  0.921910121903
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+2
+(98, 198)
+(243, 198)
+
+dataset shape: (341, 198)
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.988235294118
+Sn:  1.0
+Sp:  0.971428571429
+Mcc:  0.977151674981
+
+
+Acc:  0.988146167558
+Sn:  0.991833333333
+Sp:  0.980909090909
+Mcc:  0.971548120836
+
+
+Acc:  0.953109243697
+Sn:  1.0
+Sp:  0.910606060606
+Mcc:  0.921910121903
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+3
+(98, 198)
+(243, 198)
+
+dataset shape: (341, 198)
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.988235294118
+Sn:  1.0
+Sp:  0.971428571429
+Mcc:  0.977151674981
+
+
+Acc:  0.988146167558
+Sn:  0.991833333333
+Sp:  0.980909090909
+Mcc:  0.971548120836
+
+
+Acc:  0.953109243697
+Sn:  1.0
+Sp:  0.910606060606
+Mcc:  0.921910121903
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+4
+(98, 198)
+(243, 198)
+
+dataset shape: (341, 198)
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.988235294118
+Sn:  1.0
+Sp:  0.971428571429
+Mcc:  0.977151674981
+
+
+Acc:  0.988146167558
+Sn:  0.991833333333
+Sp:  0.980909090909
+Mcc:  0.971548120836
+
+
+Acc:  0.953109243697
+Sn:  1.0
+Sp:  0.910606060606
+Mcc:  0.921910121903
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+5
+(98, 198)
+(243, 198)
+
+dataset shape: (341, 198)
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.988235294118
+Sn:  1.0
+Sp:  0.971428571429
+Mcc:  0.977151674981
+
+
+Acc:  0.988146167558
+Sn:  0.991833333333
+Sp:  0.980909090909
+Mcc:  0.971548120836
+
+
+Acc:  0.953109243697
+Sn:  1.0
+Sp:  0.910606060606
+Mcc:  0.921910121903
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+6
+(98, 198)
+(243, 198)
+
+dataset shape: (341, 198)
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.988235294118
+Sn:  1.0
+Sp:  0.971428571429
+Mcc:  0.977151674981
+
+
+Acc:  0.988146167558
+Sn:  0.991833333333
+Sp:  0.980909090909
+Mcc:  0.971548120836
+
+
+Acc:  0.953109243697
+Sn:  1.0
+Sp:  0.910606060606
+Mcc:  0.921910121903
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+7
+(98, 198)
+(243, 198)
+
+dataset shape: (341, 198)
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.988235294118
+Sn:  1.0
+Sp:  0.971428571429
+Mcc:  0.977151674981
+
+
+Acc:  0.988146167558
+Sn:  0.991833333333
+Sp:  0.980909090909
+Mcc:  0.971548120836
+
+
+Acc:  0.953109243697
+Sn:  1.0
+Sp:  0.910606060606
+Mcc:  0.921910121903
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+8
+(98, 198)
+(243, 198)
+
+dataset shape: (341, 198)
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.988235294118
+Sn:  1.0
+Sp:  0.971428571429
+Mcc:  0.977151674981
+
+
+Acc:  0.988146167558
+Sn:  0.991833333333
+Sp:  0.980909090909
+Mcc:  0.971548120836
+
+
+Acc:  0.953109243697
+Sn:  1.0
+Sp:  0.910606060606
+Mcc:  0.921910121903
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+9
+(98, 198)
+(243, 198)
+
+dataset shape: (341, 198)
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.988235294118
+Sn:  1.0
+Sp:  0.971428571429
+Mcc:  0.977151674981
+
+
+Acc:  0.988146167558
+Sn:  0.991833333333
+Sp:  0.980909090909
+Mcc:  0.971548120836
+
+
+Acc:  0.953109243697
+Sn:  1.0
+Sp:  0.910606060606
+Mcc:  0.921910121903
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+10
+(98, 198)
+(243, 198)
+
+dataset shape: (341, 198)
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.988235294118
+Sn:  1.0
+Sp:  0.971428571429
+Mcc:  0.977151674981
+
+
+Acc:  0.988146167558
+Sn:  0.991833333333
+Sp:  0.980909090909
+Mcc:  0.971548120836
+
+
+Acc:  0.953109243697
+Sn:  1.0
+Sp:  0.910606060606
+Mcc:  0.921910121903
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+11
+(98, 198)
+(243, 198)
+
+dataset shape: (341, 198)
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.988235294118
+Sn:  1.0
+Sp:  0.971428571429
+Mcc:  0.977151674981
+
+
+Acc:  0.988146167558
+Sn:  0.991833333333
+Sp:  0.980909090909
+Mcc:  0.971548120836
+
+
+Acc:  0.953109243697
+Sn:  1.0
+Sp:  0.910606060606
+Mcc:  0.921910121903
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+12
+(98, 198)
+(243, 198)
+
+dataset shape: (341, 198)
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.988235294118
+Sn:  1.0
+Sp:  0.971428571429
+Mcc:  0.977151674981
+
+
+Acc:  0.988146167558
+Sn:  0.991833333333
+Sp:  0.980909090909
+Mcc:  0.971548120836
+
+
+Acc:  0.953109243697
+Sn:  1.0
+Sp:  0.910606060606
+Mcc:  0.921910121903
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+13
+(98, 198)
+(243, 198)
+
+dataset shape: (341, 198)
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.988235294118
+Sn:  1.0
+Sp:  0.971428571429
+Mcc:  0.977151674981
+
+
+Acc:  0.988146167558
+Sn:  0.991833333333
+Sp:  0.980909090909
+Mcc:  0.971548120836
+
+
+Acc:  0.953109243697
+Sn:  1.0
+Sp:  0.910606060606
+Mcc:  0.921910121903
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+14
+(98, 198)
+(243, 198)
+
+dataset shape: (341, 198)
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.988235294118
+Sn:  1.0
+Sp:  0.971428571429
+Mcc:  0.977151674981
+
+
+Acc:  0.988146167558
+Sn:  0.991833333333
+Sp:  0.980909090909
+Mcc:  0.971548120836
+
+
+Acc:  0.953109243697
+Sn:  1.0
+Sp:  0.910606060606
+Mcc:  0.921910121903
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+15
+(98, 198)
+(243, 198)
+
+dataset shape: (341, 198)
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.988235294118
+Sn:  1.0
+Sp:  0.971428571429
+Mcc:  0.977151674981
+
+
+Acc:  0.988146167558
+Sn:  0.991833333333
+Sp:  0.980909090909
+Mcc:  0.971548120836
+
+
+Acc:  0.953109243697
+Sn:  1.0
+Sp:  0.910606060606
+Mcc:  0.921910121903
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+16
+(98, 198)
+(243, 198)
+
+dataset shape: (341, 198)
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.988235294118
+Sn:  1.0
+Sp:  0.971428571429
+Mcc:  0.977151674981
+
+
+Acc:  0.988146167558
+Sn:  0.991833333333
+Sp:  0.980909090909
+Mcc:  0.971548120836
+
+
+Acc:  0.953109243697
+Sn:  1.0
+Sp:  0.910606060606
+Mcc:  0.921910121903
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+17
+(98, 198)
+(243, 198)
+
+dataset shape: (341, 198)
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.988235294118
+Sn:  1.0
+Sp:  0.971428571429
+Mcc:  0.977151674981
+
+
+Acc:  0.988146167558
+Sn:  0.991833333333
+Sp:  0.980909090909
+Mcc:  0.971548120836
+
+
+Acc:  0.953109243697
+Sn:  1.0
+Sp:  0.910606060606
+Mcc:  0.921910121903
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+18
+(98, 198)
+(243, 198)
+
+dataset shape: (341, 198)
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.988235294118
+Sn:  1.0
+Sp:  0.971428571429
+Mcc:  0.977151674981
+
+
+Acc:  0.988146167558
+Sn:  0.991833333333
+Sp:  0.980909090909
+Mcc:  0.971548120836
+
+
+Acc:  0.953109243697
+Sn:  1.0
+Sp:  0.910606060606
+Mcc:  0.921910121903
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+19
+(98, 198)
+(243, 198)
+
+dataset shape: (341, 198)
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.988235294118
+Sn:  1.0
+Sp:  0.971428571429
+Mcc:  0.977151674981
+
+
+Acc:  0.988146167558
+Sn:  0.991833333333
+Sp:  0.980909090909
+Mcc:  0.971548120836
+
+
+Acc:  0.953109243697
+Sn:  1.0
+Sp:  0.910606060606
+Mcc:  0.921910121903
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Acc:  0.991176470588
+Sn:  1.0
+Sp:  0.976923076923
+Mcc:  0.982041265414
+
+
+Gastritis_P
+0
+(74, 198)
+(243, 198)
+
+dataset shape: (317, 198)
+Acc:  0.921505376344
+Sn:  0.953699507389
+Sp:  0.936842105263
+Mcc:  0.830350921751
+
+
+Acc:  0.983971774194
+Sn:  1.0
+Sp:  0.952525252525
+Mcc:  0.965117728825
+
+
+Acc:  0.965203445748
+Sn:  0.986904761905
+Sp:  0.912380952381
+Mcc:  0.912100418364
+
+
+Acc:  0.948878910068
+Sn:  1.0
+Sp:  0.893230994152
+Mcc:  0.912577937554
+
+
+Acc:  0.946138807429
+Sn:  0.981593406593
+Sp:  0.936842105263
+Mcc:  0.901071388274
+
+
+Acc:  0.949169110459
+Sn:  0.9849002849
+Sp:  0.936842105263
+Mcc:  0.909702933524
+
+
+1
+(74, 198)
+(243, 198)
+
+dataset shape: (317, 198)
+Acc:  0.921505376344
+Sn:  0.953699507389
+Sp:  0.936842105263
+Mcc:  0.830350921751
+
+
+Acc:  0.983971774194
+Sn:  1.0
+Sp:  0.952525252525
+Mcc:  0.965117728825
+
+
+Acc:  0.965203445748
+Sn:  0.986904761905
+Sp:  0.912380952381
+Mcc:  0.912100418364
+
+
+Acc:  0.948878910068
+Sn:  1.0
+Sp:  0.893230994152
+Mcc:  0.912577937554
+
+
+Acc:  0.946138807429
+Sn:  0.981593406593
+Sp:  0.936842105263
+Mcc:  0.901071388274
+
+
+Acc:  0.949169110459
+Sn:  0.9849002849
+Sp:  0.936842105263
+Mcc:  0.909702933524
+
+
+2
+(74, 198)
+(243, 198)
+
+dataset shape: (317, 198)
+Acc:  0.921505376344
+Sn:  0.953699507389
+Sp:  0.936842105263
+Mcc:  0.830350921751
+
+
+Acc:  0.983971774194
+Sn:  1.0
+Sp:  0.952525252525
+Mcc:  0.965117728825
+
+
+Acc:  0.965203445748
+Sn:  0.986904761905
+Sp:  0.912380952381
+Mcc:  0.912100418364
+
+
+Acc:  0.948878910068
+Sn:  1.0
+Sp:  0.893230994152
+Mcc:  0.912577937554
+
+
+Acc:  0.946138807429
+Sn:  0.981593406593
+Sp:  0.936842105263
+Mcc:  0.901071388274
+
+
+Acc:  0.949169110459
+Sn:  0.9849002849
+Sp:  0.936842105263
+Mcc:  0.909702933524
+
+
+3
+(74, 198)
+(243, 198)
+
+dataset shape: (317, 198)
+Acc:  0.921505376344
+Sn:  0.953699507389
+Sp:  0.936842105263
+Mcc:  0.830350921751
+
+
+Acc:  0.983971774194
+Sn:  1.0
+Sp:  0.952525252525
+Mcc:  0.965117728825
+
+
+Acc:  0.965203445748
+Sn:  0.986904761905
+Sp:  0.912380952381
+Mcc:  0.912100418364
+
+
+Acc:  0.948878910068
+Sn:  1.0
+Sp:  0.893230994152
+Mcc:  0.912577937554
+
+
+Acc:  0.946138807429
+Sn:  0.981593406593
+Sp:  0.936842105263
+Mcc:  0.901071388274
+
+
+Acc:  0.949169110459
+Sn:  0.9849002849
+Sp:  0.936842105263
+Mcc:  0.909702933524
+
+
+4
+(74, 198)
+(243, 198)
+
+dataset shape: (317, 198)
+Acc:  0.921505376344
+Sn:  0.953699507389
+Sp:  0.936842105263
+Mcc:  0.830350921751
+
+
+Acc:  0.983971774194
+Sn:  1.0
+Sp:  0.952525252525
+Mcc:  0.965117728825
+
+
+Acc:  0.965203445748
+Sn:  0.986904761905
+Sp:  0.912380952381
+Mcc:  0.912100418364
+
+
+Acc:  0.948878910068
+Sn:  1.0
+Sp:  0.893230994152
+Mcc:  0.912577937554
+
+
+Acc:  0.946138807429
+Sn:  0.981593406593
+Sp:  0.936842105263
+Mcc:  0.901071388274
+
+
+Acc:  0.949169110459
+Sn:  0.9849002849
+Sp:  0.936842105263
+Mcc:  0.909702933524
+
+
+5
+(74, 198)
+(243, 198)
+
+dataset shape: (317, 198)
+Acc:  0.921505376344
+Sn:  0.953699507389
+Sp:  0.936842105263
+Mcc:  0.830350921751
+
+
+Acc:  0.983971774194
+Sn:  1.0
+Sp:  0.952525252525
+Mcc:  0.965117728825
+
+
+Acc:  0.965203445748
+Sn:  0.986904761905
+Sp:  0.912380952381
+Mcc:  0.912100418364
+
+
+Acc:  0.948878910068
+Sn:  1.0
+Sp:  0.893230994152
+Mcc:  0.912577937554
+
+
+Acc:  0.946138807429
+Sn:  0.981593406593
+Sp:  0.936842105263
+Mcc:  0.901071388274
+
+
+Acc:  0.949169110459
+Sn:  0.9849002849
+Sp:  0.936842105263
+Mcc:  0.909702933524
+
+
+6
+(74, 198)
+(243, 198)
+
+dataset shape: (317, 198)
+Acc:  0.921505376344
+Sn:  0.953699507389
+Sp:  0.936842105263
+Mcc:  0.830350921751
+
+
+Acc:  0.983971774194
+Sn:  1.0
+Sp:  0.952525252525
+Mcc:  0.965117728825
+
+
+Acc:  0.965203445748
+Sn:  0.986904761905
+Sp:  0.912380952381
+Mcc:  0.912100418364
+
+
+Acc:  0.948878910068
+Sn:  1.0
+Sp:  0.893230994152
+Mcc:  0.912577937554
+
+
+Acc:  0.946138807429
+Sn:  0.981593406593
+Sp:  0.936842105263
+Mcc:  0.901071388274
+
+
+Acc:  0.949169110459
+Sn:  0.9849002849
+Sp:  0.936842105263
+Mcc:  0.909702933524
+
+
+7
+(74, 198)
+(243, 198)
+
+dataset shape: (317, 198)
+Acc:  0.921505376344
+Sn:  0.953699507389
+Sp:  0.936842105263
+Mcc:  0.830350921751
+
+
+Acc:  0.983971774194
+Sn:  1.0
+Sp:  0.952525252525
+Mcc:  0.965117728825
+
+
+Acc:  0.965203445748
+Sn:  0.986904761905
+Sp:  0.912380952381
+Mcc:  0.912100418364
+
+
+Acc:  0.948878910068
+Sn:  1.0
+Sp:  0.893230994152
+Mcc:  0.912577937554
+
+
+Acc:  0.946138807429
+Sn:  0.981593406593
+Sp:  0.936842105263
+Mcc:  0.901071388274
+
+
+Acc:  0.949169110459
+Sn:  0.9849002849
+Sp:  0.936842105263
+Mcc:  0.909702933524
+
+
+8
+(74, 198)
+(243, 198)
+
+dataset shape: (317, 198)
+Acc:  0.921505376344
+Sn:  0.953699507389
+Sp:  0.936842105263
+Mcc:  0.830350921751
+
+
+Acc:  0.983971774194
+Sn:  1.0
+Sp:  0.952525252525
+Mcc:  0.965117728825
+
+
+Acc:  0.965203445748
+Sn:  0.986904761905
+Sp:  0.912380952381
+Mcc:  0.912100418364
+
+
+Acc:  0.948878910068
+Sn:  1.0
+Sp:  0.893230994152
+Mcc:  0.912577937554
+
+
+Acc:  0.946138807429
+Sn:  0.981593406593
+Sp:  0.936842105263
+Mcc:  0.901071388274
+
+
+Acc:  0.949169110459
+Sn:  0.9849002849
+Sp:  0.936842105263
+Mcc:  0.909702933524
+
+
+9
+(74, 198)
+(243, 198)
+
+dataset shape: (317, 198)
+Acc:  0.921505376344
+Sn:  0.953699507389
+Sp:  0.936842105263
+Mcc:  0.830350921751
+
+
+Acc:  0.983971774194
+Sn:  1.0
+Sp:  0.952525252525
+Mcc:  0.965117728825
+
+
+Acc:  0.965203445748
+Sn:  0.986904761905
+Sp:  0.912380952381
+Mcc:  0.912100418364
+
+
+Acc:  0.948878910068
+Sn:  1.0
+Sp:  0.893230994152
+Mcc:  0.912577937554
+
+
+Acc:  0.946138807429
+Sn:  0.981593406593
+Sp:  0.936842105263
+Mcc:  0.901071388274
+
+
+Acc:  0.949169110459
+Sn:  0.9849002849
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: divide by zero encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Trip_Z_random20_2.py:57: RuntimeWarning: invalid value encountered in true_divide
+  direction = np.arctan(imy/imx)       #梯度方向
+Sp:  0.936842105263
+Mcc:  0.909702933524
+
+
+10
+(74, 198)
+(243, 198)
+
+dataset shape: (317, 198)
+Acc:  0.921505376344
+Sn:  0.953699507389
+Sp:  0.936842105263
+Mcc:  0.830350921751
+
+
+Acc:  0.983971774194
+Sn:  1.0
+Sp:  0.952525252525
+Mcc:  0.965117728825
+
+
+Acc:  0.965203445748
+Sn:  0.986904761905
+Sp:  0.912380952381
+Mcc:  0.912100418364
+
+
+Acc:  0.948878910068
+Sn:  1.0
+Sp:  0.893230994152
+Mcc:  0.912577937554
+
+
+Acc:  0.946138807429
+Sn:  0.981593406593
+Sp:  0.936842105263
+Mcc:  0.901071388274
+
+
+Acc:  0.949169110459
+Sn:  0.9849002849
+Sp:  0.936842105263
+Mcc:  0.909702933524
+
+
+11
+(74, 198)
+(243, 198)
+
+dataset shape: (317, 198)
+Acc:  0.921505376344
+Sn:  0.953699507389
+Sp:  0.936842105263
+Mcc:  0.830350921751
+
+
+Acc:  0.983971774194
+Sn:  1.0
+Sp:  0.952525252525
+Mcc:  0.965117728825
+
+
+Acc:  0.965203445748
+Sn:  0.986904761905
+Sp:  0.912380952381
+Mcc:  0.912100418364
+
+
+Acc:  0.948878910068
+Sn:  1.0
+Sp:  0.893230994152
+Mcc:  0.912577937554
+
+
+Acc:  0.946138807429
+Sn:  0.981593406593
+Sp:  0.936842105263
+Mcc:  0.901071388274
+
+
+Acc:  0.949169110459
+Sn:  0.9849002849
+Sp:  0.936842105263
+Mcc:  0.909702933524
+
+
+12
+(74, 198)
+(243, 198)
+
+dataset shape: (317, 198)
+Acc:  0.921505376344
+Sn:  0.953699507389
+Sp:  0.936842105263
+Mcc:  0.830350921751
+
+
+Acc:  0.983971774194
+Sn:  1.0
+Sp:  0.952525252525
+Mcc:  0.965117728825
+
+
+Acc:  0.965203445748
+Sn:  0.986904761905
+Sp:  0.912380952381
+Mcc:  0.912100418364
+
+
+Acc:  0.948878910068
+Sn:  1.0
+Sp:  0.893230994152
+Mcc:  0.912577937554
+
+
+Acc:  0.946138807429
+Sn:  0.981593406593
+Sp:  0.936842105263
+Mcc:  0.901071388274
+
+
+Acc:  0.949169110459
+Sn:  0.9849002849
+Sp:  0.936842105263
+Mcc:  0.909702933524
+
+
+13
+(74, 198)
+(243, 198)
+
+dataset shape: (317, 198)
+Acc:  0.921505376344
+Sn:  0.953699507389
+Sp:  0.936842105263
+Mcc:  0.830350921751
+
+
+Acc:  0.983971774194
+Sn:  1.0
+Sp:  0.952525252525
+Mcc:  0.965117728825
+
+
+Acc:  0.965203445748
+Sn:  0.986904761905
+Sp:  0.912380952381
+Mcc:  0.912100418364
+
+
+Acc:  0.948878910068
+Sn:  1.0
+Sp:  0.893230994152
+Mcc:  0.912577937554
+
+
+Acc:  0.946138807429
+Sn:  0.981593406593
+Sp:  0.936842105263
+Mcc:  0.901071388274
+
+
+Acc:  0.949169110459
+Sn:  0.9849002849
+Sp:  0.936842105263
+Mcc:  0.909702933524
+
+
+14
+(74, 198)
+(243, 198)
+
+dataset shape: (317, 198)
+Acc:  0.921505376344
+Sn:  0.953699507389
+Sp:  0.936842105263
+Mcc:  0.830350921751
+
+
+Acc:  0.983971774194
+Sn:  1.0
+Sp:  0.952525252525
+Mcc:  0.965117728825
+
+
+Acc:  0.965203445748
+Sn:  0.986904761905
+Sp:  0.912380952381
+Mcc:  0.912100418364
+
+
+Acc:  0.948878910068
+Sn:  1.0
+Sp:  0.893230994152
+Mcc:  0.912577937554
+
+
+Acc:  0.946138807429
+Sn:  0.981593406593
+Sp:  0.936842105263
+Mcc:  0.901071388274
+
+
+Acc:  0.949169110459
+Sn:  0.9849002849
+Sp:  0.936842105263
+Mcc:  0.909702933524
+
+
+15
+(74, 198)
+(243, 198)
+
+dataset shape: (317, 198)
+Acc:  0.921505376344
+Sn:  0.953699507389
+Sp:  0.936842105263
+Mcc:  0.830350921751
+
+
+Acc:  0.983971774194
+Sn:  1.0
+Sp:  0.952525252525
+Mcc:  0.965117728825
+
+
+Acc:  0.965203445748
+Sn:  0.986904761905
+Sp:  0.912380952381
+Mcc:  0.912100418364
+
+
+Acc:  0.948878910068
+Sn:  1.0
+Sp:  0.893230994152
+Mcc:  0.912577937554
+
+
+Acc:  0.946138807429
+Sn:  0.981593406593
+Sp:  0.936842105263
+Mcc:  0.901071388274
+
+
+Acc:  0.949169110459
+Sn:  0.9849002849
+Sp:  0.936842105263
+Mcc:  0.909702933524
+
+
+16
+(74, 198)
+(243, 198)
+
+dataset shape: (317, 198)
+Acc:  0.921505376344
+Sn:  0.953699507389
+Sp:  0.936842105263
+Mcc:  0.830350921751
+
+
+Acc:  0.983971774194
+Sn:  1.0
+Sp:  0.952525252525
+Mcc:  0.965117728825
+
+
+Acc:  0.965203445748
+Sn:  0.986904761905
+Sp:  0.912380952381
+Mcc:  0.912100418364
+
+
+Acc:  0.948878910068
+Sn:  1.0
+Sp:  0.893230994152
+Mcc:  0.912577937554
+
+
+Acc:  0.946138807429
+Sn:  0.981593406593
+Sp:  0.936842105263
+Mcc:  0.901071388274
+
+
+Acc:  0.949169110459
+Sn:  0.9849002849
+Sp:  0.936842105263
+Mcc:  0.909702933524
+
+
+17
+(74, 198)
+(243, 198)
+
+dataset shape: (317, 198)
+Acc:  0.921505376344
+Sn:  0.953699507389
+Sp:  0.936842105263
+Mcc:  0.830350921751
+
+
+Acc:  0.983971774194
+Sn:  1.0
+Sp:  0.952525252525
+Mcc:  0.965117728825
+
+
+Acc:  0.965203445748
+Sn:  0.986904761905
+Sp:  0.912380952381
+Mcc:  0.912100418364
+
+
+Acc:  0.948878910068
+Sn:  1.0
+Sp:  0.893230994152
+Mcc:  0.912577937554
+
+
+Acc:  0.946138807429
+Sn:  0.981593406593
+Sp:  0.936842105263
+Mcc:  0.901071388274
+
+
+Acc:  0.949169110459
+Sn:  0.9849002849
+Sp:  0.936842105263
+Mcc:  0.909702933524
+
+
+18
+(74, 198)
+(243, 198)
+
+dataset shape: (317, 198)
+Acc:  0.921505376344
+Sn:  0.953699507389
+Sp:  0.936842105263
+Mcc:  0.830350921751
+
+
+Acc:  0.983971774194
+Sn:  1.0
+Sp:  0.952525252525
+Mcc:  0.965117728825
+
+
+Acc:  0.965203445748
+Sn:  0.986904761905
+Sp:  0.912380952381
+Mcc:  0.912100418364
+
+
+Acc:  0.948878910068
+Sn:  1.0
+Sp:  0.893230994152
+Mcc:  0.912577937554
+
+
+Acc:  0.946138807429
+Sn:  0.981593406593
+Sp:  0.936842105263
+Mcc:  0.901071388274
+
+
+Acc:  0.949169110459
+Sn:  0.9849002849
+Sp:  0.936842105263
+Mcc:  0.909702933524
+
+
+19
+(74, 198)
+(243, 198)
+
+dataset shape: (317, 198)
+Acc:  0.921505376344
+Sn:  0.953699507389
+Sp:  0.936842105263
+Mcc:  0.830350921751
+
+
+Acc:  0.983971774194
+Sn:  1.0
+Sp:  0.952525252525
+Mcc:  0.965117728825
+
+
+Acc:  0.965203445748
+Sn:  0.986904761905
+Sp:  0.912380952381
+Mcc:  0.912100418364
+
+
+Acc:  0.948878910068
+Sn:  1.0
+Sp:  0.893230994152
+Mcc:  0.912577937554
+
+
+Acc:  0.946138807429
+Sn:  0.981593406593
+Sp:  0.936842105263
+Mcc:  0.901071388274
+
+
+Acc:  0.949169110459
+Sn:  0.9849002849
+Sp:  0.936842105263
+Mcc:  0.909702933524
+
+

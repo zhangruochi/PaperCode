@@ -6,11 +6,11 @@ with open("acc.txt","r") as f:
     content = f.read()
     print(content)
 
-pattern = re.compile("Four acc:  0\.\d+") 
+pattern = re.compile("ulcer_acc:  \d\.\d+") 
 result = re.findall(pattern,content)
 #print(result)   
 
-result_number = [float(item.strip("Four acc:  ")) for item in result]
+result_number = [float(item.strip("ulcer_acc:  ")) for item in result]
 print(result_number)
 
 

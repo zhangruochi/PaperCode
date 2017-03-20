@@ -6,10 +6,10 @@ control_filename = "GSE64538_control_data.txt"
 periods  = 4
 sample_for_every_periods = 3
 index_column_name = "id"
-fdr = None
-n_clusters = 50
-droped_cluster_gene_count = 10
-var_percent = 0.8
+fdr = False
+n_clusters = 40
+droped_cluster_gene_count = 5
+var_percent = 0.6
 
 
 
