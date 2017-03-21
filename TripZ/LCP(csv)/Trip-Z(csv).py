@@ -64,6 +64,7 @@ def read_csv_file(p_filename,n_filename):
     for i in range(p_dataset.shape[0]):
         labels.append(1)
 
+    print(len(labels))    
     return dataset,labels
 
 
