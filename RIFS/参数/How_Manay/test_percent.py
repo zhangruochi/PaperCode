@@ -153,7 +153,7 @@ def random_num_generator(num_of_feature,seed_number, percent):
 
 
 #对每一个数据集进行运算
-def single(dataset_filename,label_filename, seed = 7, percent = 0.4, stop = 4):
+def single(dataset_filename,label_filename, seed = 7, percent = 0.5, stop = 3):
 #------------参数接口---------------    
     seed_number = seed
     skf = StratifiedKFold(n_splits = 10)

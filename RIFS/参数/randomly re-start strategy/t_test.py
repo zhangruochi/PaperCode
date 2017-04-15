@@ -99,8 +99,12 @@ def t_test(dataset,labels):
 #根据 t 检验的结果的大小重新构造特征集
 def rank_t_value(dataset,labels):
     p_value = t_test(dataset,labels)
-    sort_index = p_value.sort_values(ascending=True).index
+    sorted_pvalue = p_value.sort_values(ascending=True)
+    print(sorted_pvalue.iloc[[434,435,436,437]])
+    sort_index = sorted_pvalue.index
+
     dataset = dataset.reindex(sort_index)
+    #print(dataset.head())
     
     return dataset.T
 
@@ -144,11 +148,12 @@ def get_aac(estimator,X,y,seed_number,skf):
 def single(datset_filename,class_filename,feature_range,seed_number):
     estimator_list = [0,1,2,3,4]
     skf = StratifiedKFold(n_splits = 10)
-    dataset,labels = prepare(datset_filename,class_filename)
-    
+    dataset,labels = prepare(datset_filename,class_filename) 
+    #print(dataset.head()) 
     max_estimator_aac = 0
     for estimator in estimator_list:
-        estimator_aac = get_aac(select_estimator(estimator),dataset.iloc[:,:feature_range],labels,seed_number,skf)
+        estimator_aac = get_aac(select_estimator(estimator),dataset.iloc[:,434:434+feature_range],labels,seed_number,skf)
+
         if estimator_aac > max_estimator_aac:
             max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用四个estimator 得到的最大值
 
@@ -192,7 +197,7 @@ def all_dataset():
         
 
 if __name__ == '__main__':
-    print(single("t1d.csv","t1dclass.csv",10,7))
+    print(single("ALL3.csv","ALL3class.csv",4,7))
 
 
     
