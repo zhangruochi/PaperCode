@@ -1,6 +1,13 @@
-#encoding: utf-8
+import warnings
+warnings.filterwarnings("ignore")
+
 from sklearn.decomposition import PCA
-import ConfigParser 
+
+try:
+    import ConfigParser
+except ImportError:
+    import configparser as ConfigParser   
+  
 import os
 import numpy as np
 import time
@@ -9,17 +16,20 @@ import multiprocessing
 import pandas as pd
 import gzip 
 
+
 try:
     import cPickle as pickle
 except ImportError:
     import pickle
 
+
 from sub_modules import my_hog
 from sub_modules import my_lbp
-from sub_modules import my_saliency 
-from sub_modules.my_pca import implement_pca
-from sub_modules import my_censure
-from sub_modules import my_orb
+
+
+
+def proxy(cls_instance,algorithm,size,image_path):
+    return cls_instance.work(algorithm,size,image_path)
 
 
 class ImageProcess(object):
@@ -27,7 +37,7 @@ class ImageProcess(object):
         self.option_dict = self.get_options()
         #print(self.option_dict)     
 
-    #参数配置文件    
+    #configure file 
     def get_options(self):
         cf = ConfigParser.ConfigParser()
         cf.read('config.cof')
@@ -38,27 +48,20 @@ class ImageProcess(object):
 
         return option_dict
 
-    #算法选择函数
+    #select algorithm
     def get_algorithm(self):
         algorithms = []
         for algorithm in self.option_dict["algorithm"]:
             if algorithm == "HOG":
                 algorithms.append(my_hog.HOG())
-            elif algorithm == "LBP":
-                algorithms.append(my_lbp.LBP())
-            elif algorithm == "SALIENCY":
-                algorithms.append(my_saliency.SALIENCY()) 
-            elif algorithm == "CENSURE":
-                algorithms.append(my_censure.MYCENSURE()) 
-            elif algorithm == "ORB":
-                algorithms.append(my_orb.MYORB())
-
+            if algorithm == "LBP":
+                algorithms.append(my_lbp.LBP())    
+            
         return algorithms          
 
-    #图片读取函数
+    #image read function
     def image_read(self,algorithm):
-
-        #特征的名字和特征的值
+        print("using single process to dealing with pictures.......\n")
         feature_list = []
         name_list = []
 
@@ -80,11 +83,12 @@ class ImageProcess(object):
         return feature_list,name_list
 
 
-    #合并特征集合
+    #merge the features from different algorithms
     def merge_dataset(self):
-        dataset_index = 0 
 
+        dataset_index = 0 
         algorithm_list = self.get_algorithm()
+
         if self.option_dict["njob"] == 1:
             for algorithm in algorithm_list:
                 print(algorithm)
@@ -116,7 +120,6 @@ class ImageProcess(object):
         return dataset  
             
 
-    #多进程的 work 函数
     def work(self,algorithm,size,image_path):
         feature = algorithm.read_image(image_path,size)
         image_name = os.path.split(image_path)[-1]
@@ -124,8 +127,10 @@ class ImageProcess(object):
         return (feature,image_name)
 
 
-    #图片的并行读取    
+    #multiprocessing the images   
     def multiprocessing_read(self,algorithm):
+        print("using multiprocesses to deal with pictures......\n")
+        
         feature_list = []
         if self.option_dict["image_size"]:
             size = self.option_dict["image_size"]
@@ -133,7 +138,7 @@ class ImageProcess(object):
         else:
             size = None
 
-        work = partial(self.work,algorithm,size)
+        work = partial(proxy,self,algorithm,size)
            
         pool = multiprocessing.Pool(self.option_dict["njob"])
         image_path_list = [os.path.join(self.option_dict["folder"],name) for name \
@@ -164,13 +169,15 @@ class ImageProcess(object):
         if "gzip" in format_list:
             file = gzip.GzipFile("{}.pkl.zip".format(saving_name), 'wb')
             pickle.dump(dataset, file, -1)
-            file.close()            
+            file.close()       
+
+        print("\nSaving features file successful!\n")         
         
 
-    #所有图片读取
     def run(self):
         dataset = self.merge_dataset()
-        print(dataset)   #"[sample,feature]"
+        print("\nGetting {} samples, every sample has {} features".format(dataset.shape[0],dataset.shape[1]))
+        #print(dataset.shape)   #"[sample,feature]"
         saving_name = os.path.split(self.option_dict["folder"])[-1]
         self.save_dataset(saving_name,dataset) 
 

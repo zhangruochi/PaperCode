@@ -2,7 +2,11 @@
 import os
 from skimage.feature import local_binary_pattern
 from PIL import Image
-import ConfigParser 
+try:
+    import ConfigParser
+except ImportError:
+    import configparser as ConfigParser   
+    
 import numpy as np
 
 
@@ -49,7 +53,6 @@ class LBP(object):
        
 
          
-
 if __name__ == '__main__':
     LBP().read_image("2.jpg",(500,500))
     #get_options()

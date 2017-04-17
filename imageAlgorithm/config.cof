@@ -1,0 +1,71 @@
+#main function
+[main]
+algorithm = ["LBP"]  #HOG LBP
+folder = "img_SUB/Gastric_polyp_sub"
+image_size = (100,100)              #"(width, height)"  None   
+njob = 3
+pca = False
+image_format = ["jpg","png"]    #format
+save_format = ["csv"]        #"csv","gzip","pickle","json","excel", "txt"4
+
+#PCA Parameters
+[PCA]
+n_components = 100      # int  min(n_samples, n_features)
+svd_solver = "auto"     # "auto", "full", "arpack", "randomized"
+tol = 0                 # float >= 0
+
+
+#HOG Parameters
+[HOG]
+orientations = 9
+pixels_per_cell = (8, 8)
+cells_per_block = (3, 3)
+visualise = False
+transform_sqrt = False
+feature_vector = True
+normalise = None
+
+#LBP Parameters
+[LBP]
+p = 24                    #(int) Number of circularly symmetric neighbour set points (quantization of the angular space).
+r = 8                     #(float) Radius of circle (spatial resolution of the operator)
+method = "uniform"        #"ror", "uniform", "var"
+
+
+
+#CENSURE Parameters
+[CENSURE]
+min_scale = 1
+max_scale = 7
+mode = "DoB"            # "DoB", "Octagon", "STAR"
+
+
+#ORB Parameters
+[ORB]
+downscale=1.2
+n_scales=8
+n_keypoints=500
+fast_n=9
+fast_threshold=0.08
+harris_k=0.04
+
+#SIFT Parameters
+[SIFT]
+n_octaves=None 
+n_levels=3  
+first_octave=0  
+peak_thresh=0
+edge_thresh=10
+norm_thresh=None  
+magnification=3 
+window_size=2
+frames=None
+force_orientations=False 
+float_descriptors=False
+compute_descriptor=False 
+verbose=False
+
+
+
+
+

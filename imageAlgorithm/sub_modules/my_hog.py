@@ -1,20 +1,29 @@
-#encoding: utf-8
 import os
 from skimage.feature import hog
 from PIL import Image
-import ConfigParser 
+
+try:
+    import ConfigParser
+except ImportError:
+    import configparser as ConfigParser 
+
 import numpy as np
 
 
 class HOG(object):
 
+    def __str__(self):
+        return "\nUsing the algorithm HOG.....\n"
+
+
     def get_options(self):
         cf = ConfigParser.ConfigParser()
-        cf.read('config.cof')
+        cf.read("config.cof")
         
         option_dict = dict()
 
         for key,value in cf.items("HOG"):
+
             option_dict[key] = eval(value)
 
         #print(option_dict)    
@@ -22,8 +31,7 @@ class HOG(object):
     
 
 
-    def read_image(self,image_name,size):
-        #读取配置文件
+    def read_image(self,image_name,size = None):
         options = self.get_options()
 
         if size:    
@@ -38,6 +46,6 @@ class HOG(object):
 
 
 if __name__ == '__main__':
-    feature = HOG().read_image("../img_SUB/Gastric_polyp_sub/Erosionscromatosc_1_s.jpg",None)
+    feature = HOG().read_image("../img_SUB/Gastric_polyp_sub/Erosionscromatosc_1_s.jpg")
     print(feature.shape)
     #get_options()
