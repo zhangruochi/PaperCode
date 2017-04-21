@@ -9,6 +9,8 @@ except ImportError:
     
 import numpy as np
 
+#from matplotlib import pyplot as plt
+
 
 class LBP(object):
 
@@ -26,11 +28,9 @@ class LBP(object):
 
      
 
-    def read_image(self,image_name,size):
+    def read_image(self,image_name,size = None):
         #读取配置文件
         option_dict = self.get_options()
-
-        eps = 1e-7
 
         if size:    
             im = np.array(Image.open(image_name).convert("L").resize(size))
@@ -40,19 +40,17 @@ class LBP(object):
         
         lbp = local_binary_pattern(im, option_dict["p"],
             option_dict["r"], option_dict["method"])
-        (hist, _) = np.histogram(lbp.ravel(),
-            bins=np.arange(0, option_dict["p"] + 3),
-            range=(0, option_dict["p"] + 2))
- 
-        # normalize the histogram
-        hist = hist.astype("float")
-        hist /= (hist.sum() + eps)
+
+        plt.imshow(lbp)
+        plt.show()
+        
         
         # return the histogram of Local Binary Patterns
-        return hist
+        return lbp.reshape((1,lbp.shape[0]*lbp.shape[1]))[0]
        
 
          
 if __name__ == '__main__':
-    LBP().read_image("2.jpg",(500,500))
+    feature = LBP().read_image("../img_SUB/Gastric_polyp_sub/Erosionscromatosc_1_s.jpg")
+    print(feature.shape)
     #get_options()

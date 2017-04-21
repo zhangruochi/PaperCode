@@ -1,9 +1,9 @@
 #main function
 [main]
-algorithm = ["LBP"]  #HOG LBP
+algorithm = ["HESSIAN"]  #HOG LBP
 folder = "img_SUB/Gastric_polyp_sub"
 image_size = (100,100)              #"(width, height)"  None   
-njob = 3
+njob = 1
 pca = False
 image_format = ["jpg","png"]    #format
 save_format = ["csv"]        #"csv","gzip","pickle","json","excel", "txt"4
@@ -33,37 +33,31 @@ method = "uniform"        #"ror", "uniform", "var"
 
 
 
-#CENSURE Parameters
-[CENSURE]
-min_scale = 1
-max_scale = 7
-mode = "DoB"            # "DoB", "Octagon", "STAR"
+
+#GLCM Parameters
+[GLCM]
+block_num = 4
+distances = [1,2]
+angles = [0,np.pi/2]
+levels = 256
+symmetric = False
+normed = True
+prop = "contrast"  
 
 
-#ORB Parameters
-[ORB]
-downscale=1.2
-n_scales=8
-n_keypoints=500
-fast_n=9
-fast_threshold=0.08
-harris_k=0.04
+#HESSIAN MATRIX Parameters
+[HESSIAN]
+sigma= 1  #Standard deviation used for the Gaussian kernel, used for the Hessian matrix.
 
-#SIFT Parameters
-[SIFT]
-n_octaves=None 
-n_levels=3  
-first_octave=0  
-peak_thresh=0
-edge_thresh=10
-norm_thresh=None  
-magnification=3 
-window_size=2
-frames=None
-force_orientations=False 
-float_descriptors=False
-compute_descriptor=False 
-verbose=False
+
+#CANNY Parameters
+[CANNY]
+sigma = 3
+low_threshold = None 
+high_threshold = None 
+mask = None
+use_quantiles = False
+
 
 
 

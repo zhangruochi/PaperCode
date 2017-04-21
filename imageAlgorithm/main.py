@@ -25,6 +25,8 @@ except ImportError:
 
 from sub_modules import my_hog
 from sub_modules import my_lbp
+from sub_modules import my_glcm
+from sub_modules import my_hessian
 
 
 
@@ -55,7 +57,11 @@ class ImageProcess(object):
             if algorithm == "HOG":
                 algorithms.append(my_hog.HOG())
             if algorithm == "LBP":
-                algorithms.append(my_lbp.LBP())    
+                algorithms.append(my_lbp.LBP()) 
+            if algorithm == "GLCM":
+                algorithms.append(my_glcm.GLCM()) 
+            if algorithm == "HESSIAN":
+                algorithms.append(my_hessian.HESSIAN())          
             
         return algorithms          
 
@@ -115,6 +121,7 @@ class ImageProcess(object):
         if self.option_dict["pca"]:
             left = implement_pca(left)               
 
+        print(left)    
         dataset = pd.DataFrame(data = left,index= name_list,columns= list(range(left.shape[1])))  
         
         return dataset  
