@@ -8,6 +8,7 @@ except ImportError:
     import configparser as ConfigParser   
     
 import numpy as np
+from sklearn.preprocessing import MinMaxScaler
 
 #from matplotlib import pyplot as plt
 
@@ -24,7 +25,13 @@ class LBP(object):
 
         #print(option_dict)    
         return option_dict    
-     
+    
+    def normalize(self,feature):
+        
+        normalizer = MinMaxScaler()
+        normalized_feature = normalizer.fit_transform(feature)
+
+        return normalized_feature
 
      
 
@@ -41,16 +48,18 @@ class LBP(object):
         lbp = local_binary_pattern(im, option_dict["p"],
             option_dict["r"], option_dict["method"])
 
-        plt.imshow(lbp)
-        plt.show()
+        if options["normalize"]:
+            lbp = self.normalize(lbp)
+        #plt.imshow(lbp)
+        #plt.show()
         
         
         # return the histogram of Local Binary Patterns
-        return lbp.reshape((1,lbp.shape[0]*lbp.shape[1]))[0]
+        return normalized_lbp.reshape((1,lbp.shape[0]*lbp.shape[1]))[0]
        
 
          
 if __name__ == '__main__':
     feature = LBP().read_image("../img_SUB/Gastric_polyp_sub/Erosionscromatosc_1_s.jpg")
-    print(feature.shape)
+    print(feature)
     #get_options()

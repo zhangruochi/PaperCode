@@ -42,7 +42,12 @@ class ImageProcess(object):
     #configure file 
     def get_options(self):
         cf = ConfigParser.ConfigParser()
-        cf.read('config.cof')
+        
+        if os.path.exists("config.cof"):
+            cf.read('config.cof')
+        else:
+            print("there is no config.cof!")
+            exit()
         
         option_dict = dict()
         for key,value in cf.items("main"):
@@ -61,7 +66,9 @@ class ImageProcess(object):
             if algorithm == "GLCM":
                 algorithms.append(my_glcm.GLCM()) 
             if algorithm == "HESSIAN":
-                algorithms.append(my_hessian.HESSIAN())          
+                algorithms.append(my_hessian.HESSIAN()) 
+            if algorithm == "CANNY":
+                algorithms.append(my_canny.CANNY())              
             
         return algorithms          
 
@@ -164,17 +171,24 @@ class ImageProcess(object):
     def save_dataset(self,saving_name,dataset):
         format_list = self.option_dict["save_format"]
 
+        float_format = None
+        if self.option_dict["decimal"]:
+            float_format = "%.{}f".format(self.option_dict["decimal"])
+
+        if not os.path.exists("features"):
+            os.mkdir("features")
+
         if "csv" in format_list:
-            dataset.to_csv("{}.csv".format(saving_name))
+            dataset.to_csv("features/{}.csv".format(saving_name),float_format = float_format)
 
         if "pickle" in format_list:
-            dataset.to_pickle("{}.pkl".format(saving_name))
+            dataset.to_pickle("features/{}.pkl".format(saving_name))
 
         if "json" in format_list:
-            dataset.to_json("{}.json".format(saving_name))        
+            dataset.to_json("features/{}.json".format(saving_name))        
 
         if "gzip" in format_list:
-            file = gzip.GzipFile("{}.pkl.zip".format(saving_name), 'wb')
+            file = gzip.GzipFile("features/{}.pkl.zip".format(saving_name), 'wb')
             pickle.dump(dataset, file, -1)
             file.close()       
 

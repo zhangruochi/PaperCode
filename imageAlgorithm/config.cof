@@ -1,18 +1,19 @@
 #main function
 [main]
-algorithm = ["HESSIAN"]  #HOG LBP
+algorithm = ["HOG"]  #HOG LBP
 folder = "img_SUB/Gastric_polyp_sub"
-image_size = (100,100)              #"(width, height)"  None   
+image_size = (100,100)                
 njob = 1
 pca = False
-image_format = ["jpg","png"]    #format
-save_format = ["csv"]        #"csv","gzip","pickle","json","excel", "txt"4
+image_format = ["jpg","png"]   
+save_format = ["csv"]       
+decimal = 3
 
 #PCA Parameters
 [PCA]
-n_components = 100      # int  min(n_samples, n_features)
-svd_solver = "auto"     # "auto", "full", "arpack", "randomized"
-tol = 0                 # float >= 0
+n_components = 100      
+svd_solver = "auto"     
+tol = 0                
 
 
 #HOG Parameters
@@ -23,15 +24,14 @@ cells_per_block = (3, 3)
 visualise = False
 transform_sqrt = False
 feature_vector = True
-normalise = None
+normalize = False
 
 #LBP Parameters
 [LBP]
-p = 24                    #(int) Number of circularly symmetric neighbour set points (quantization of the angular space).
-r = 8                     #(float) Radius of circle (spatial resolution of the operator)
-method = "uniform"        #"ror", "uniform", "var"
-
-
+p = 24                   
+r = 8                    
+method = "uniform"        
+normalize = False
 
 
 #GLCM Parameters
@@ -43,11 +43,13 @@ levels = 256
 symmetric = False
 normed = True
 prop = "contrast"  
+normalize = False
 
 
 #HESSIAN MATRIX Parameters
 [HESSIAN]
-sigma= 1  #Standard deviation used for the Gaussian kernel, used for the Hessian matrix.
+sigma= 1  
+normalize = False
 
 
 #CANNY Parameters
@@ -57,9 +59,6 @@ low_threshold = None
 high_threshold = None 
 mask = None
 use_quantiles = False
-
-
-
-
+normalize = False
 
 

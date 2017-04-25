@@ -8,6 +8,7 @@ except ImportError:
     import configparser as ConfigParser 
 
 import numpy as np
+from sklearn.preprocessing import MinMaxScaler
 
 
 class HOG(object):
@@ -29,6 +30,13 @@ class HOG(object):
         #print(option_dict)    
         return option_dict
     
+    def normalize(self,feature):
+        
+        normalizer = MinMaxScaler()
+        normalized_feature = normalizer.fit_transform(feature)
+
+        return normalized_feature
+
 
 
     def read_image(self,image_name,size = None):
@@ -41,11 +49,14 @@ class HOG(object):
 
         options["image"] = im    
         feature = hog(**options)
+        
+        if options["normalize"]:
+            feature = self.normalize(feature)
 
         return feature        
 
 
 if __name__ == '__main__':
     feature = HOG().read_image("../img_SUB/Gastric_polyp_sub/Erosionscromatosc_1_s.jpg")
-    print(feature.shape)
+    print(feature)
     #get_options()

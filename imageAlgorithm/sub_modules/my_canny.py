@@ -8,6 +8,7 @@ except ImportError:
     import configparser as ConfigParser 
 
 import numpy as np
+from sklearn.preprocessing import MinMaxScaler
 
 #from matplotlib import pyplot as plt
 
@@ -31,6 +32,13 @@ class CANNY(object):
         #print(option_dict)    
         return option_dict
     
+    def normalize(self,feature):
+        
+        normalizer = MinMaxScaler()
+        normalized_feature = normalizer.fit_transform(feature)
+
+        return normalized_feature
+
 
     def bool_num_converter(self,bool_feature):
         num_matrix = np.zeros((bool_feature.shape[0],bool_feature.shape[1]))
@@ -50,6 +58,11 @@ class CANNY(object):
         options["image"] = im  
         bool_feature = canny(**options)
         feature = self.bool_num_converter(bool_feature)
+
+        if options["normalize"]:
+            feature = self.normalize(feature)
+
+
         #plt.imshow(feature)
         #plt.show()
 
@@ -58,5 +71,5 @@ class CANNY(object):
 
 if __name__ == '__main__':
     feature = CANNY().read_image("../img_SUB/Gastric_polyp_sub/Erosionscromatosc_1_s.jpg")
-    #print(feature.shape)
+    print(feature)
     #get_options()

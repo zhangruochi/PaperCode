@@ -8,7 +8,9 @@ try:
 except ImportError:
     import configparser as ConfigParser 
 
+from sklearn.preprocessing import MinMaxScaler
 import numpy as np
+
 
 
 class GLCM(object):
@@ -51,7 +53,12 @@ class GLCM(object):
            
         return block_list        
                 
+    def normalize(self,feature):
+        
+        normalizer = MinMaxScaler()
+        normalized_feature = normalizer.fit_transform(feature)
 
+        return normalized_feature    
 
 
     def read_image(self,image_name,size = None):
@@ -73,11 +80,13 @@ class GLCM(object):
             feature_list.append(feature_2D[0])
 
         feature_list_matrix = np.array(feature_list)
-        features = feature_list_matrix.reshape((1,feature_list_matrix.shape[0]*feature_list_matrix.shape[1]))[0]  
-        return features        
+        if options["normalize"]:
+            feature_list_matrix = self.normalize(feature_list_matrix)
+
+        return feature_list_matrix.reshape((1,feature_list_matrix.shape[0]*feature_list_matrix.shape[1]))[0]      
 
 
 if __name__ == '__main__':
     feature = GLCM().read_image("../Img_sub/Gastric_polyp_sub/Erosionscromatosc_1_s.jpg")
-    print(feature.shape)
+    print(feature)
     #get_options()

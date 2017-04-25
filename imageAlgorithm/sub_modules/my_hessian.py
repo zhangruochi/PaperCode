@@ -9,7 +9,7 @@ except ImportError:
 
 import numpy as np
 
-from matplotlib import pyplot as plt
+#from matplotlib import pyplot as plt
 
 
 class HESSIAN(object):
@@ -30,6 +30,13 @@ class HESSIAN(object):
 
         #print(option_dict)    
         return option_dict
+
+    def normalize(self,feature):
+        
+        normalizer = MinMaxScaler()
+        normalized_feature = normalizer.fit_transform(feature)
+
+        return normalized_feature    
     
 
 
@@ -43,8 +50,12 @@ class HESSIAN(object):
 
         options["image"] = im    
         feature = hessian_matrix_det(**options)
-        plt.imshow(feature)
-        plt.show()
+
+        if options["normalize"]:
+            feature = self.normalize(feature)
+
+        #plt.imshow(feature)
+        #plt.show()
 
 
         return feature.reshape((1,feature.shape[0]*feature.shape[1]))[0]        
@@ -52,5 +63,5 @@ class HESSIAN(object):
 
 if __name__ == '__main__':
     feature = HESSIAN().read_image("../img_SUB/Gastric_polyp_sub/Erosionscromatosc_1_s.jpg")
-    print(feature.shape)
+    print(feature)
     #get_options()
