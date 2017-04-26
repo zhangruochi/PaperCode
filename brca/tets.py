@@ -1,0 +1,1 @@
+print("gazhang".strip("ga"))
