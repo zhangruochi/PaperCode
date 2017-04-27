@@ -14,7 +14,7 @@ def load_dataset(dataset_filename,json_filename):
     filtered_dataset = dataset.iloc[:,mask].fillna(method = "backfill")
     
     print("filtered_dataset: " + str(filtered_dataset.shape))
-    print("labels: "+ str(len(labels)))
+    print("raw filtered_labels: "+ str(len(labels)))
 
     return filtered_dataset,labels
 

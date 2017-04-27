@@ -81,8 +81,8 @@ def get_labels(dataset_filename,json_filename):
         #    print(sample_name)  
         index += 1
 
-    print("the num of samples: " + str(len(sample_mask)))    
-    print("the valid num of samples: " + str(len(labels)))
+    #print("the num of samples: " + str(len(sample_mask)))    
+    #print("the valid num of samples: " + str(len(labels)))
 
     return sample_mask,labels
 

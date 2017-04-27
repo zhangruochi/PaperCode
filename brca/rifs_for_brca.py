@@ -63,18 +63,23 @@ def get_name_index(dataset):
 
 #加载标签
 def processing_class(labels,criterion):
+    #print(labels)
     p_class = criterion[0]
     n_class = criterion[1]
     result = []
+    mask = []
     
     for label in labels:
         if label in p_class:
             result.append(1)
-        if label in n_class:
-            result.append(0)        
-    
-    #exit()
-    return np.array(result)
+            mask.append(True)
+        elif label in n_class:
+            result.append(0) 
+            mask.append(True)
+        else:
+            mask.append(False)    
+    return np.array(result),mask
+
 
 # t_检验  得到每个特征的 t 值
 def t_test(dataset,labels):
@@ -104,9 +109,16 @@ def rank_t_value(dataset,labels):
 
 def prepare(dataset_filename,json_filename,criterion):
     dataset,labels = load_dataset(dataset_filename,json_filename)
+    labels,mask = processing_class(labels,criterion)
+    #print(dataset)
+    dataset = dataset.loc[:,mask]
+    print("-"*20)
+    print("using label to filter....")
+    print("-"*20)
+    print("ultimate dataset: " + str(dataset.shape))
+    print("ultimate laabel length: " + str(len(labels)))
+    print("\n")
     dataset = processing_data(dataset)
-    labels = processing_class(labels,criterion)
-
     dataset = rank_t_value(dataset,labels)
     return dataset,labels
 
