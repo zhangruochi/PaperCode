@@ -11,11 +11,11 @@ Required packages
 Info
 - name   : "zhangruochi"
 - email  : "zrc720@gmail.com"
-- date   : "2017.2.22"
+- date   : "2017.4.26"
 - Version : 1.0.0
 
 Description
-    test randomly re-start the IFS strategy
+    brca
 '''
 
 
@@ -65,7 +65,6 @@ def get_name_index(dataset):
 def processing_class(labels,criterion):
     p_class = criterion[0]
     n_class = criterion[1]
-    
     result = []
     
     for label in labels:
@@ -74,7 +73,6 @@ def processing_class(labels,criterion):
         if label in n_class:
             result.append(0)        
     
-    #print(result)
     #exit()
     return np.array(result)
 
@@ -221,7 +219,10 @@ def single(dataset_filename,json_filename,criterion, seed = 7, percent = 0.5, st
         
 
 if __name__ == '__main__':
-    single("matrix_data.tsv","clinical.project-TCGA-BRCA.2017-04-20T02_01_20.302397.json",[[1],[2,3,4]])
+    #seed 表示随机种子
+    #percent 表示重启的百分比
+    #stop 表示向后搜索的个数
+    single("matrix_data.tsv","clinical.project-TCGA-BRCA.2017-04-20T02_01_20.302397.json",[[1],[2,3]],seed = 7, percent = 0.5, stop = 4)
 
 
     

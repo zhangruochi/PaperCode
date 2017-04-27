@@ -18,13 +18,14 @@ def get_name_sample_dict(json_filename):
                 if key == "diagnoses":
                     sample_id = value[0]["submitter_id"].strip("_diagnosis")
                     stage = value[0]["tumor_stage"].replace("stage ","")
+                    
                     if not "i" in stage:
                         continue
 
                     if stage[-1] != "i":
                         stage = stage[:-1]
 
-                    if len(stage) > 4 or len(stage) < 1:
+                    if len(stage) > 3 or len(stage) < 1:
                         continue
 
                     names_classes[sample_id] = len(stage) 
@@ -48,11 +49,15 @@ def test_exist(samples):
 #加载需要训练数据集的类标
 def load_sample(dataset_filename):
     with open(dataset_filename) as f:
-        samples = f.readline().split()     
+        samples = f.readline().split()
+
         #test_exist(samples)
 
-        samples = [sample[0:12] for sample in samples]
-
+        samples = [sample[0:15] for sample in samples]
+        #print(samples)
+        #test_exist(samples)
+        #matrix数据集去重后
+        #print("the raw matrix: "+str(len(samples)))
         return samples
 
 
@@ -66,16 +71,18 @@ def get_labels(dataset_filename,json_filename):
 
     index = 0
     for sample_name in samples:
-        if sample_name in name_sample_dict:
+        name = sample_name[:-3]
+        stage_id = int(sample_name[-2:])
+        if name in name_sample_dict and stage_id <=10:
             sample_mask.append(index)
-            labels.append(name_sample_dict[sample_name])
-        #不存在 stage 的样本
+            labels.append(name_sample_dict[name])
+        #不存在 stage 的样本  (not reported  or stage x or stage_id > 11)
         #else:
         #    print(sample_name)  
         index += 1
 
-    #print("the num of samples: " + str(len(sample_mask)))    
-    #print("the valid num of samples: " + str(len(labels)))
+    print("the num of samples: " + str(len(sample_mask)))    
+    print("the valid num of samples: " + str(len(labels)))
 
     return sample_mask,labels
 
