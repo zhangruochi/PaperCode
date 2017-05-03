@@ -1,0 +1,30 @@
+for different classes: [[1], [2]]
+the feature name is: ['SDK2', 'RRM2', 'FAM54A', 'RFX4', 'CNN3', 'CDC2', 'CHST5', 'SLC16A13', 'ULBP3', 'TRIM25', 'TOP2A', 'C6', 'LCE3B', 'PNPT1', 'IL1F9', 'FVT1', 'TH', 'DPCR1', 'OGDH', 'KIF4B']
+the aic is: -311.8571519919848
+the acc is: 0.79
+
+for different classes: [[1], [3]]
+the feature name is: ['SEPT10', 'RWDD3', 'PMAIP1', 'RBBP8', 'ETAA1', 'RANBP2', 'ASXL2', 'SH3RF1', 'ARMCX2', 'MACF1', 'GSR', 'ZNF37A', 'ELAVL4', 'PSMB5', 'ZNF264', 'TRIM27', 'GSG1', 'MIER1', 'SLC25A1', 'C6orf136']
+the aic is: -157.63138113668606
+the acc is: 0.7793427230046949
+
+for different classes: [[2], [3]]
+the feature name is: ['ASXL2', 'MFSD4', 'RANBP2', 'WDR55', 'PBX1', 'ZGPAT', 'CORO2B', 'TYW3', 'RBBP8', 'C20orf142', 'USP34', 'MACF1', 'MMP15', 'FAM122C', 'LDLRAD3', 'REV1', 'SCGB1A1', 'CPT1A', 'SLC4A1AP', 'C8orf55']
+the aic is: -317.14711134581603
+the acc is: 0.7788697788697788
+
+for different classes: [[1, 2], [3]]
+the feature name is: ['ASXL2', 'RANBP2', 'RBBP8', 'MACF1', 'SCGB1A1', 'WDR55', 'SEPT10', 'LDLRAD3', 'PBX1', 'TYW3', 'RWDD3', 'ACOT8', 'ETAA1', 'CALM1', 'SLC26A6', 'C20orf142', 'ZGPAT', 'MMP15', 'MFSD4', 'C8orf55']
+the aic is: -470.2341958043396
+the acc is: 0.8156862745098039
+
+for different classes: [[1, 3], [2]]
+the feature name is: ['CNTNAP2', 'ZYG11B', 'SLC4A1AP', 'ORC3L', 'HRASLS3', 'MFSD4', 'LRRC32', 'ENPP7', 'TRRAP', 'SLC38A2', 'OR7E91P', 'OR51B6', 'POLR3A', 'ATP6V1E2', 'ADH1A', 'SLC17A5', 'PNPT1', 'POL3S', 'FAH', 'TAF7L']
+the aic is: -260.6129502611476
+the acc is: 0.6686274509803921
+
+for different classes: [[1], [2, 3]]
+the feature name is: ['RRM2', 'SDK2', 'FAM54A', 'CNN3', 'CHSY1', 'RFX4', 'FAM38B', 'FVT1', 'CDC2', 'C13orf3', 'LCE3B', 'KIF4B', 'TRIM25', 'TH', 'GSR', 'DPCR1', 'TMEM26', 'ARMCX2', 'CX3CR1', 'ATG4D']
+the aic is: -506.1678894518616
+the acc is: 0.8254901960784313
+
