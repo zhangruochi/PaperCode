@@ -26,6 +26,7 @@ import pickle
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import StratifiedKFold
 from sklearn.multiclass import OneVsOneClassifier
+from sklearn.feature_selection import chi2
 from prepare import load_dataset
 
 
@@ -53,16 +54,44 @@ def get_feature_set(dataset_filename,json_filename,feature_range = 20):
 
 
 
+def generate_mask(y_test):
+
+    mask = []
+
+    stage_mask = {
+            1: [True,False,False],
+            2: [False,True,False],
+            3: [False,False,True]
+    }
+
+    for label in y_test:
+        mask.append(stage_mask[label])
+
+    return np.array(mask)    
+
+
+
+
+
 #采用 K-Fold 交叉验证 得到 aac 
-def get_aac(estimator,X,y,skf):
+def get_residual_sum(estimator,X,y,skf):
     scores = []
+    residual_sums = []
     for train_index,test_index in skf.split(X,y):
         X_train, X_test = X.iloc[train_index,:], X.iloc[test_index,:]
         y_train, y_test = y[train_index], y[test_index]
         estimator.fit(X_train,y_train)
         scores.append(estimator.score(X_test,y_test))
+        all_proba = estimator.predict_proba(X_test)
+        residual_sums.append(residual_sum_of_square(all_proba[generate_mask(y_test)]))
 
-    return np.mean(scores)   
+    score = np.mean(scores)
+    residual_sum = np.mean(residual_sums) 
+    print("acc is: " + str(score))
+    print("residual_sum is: " + str(residual_sum))  
+    
+    return residual_sum
+
 
 
 def main(dataset_filename,json_filename,feature_range = 20,n_splits = 10):
@@ -79,8 +108,18 @@ def main(dataset_filename,json_filename,feature_range = 20,n_splits = 10):
     skf = StratifiedKFold(n_splits = 10)
     estimator = LogisticRegression()
 
-    acc = get_aac(estimator,dataset,labels,skf)
+    sample_num, feature_num = dataset.shape
+
+    for first in range(feature_num-2):
+        for second in range(first,feature_num-1):
+            for third in range(second,feature_num):
+                eliminate_feature = set([first,second,third])
+                feature_list = list(range(feature_num)) - eliminate_feature
+                
+
+
     
+
 
 
 
