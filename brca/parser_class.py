@@ -22,13 +22,10 @@ def get_name_sample_dict(json_filename):
                     if not "i" in stage:
                         continue
 
-                    if stage[-1] != "i":
-                        stage = stage[:-1]
+                    if stage[-1] == "v":
+                        stage = "iiii"
 
-                    if len(stage) > 3 or len(stage) < 1:
-                        continue
-
-                    names_classes[sample_id] = len(stage) 
+                    names_classes[sample_id] = stage.count('i')
                     continue      
         
         #print(names_classes)    

@@ -26,6 +26,7 @@ import pickle
 import random
 from functools import partial
 from parser_class import get_labels
+import csv
 
 def load_dataset(dataset_filename,json_filename):
     dataset = pd.read_csv(dataset_filename,"\t",index_col = 0)
@@ -37,6 +38,15 @@ def load_dataset(dataset_filename,json_filename):
     print("filtered_dataset: " + str(filtered_dataset.shape))
     print("raw filtered_labels: "+ str(len(labels)))
 
+    """
+    names = filtered_dataset.columns.tolist()
+    with open('eggs.csv', 'w') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(names)
+        writer.writerow(labels)
+    """    
+    print(labels)
+    exit()
     return filtered_dataset,labels
 
 
@@ -91,8 +101,7 @@ if __name__ == '__main__':
     """
     dataset,labels = prepare_dataset_labels("matrix_data.tsv",\
         "clinical.project-TCGA-BRCA.2017-04-20T02_01_20.302397.json",[[1],[2,3]])
-
-          
+      
 
     
     
