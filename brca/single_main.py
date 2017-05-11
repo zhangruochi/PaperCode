@@ -11,8 +11,8 @@ Required packages
 Info
 - name   : "zhangruochi"
 - email  : "zrc720@gmail.com"
-- date   : "2017.04.28"
-- Version : 1.0.0
+- date   : "2017.05.10"
+- Version : 2.0.0
 
 Description
     t-test
@@ -30,10 +30,7 @@ from functools import partial
 import math
 
 from scipy.stats import ttest_ind_from_stats
-
 from sklearn.model_selection import StratifiedKFold
-from sklearn.linear_model import LogisticRegression
-
 from prepare import prepare_dataset_labels
 
 
@@ -81,33 +78,10 @@ def prepare(dataset_filename,json_filename,criterion):
     dataset.index = list(range(dataset.shape[0]))
     dataset = rank_t_value(dataset,labels)
 
+
     return dataset,labels,name_index_dic
 
 
-
-def cal_aic(prob,y_true,k):
-
-
-    sum_1 = sum(prob[y_true == 1,0] ** 2)
-    sum_0 = sum(prob[y_true == 0,1] ** 2)
-
-    deviation = sum_1 + sum_0
-
-    n = len(y_true)
-    k = k
-    l = -(2/n)*math.log(2*math.pi) - n/2 * math.log(deviation / n) - n/2
-    aic = -2 * l + 2 * (k + 1)
-
-    return aic
-
- 
-def get_aic(estimator,X,y,k):
-    estimator.fit(X,y)
-    prob = estimator.predict_proba(X)
-    acc = estimator.score(X,y)
-    aic = cal_aic(prob,y,k)
-
-    return aic,acc
 
 
 def get_name(name_index_dic, feature_list):
@@ -122,34 +96,27 @@ def get_name(name_index_dic, feature_list):
 
 
 #对每一个数据集进行运算
-def single(dataset_filename,json_filename,classes = [[1],[2,3]],feature_range = 20):
-    estimator = LogisticRegression()
+def single(dataset_filename,json_filename,classes = [[1,2],[2,3]],feature_range = 10):
 
     dataset,labels,name_index_dic = prepare(dataset_filename,json_filename,classes)
-
     feature_list = dataset.columns[:feature_range].tolist()
     feature_names = get_name(name_index_dic,feature_list)
 
     print("the dataset shape is(samples,features): {}".format(str(dataset.shape)))
-    print("-"*20)
+    print("-"*30)
 
-
-
-    estimator_aic,estimator_acc = get_aic(estimator,dataset.iloc[:,:feature_range],labels,feature_range)
     print("for different classes: {}\n".format(str(classes)))
     print("the features name is: ")
     print(feature_names)
-    print("the aic is: {}".format(estimator_aic))
-    print("the acc is: {}\n".format(estimator_acc))
+
 
     with open("result.txt","a") as f:
-        f.write("for different classes: {}\n".format(str(classes)))
-        f.write("the feature name is: {}\n".format(str(feature_names)))
-        f.write("the aic is: {}\n".format(estimator_aic))
-        f.write("the acc is: {}\n\n".format(estimator_acc))
-        
-        
-    return estimator_aic, feature_names
+        f.write("for classes: {}\n".format(str(classes)))
+        f.write("the feature name is: {}\n\n".format(str(feature_names)))
+
+    return feature_names    
+
+
         
 
 if __name__ == '__main__':
@@ -161,7 +128,7 @@ if __name__ == '__main__':
         feature_range     选择前 n 个特征
     """
     single("matrix_data.tsv","clinical.project-TCGA-BRCA.2017-04-20T02_01_20.302397.json",\
-        classes = [[1],[2,3]],feature_range = 10)
+        classes = [[1],[2]],feature_range = 10)
 
 
     

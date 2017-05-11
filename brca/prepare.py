@@ -45,8 +45,6 @@ def load_dataset(dataset_filename,json_filename):
         writer.writerow(names)
         writer.writerow(labels)
     """    
-    print(labels)
-    exit()
     return filtered_dataset,labels
 
 
@@ -100,7 +98,7 @@ if __name__ == '__main__':
 
     """
     dataset,labels = prepare_dataset_labels("matrix_data.tsv",\
-        "clinical.project-TCGA-BRCA.2017-04-20T02_01_20.302397.json",[[1],[2,3]])
+        "clinical.project-TCGA-BRCA.2017-04-20T02_01_20.302397.json",[[1,2],[3,4]])
       
 
     
