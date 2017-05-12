@@ -1,0 +1,121 @@
+for classes: [[1], [2]]
+the feature name is: ['RRM2', 'ZC3H12D', 'CHST5', 'CDC2', 'FAM54A', 'GIP', 'CX3CR1', 'LCE3B', 'DPCR1', 'PLIN', 'C6', 'TRRAP', 'RFX4', 'PTGER3', 'TMEM26', 'KIF4B', 'NCAPH', 'TPRX1', 'TH', 'JMJD6']
+
+for classes: [[1], [3]]
+the feature name is: ['SEPT10', 'RBBP8', 'GSR', 'PMAIP1', 'RWDD3', 'ETAA1', 'ZC3H12D', 'ACOT8', 'RANBP2', 'ELAVL4', 'ARMCX2', 'STXBP3', 'CHSY1', 'PSMB5', 'MACF1', 'TBRG4', 'ZNF264', 'ASXL2', 'GSG1', 'MIER1']
+
+for classes: [[1], [4]]
+the feature name is: ['PAGE5', 'PAGE2B', 'SLITRK5', 'MAGEA1', 'PAGE2', 'SLC5A12', 'MAGEA3', 'MAGEA12', 'ZC3H12D', 'VPS41', 'EYA1', 'RBBP5', 'P4HA1', 'MAGEA5', 'FAM83C', 'STYXL1', 'MAEL', 'MAGEC1', 'PGK1', 'SPAG4']
+
+for classes: [[2], [3]]
+the feature name is: ['ASXL2', 'MFSD4', 'RANBP2', 'WDR55', 'PBX1', 'ZGPAT', 'CORO2B', 'TYW3', 'RBBP8', 'C20orf142', 'USP34', 'MACF1', 'MMP15', 'FAM122C', 'LDLRAD3', 'REV1', 'SCGB1A1', 'CPT1A', 'SLC4A1AP', 'C8orf55']
+
+for classes: [[2], [4]]
+the feature name is: ['PAGE5', 'PAGE2B', 'DIP2B', 'OR4C13', 'FAM83C', 'P4HA1', 'C13orf30', 'MAGEA1', 'PIGN', 'FAM9C', 'SLCO6A1', 'OR5R1', 'PAQR9', 'PAGE2', 'CNTN6', 'MAGEC1', 'BPIL3', 'SCUBE3', 'KLHL12', 'UGT2B4']
+
+for classes: [[3], [4]]
+the feature name is: ['KCNB2', 'IFT81', 'SCUBE3', 'OR4C13', 'HTATIP2', 'PLAC8', 'PAGE5', 'CLDN15', 'SEPT5', 'SLCO6A1', 'PAGE2B', 'HHATL', 'MAEL', 'TMEM45A', 'NEUROD4', 'FAM83C', 'C13orf30', 'GPSM3', 'P4HA1', 'PRR16']
+
+for classes: [[1, 2], [3]]
+the feature name is: ['ASXL2', 'RANBP2', 'RBBP8', 'MACF1', 'ACOT8', 'WDR55', 'PBX1', 'SCGB1A1', 'TYW3', 'SEPT10', 'C20orf142', 'LDLRAD3', 'ETAA1', 'RWDD3', 'MMP15', 'CPT1A', 'CALM1', 'SLC26A6', 'SFRS11', 'USP34']
+
+for classes: [[1, 2], [4]]
+the feature name is: ['PAGE5', 'PAGE2B', 'FAM83C', 'PAGE2', 'MAGEA1', 'DIP2B', 'P4HA1', 'MAGEC1', 'C13orf30', 'OR4C13', 'PAQR9', 'CNTN6', 'KLHL12', 'SLCO6A1', 'MAEL', 'SCUBE3', 'BPIL3', 'MAGEA12', 'ZDHHC7', 'FAM9C']
+
+for classes: [[1, 3], [2]]
+the feature name is: ['MFSD4', 'SLC4A1AP', 'TRRAP', 'CNTNAP2', 'ORC3L', 'ZYG11B', 'HRASLS3', 'OR51B6', 'POLR3A', 'LRRC32', 'ADH1A', 'MGC45438', 'ENPP7', 'CORO2B', 'SLC38A2', 'CXCL14', 'OR7E91P', 'SLC17A5', 'AGBL5', 'POL3S']
+
+for classes: [[1, 3], [4]]
+the feature name is: ['PAGE5', 'PAGE2B', 'FAM83C', 'MAEL', 'PAGE2', 'MAGEA1', 'SCUBE3', 'P4HA1', 'SLCO6A1', 'C13orf30', 'MAGEC2', 'TMEM45A', 'PLAC8', 'MAGEA4', 'HTATIP2', 'CNTN6', 'BNIP3', 'CCDC66', 'OR4C13', 'MLF1']
+
+for classes: [[1, 4], [2]]
+the feature name is: ['SDK2', 'RRM2', 'FAM54A', 'RFX4', 'CNN3', 'CDC2', 'CHST5', 'SLC16A13', 'ULBP3', 'TRIM25', 'TOP2A', 'C6', 'LCE3B', 'PNPT1', 'IL1F9', 'FVT1', 'TH', 'DPCR1', 'OGDH', 'KIF4B']
+
+for classes: [[1, 4], [3]]
+the feature name is: ['SEPT10', 'RWDD3', 'PMAIP1', 'RBBP8', 'ETAA1', 'RANBP2', 'ASXL2', 'SH3RF1', 'ARMCX2', 'MACF1', 'GSR', 'ZNF37A', 'ELAVL4', 'PSMB5', 'ZNF264', 'TRIM27', 'GSG1', 'MIER1', 'SLC25A1', 'C6orf136']
+
+for classes: [[2, 3], [1]]
+the feature name is: ['RRM2', 'ZC3H12D', 'CHSY1', 'GSR', 'CX3CR1', 'FAM54A', 'CDC2', 'TMEM26', 'DPCR1', 'KIF4B', 'TMEM63B', 'C13orf3', 'LCE3B', 'SLC16A4', 'UBE2C', 'CYBRD1', 'TH', 'TBRG4', 'AURKA', 'JMJD6']
+
+for classes: [[2, 3], [4]]
+the feature name is: ['PAGE5', 'PAGE2B', 'FAM83C', 'OR4C13', 'DIP2B', 'SLCO6A1', 'P4HA1', 'C13orf30', 'SCUBE3', 'MAGEA1', 'PAGE2', 'CNTN6', 'NR2E1', 'NEUROD4', 'MAEL', 'PAQR9', 'UGT2B4', 'KCNB2', 'LZTR1', 'PIGN']
+
+for classes: [[2, 4], [1]]
+the feature name is: ['RRM2', 'ZC3H12D', 'CHST5', 'CDC2', 'GIP', 'CX3CR1', 'FAM54A', 'TPRX1', 'TRRAP', 'DPCR1', 'LCE3B', 'PTGER3', 'PLIN', 'TMEM26', 'SFTPA1B', 'KIF4B', 'NCAPH', 'C5orf36', 'GSR', 'CHSY1']
+
+for classes: [[2, 4], [3]]
+the feature name is: ['ASXL2', 'MFSD4', 'RANBP2', 'CORO2B', 'ZGPAT', 'WDR55', 'TYW3', 'PBX1', 'MACF1', 'SCGB1A1', 'LDLRAD3', 'RBBP8', 'SLC4A1AP', 'MMP15', 'C20orf142', 'CALM1', 'USP34', 'C8orf55', 'DDX1', 'REV1']
+
+for classes: [[3, 4], [1]]
+the feature name is: ['SEPT10', 'RBBP8', 'GSR', 'PMAIP1', 'ACOT8', 'ZC3H12D', 'RWDD3', 'STXBP3', 'TBRG4', 'SLITRK5', 'CHSY1', 'C12orf35', 'ELAVL4', 'CX3CR1', 'ARMCX2', 'ETAA1', 'NTRK2', 'PSMB5', 'RANBP2', 'C4orf30']
+
+for classes: [[3, 4], [2]]
+the feature name is: ['ASXL2', 'USP34', 'PBX1', 'RBBP8', 'C20orf142', 'TYW3', 'RANBP2', 'ACOT8', 'WDR55', 'MMP15', 'CPT1A', 'SFRS11', 'TTC32', 'REV1', 'MFSD4', 'ZYG11B', 'GRHL2', 'APOH', 'CNTNAP2', 'ZZZ3']
+
+for classes: [[1], [2, 3, 4]]
+the feature name is: ['RRM2', 'ZC3H12D', 'CX3CR1', 'GSR', 'CHSY1', 'FAM54A', 'CDC2', 'TMEM26', 'DPCR1', 'KIF4B', 'SLC16A4', 'TMEM63B', 'UBE2C', 'C13orf3', 'TBRG4', 'LCE3B', 'GIP', 'CYBRD1', 'C5orf36', 'PTGER3']
+
+for classes: [[2], [1, 3, 4]]
+the feature name is: ['CNTNAP2', 'ZYG11B', 'SLC4A1AP', 'ORC3L', 'HRASLS3', 'MFSD4', 'LRRC32', 'ENPP7', 'TRRAP', 'SLC38A2', 'OR7E91P', 'OR51B6', 'POLR3A', 'ATP6V1E2', 'ADH1A', 'SLC17A5', 'PNPT1', 'POL3S', 'FAH', 'TAF7L']
+
+for classes: [[3], [1, 2, 4]]
+the feature name is: ['ASXL2', 'RANBP2', 'RBBP8', 'MACF1', 'SCGB1A1', 'WDR55', 'SEPT10', 'LDLRAD3', 'PBX1', 'TYW3', 'RWDD3', 'ACOT8', 'ETAA1', 'CALM1', 'SLC26A6', 'C20orf142', 'ZGPAT', 'MMP15', 'MFSD4', 'C8orf55']
+
+for classes: [[4], [1, 2, 3]]
+the feature name is: ['PAGE5', 'PAGE2B', 'FAM83C', 'PAGE2', 'MAGEA1', 'P4HA1', 'SLCO6A1', 'DIP2B', 'C13orf30', 'OR4C13', 'MAEL', 'CNTN6', 'SCUBE3', 'MAGEC1', 'PAQR9', 'NR2E1', 'KLHL12', 'DLEU7', 'LZTR1', 'HTATIP2']
+
+for classes: [[1, 2], [3, 4]]
+the feature name is: ['ASXL2', 'RBBP8', 'ACOT8', 'RANBP2', 'PBX1', 'USP34', 'SFRS11', 'C20orf142', 'TYW3', 'CPT1A', 'SEPT10', 'WDR55', 'MMP15', 'MACF1', 'RWDD3', 'RG9MTD3', 'REV1', 'TTC32', 'ETAA1', 'LDLRAD3']
+
+for classes: [[1, 3], [2, 4]]
+the feature name is: ['MFSD4', 'SLC4A1AP', 'TRRAP', 'CNTNAP2', 'ORC3L', 'OR51B6', 'MGC45438', 'CORO2B', 'ZYG11B', 'ADH1A', 'POLR3A', 'HRASLS3', 'GLI1', 'CXCL14', 'AGBL5', 'ENPP7', 'LRRC32', 'BRUNOL5', 'IGF1', 'DARC']
+
+for classes: [[1, 4], [2, 3]]
+the feature name is: ['RRM2', 'SDK2', 'FAM54A', 'CNN3', 'CHSY1', 'RFX4', 'FAM38B', 'FVT1', 'CDC2', 'C13orf3', 'LCE3B', 'KIF4B', 'TRIM25', 'TH', 'GSR', 'DPCR1', 'TMEM26', 'ARMCX2', 'CX3CR1', 'ATG4D']
+
+
+for classes: [[1], [2]]
+the feature name is: ['RRM2', 'ZC3H12D', 'CHST5', 'CDC2', 'FAM54A', 'GIP', 'CX3CR1', 'LCE3B', 'DPCR1', 'PLIN']
+
+for classes: [[1], [2]]
+the feature name is: ['RRM2', 'ZC3H12D', 'CHST5', 'CDC2', 'FAM54A', 'GIP', 'CX3CR1', 'LCE3B', 'DPCR1', 'PLIN']
+
+for classes: [[1], [2]]
+the feature name is: ['RRM2', 'ZC3H12D', 'CHST5', 'CDC2', 'FAM54A', 'GIP', 'CX3CR1', 'LCE3B', 'DPCR1', 'PLIN']
+
+for classes: [[1], [2]]
+the feature name is: ['RRM2', 'ZC3H12D', 'CHST5', 'CDC2', 'FAM54A', 'GIP', 'CX3CR1', 'LCE3B', 'DPCR1', 'PLIN']
+
+for classes: [[1], [2]]
+the feature name is: ['RRM2', 'ZC3H12D', 'CHST5', 'CDC2', 'FAM54A', 'GIP', 'CX3CR1', 'LCE3B', 'DPCR1', 'PLIN']
+
+for classes: [[1], [2]]
+the feature name is: ['RRM2', 'ZC3H12D', 'CHST5', 'CDC2', 'FAM54A', 'GIP', 'CX3CR1', 'LCE3B', 'DPCR1', 'PLIN']
+
+for classes: [[1], [2]]
+the feature name is: ['RRM2', 'ZC3H12D', 'CHST5', 'CDC2', 'FAM54A', 'GIP', 'CX3CR1', 'LCE3B', 'DPCR1', 'PLIN']
+
+for classes: [[1], [2]]
+the feature name is: ['RRM2', 'ZC3H12D', 'CHST5', 'CDC2', 'FAM54A', 'GIP', 'CX3CR1', 'LCE3B', 'DPCR1', 'PLIN']
+
+for classes: [[1], [2]]
+the feature name is: ['RRM2', 'ZC3H12D', 'CHST5', 'CDC2', 'FAM54A', 'GIP', 'CX3CR1', 'LCE3B', 'DPCR1', 'PLIN']
+
+for classes: [[1, 2], [3, 4]]
+the feature name is: ['ASXL2', 'RBBP8', 'ACOT8', 'RANBP2', 'PBX1', 'USP34', 'SFRS11', 'C20orf142', 'TYW3', 'CPT1A']
+
+for classes: [[1, 2], [3, 4]]
+the feature name is: ['ASXL2', 'RBBP8', 'ACOT8', 'RANBP2', 'PBX1', 'USP34', 'SFRS11', 'C20orf142', 'TYW3', 'CPT1A']
+
+for classes: [[1, 2], [3, 4]]
+the feature name is: ['ASXL2', 'RBBP8', 'ACOT8', 'RANBP2', 'PBX1', 'USP34', 'SFRS11', 'C20orf142', 'TYW3', 'CPT1A']
+
+for classes: [[1, 2], [3, 4]]
+the feature name is: ['ASXL2', 'RBBP8', 'ACOT8', 'RANBP2', 'PBX1', 'USP34', 'SFRS11', 'C20orf142', 'TYW3', 'CPT1A']
+
+for classes: [[1, 2], [3, 4]]
+the feature name is: ['ASXL2', 'RBBP8', 'ACOT8', 'RANBP2', 'PBX1', 'USP34', 'SFRS11', 'C20orf142', 'TYW3', 'CPT1A']
+
+for classes: [[1, 2], [3, 4]]
+the feature name is: ['ASXL2', 'RBBP8', 'ACOT8', 'RANBP2', 'PBX1', 'USP34', 'SFRS11', 'C20orf142', 'TYW3', 'CPT1A']
+
