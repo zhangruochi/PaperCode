@@ -55,7 +55,7 @@ def rank_importance_value(dataset,labels):
     t_dataset = dataset.T
     selector = Lasso(alpha = 0.01)
     selector.fit(t_dataset,labels)
-    dataset = t_dataset.iloc[:, abs(selector.coef_) > 0.01]
+    dataset = t_dataset.iloc[:, abs(selector.coef_) != 0]
     
     return dataset
 
