@@ -123,6 +123,8 @@ def single(dataset_filename,json_filename,classes = [[1,2],[3,4]]):
 
     with open("result.txt","a") as f:
         f.write("for classes: {}\n".format(str(classes)))
+        f.write("the dataset shape is(samples,features): {}\n".format(str(dataset.shape)))
+        f.write("the acc is: {}\n".format(scores))
         f.write("the feature name is: {}\n\n".format(str(feature_names)))
 
     return feature_names    

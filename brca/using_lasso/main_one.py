@@ -143,9 +143,6 @@ def delete_feature(coefs,feature_name,k = 2):
     return feature_name   
 
 
-
-
-
 #均方误差根 
 def rmse(y_test, y):  
     return sp.sqrt(sp.mean((y_test - y) ** 2)) 
@@ -164,7 +161,7 @@ def recursive_elimination(dataset,labels):
         r2 = r2_score(labels,y_pre)
         r22 = rmse(labels,y_pre)
         print(r2,r22)
-        if r2 <= 0.9:
+        if r2 < 0.9 or r22 > 0.2:
             break
 
         feature_list = delete_feature(clf.coef_,feature_name,k = 2)
@@ -178,8 +175,8 @@ def recursive_elimination(dataset,labels):
 
 
 #主函数
-def main(dataset_filename,json_filename,n_splits = 10,criterion = "aic",\
-    estimator_list = ["LSVM","LG"],seed_number = 7):
+def main(dataset_filename,json_filename,n_splits = 10,\
+    estimator_list = ["LG"]):
     
     skf = StratifiedKFold(n_splits = n_splits)
     filtered_dataset,labels = load_dataset(dataset_filename,json_filename)
@@ -226,7 +223,7 @@ def main(dataset_filename,json_filename,n_splits = 10,criterion = "aic",\
 if __name__ == '__main__':
     #get_feature_set("matrix_data.tsv","clinical.project-TCGA-BRCA.2017-04-20T02_01_20.302397.json",feature_range = 20)    
     main("matrix_data.tsv","clinical.project-TCGA-BRCA.2017-04-20T02_01_20.302397.json",n_splits = 10,\
-        criterion = "aic",estimator_list = ["LSVM","LG"],seed_number = 7)
+        estimator_list = ["LG"])
 
 
 

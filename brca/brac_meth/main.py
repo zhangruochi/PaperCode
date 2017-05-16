@@ -5,6 +5,8 @@ import pickle
 import os
 import numpy as np
 from operator import itemgetter
+from parser_class import get_labels
+import csv
 
 """
 def test_dataset(loc_filename):
@@ -130,7 +132,39 @@ def processing_chr_denominator_dict(chr_denominator_dict):
 
 
 
-def main(meth_filename,loc_filename, length):
+def processing_class(labels,criterion = [[1,2],[3,4]]):
+    #print(labels)
+    p_class = criterion[0]
+    n_class = criterion[1]
+    result = []
+    mask = []
+    
+    for label in labels:
+        if label in p_class:
+            result.append("P")
+
+        else:
+            result.append("N") 
+
+    index = 0
+    with open('labels.csv', 'w') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(["","Class"])   
+
+        for labels in result:    
+            writer.writerow([index,labels])  
+            index += 1      
+
+
+    return np.array(result)
+
+
+
+def main(meth_filename,loc_filename,json_filename,length):
+
+    sample_mask,stage_labels = get_labels(meth_filename,json_filename)
+    labels = processing_class(stage_labels)
+
     
     if os.path.exists("win.pkl"):
         with open("win.pkl","rb") as f:
@@ -149,7 +183,6 @@ def main(meth_filename,loc_filename, length):
 
     #记录每条染色体每段cg的数目，最后取平均值用做分母
     chr_denominator_dict = defaultdict(dict)
-
 
 
     with open(meth_filename,"r") as f:
@@ -181,9 +214,14 @@ def main(meth_filename,loc_filename, length):
 
         with open("chr_denominator_dict.pkl","wb") as f:
             pickle.dump(chr_denominator_dict,f)
+    """ 
 
-    
+    with open("chr_matrix.pkl","rb") as f:
+        chr_matrix = pickle.load(f)
 
+    with open("chr_denominator_dict.pkl","rb") as f:
+        chr_denominator_dict = pickle.load(f)
+    """
     #print(chr_matrix) 
     new_chr_denominator_dict = processing_chr_denominator_dict(chr_denominator_dict) 
 
@@ -192,8 +230,8 @@ def main(meth_filename,loc_filename, length):
     
     for chr_name, data_matrix in chr_matrix.items():
         chr_data_matrix = data_matrix / new_chr_denominator_dict[chr_name]
+        chr_data_matrix = chr_data_matrix.T[sample_mask].T
 
-        
         np.savetxt('output/chromosome_{}.csv'.format(chr_name),chr_data_matrix, delimiter = ',')
     
         print("the data_matrix of {} chromosome is : \n".format(chr_name))
@@ -214,5 +252,5 @@ def main(meth_filename,loc_filename, length):
             
 if __name__ == '__main__':
     #load_loc_dataset("GPL13534_HumanMethylation450_15017482_v.1.1.csv")
-    main("matrix_data.tsv","GPL13534_HumanMethylation450_15017482_v.1.1.csv",length = 1000000)
+    main("matrix_data.tsv","GPL13534_HumanMethylation450_15017482_v.1.1.csv","clinical.project-TCGA-BRCA.2017-04-20T02_01_20.302397.json",length = 1000000)
 
