@@ -8,7 +8,6 @@ try:
 except ImportError:
     import configparser as ConfigParser 
 
-from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 
 
@@ -80,8 +79,6 @@ class GLCM(object):
             feature_list.append(feature_2D[0])
 
         feature_list_matrix = np.array(feature_list)
-        if options["normalize"]:
-            feature_list_matrix = self.normalize(feature_list_matrix)
 
         return feature_list_matrix.reshape((1,feature_list_matrix.shape[0]*feature_list_matrix.shape[1]))[0]      
 

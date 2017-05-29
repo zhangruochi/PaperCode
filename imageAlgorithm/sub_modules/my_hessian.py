@@ -31,15 +31,7 @@ class HESSIAN(object):
         #print(option_dict)    
         return option_dict
 
-    def normalize(self,feature):
-        
-        normalizer = MinMaxScaler()
-        normalized_feature = normalizer.fit_transform(feature)
-
-        return normalized_feature    
     
-
-
     def read_image(self,image_name,size = None):
         options = self.get_options()
 
@@ -51,8 +43,6 @@ class HESSIAN(object):
         options["image"] = im    
         feature = hessian_matrix_det(**options)
 
-        if options["normalize"]:
-            feature = self.normalize(feature)
 
         #plt.imshow(feature)
         #plt.show()

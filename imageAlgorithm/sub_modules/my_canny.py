@@ -8,7 +8,7 @@ except ImportError:
     import configparser as ConfigParser 
 
 import numpy as np
-from sklearn.preprocessing import MinMaxScaler
+
 
 #from matplotlib import pyplot as plt
 
@@ -58,10 +58,6 @@ class CANNY(object):
         options["image"] = im  
         bool_feature = canny(**options)
         feature = self.bool_num_converter(bool_feature)
-
-        if options["normalize"]:
-            feature = self.normalize(feature)
-
 
         #plt.imshow(feature)
         #plt.show()

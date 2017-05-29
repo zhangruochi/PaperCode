@@ -6,15 +6,17 @@ from sklearn.decomposition import PCA
 try:
     import ConfigParser
 except ImportError:
-    import configparser as ConfigParser   
-  
+    import configparser as ConfigParser 
+
+from PIL import Image  
 import os
 import numpy as np
 import time
 from functools import partial
 import multiprocessing
 import pandas as pd
-import gzip 
+from sklearn.preprocessing import MinMaxScaler
+
 
 
 try:
@@ -27,6 +29,7 @@ from sub_modules import my_hog
 from sub_modules import my_lbp
 from sub_modules import my_glcm
 from sub_modules import my_hessian
+from sub_modules import my_pca
 
 
 
@@ -78,12 +81,22 @@ class ImageProcess(object):
         feature_list = []
         name_list = []
 
+        #using the size of first image as default
+        for file in os.listdir(self.option_dict["folder"]):
+            if file.split(".")[-1] in self.option_dict["image_format"]:
+                im = Image.open(os.path.join(self.option_dict["folder"],file)).convert("L")
+                im_size = im.size
+                break
+
+
         if self.option_dict["image_size"]:
             size = self.option_dict["image_size"]
-            #print(size);exit()
+            print("you set the image size as : {}\n".format(size))
         else:
-            size = None
-            
+            size = im_size
+            print("using the first image's size {} as default\n".format(size))
+        
+
         for file in os.listdir(self.option_dict["folder"]):
             if file.split(".")[-1] in self.option_dict["image_format"]:  
                 print("read image: {}".format(file))
@@ -95,7 +108,12 @@ class ImageProcess(object):
                 
         return feature_list,name_list
 
-
+    #normalization    
+    def normalize(self,feature):
+        normalizer = MinMaxScaler()
+        normalized_feature = normalizer.fit_transform(feature)
+        return normalized_feature             
+        
     #merge the features from different algorithms
     def merge_dataset(self):
 
@@ -106,33 +124,45 @@ class ImageProcess(object):
             for algorithm in algorithm_list:
                 print(algorithm)
                 if dataset_index == 0:
-                    left,name_list = self.image_read(algorithm)
-                    dataset_index += 1    
-                    #print(left.shape)
+                    left,name_list = self.image_read(algorithm)   
+                    if self.option_dict["normalize"]:
+                        left = self.normalize(left) 
+                        print(left[0:5])
+                    dataset_index += 1     
                 else:
                     left = np.hstack((left,self.image_read(algorithm)[0]))
-                    #print(left.shape)
+                    if self.option_dict["normalize"]:
+                        left = self.normalize(left) 
+                        print(left[0:5])
+
 
         elif self.option_dict["njob"] > 1:
             for algorithm in algorithm_list:
                 dataset = self.multiprocessing_read(algorithm)
                 if dataset_index == 0:
                     left,name_list = self.image_read(algorithm)
+                    if self.option_dict["normalize"]:
+                        left = self.normalize(left) 
+                        print(left[0:5])
                     dataset_index += 1    
                 else:
                     left = np.hstack((left,self.image_read(algorithm)[0]))
+                    if self.option_dict["normalize"]:
+                        left = self.normalize(left) 
+                        print(left[0:5])
         else:
             print("you should write the true value of njob")     
 
-
-        if self.option_dict["pca"]:
-            left = implement_pca(left)               
-
-        print(left)    
-        dataset = pd.DataFrame(data = left,index= name_list,columns= list(range(left.shape[1])))  
         
+        if self.option_dict["pca"]:
+            left = my_pca.implement_pca(left)  
+
+
+
+        dataset = pd.DataFrame(data = left,index= name_list,columns= list(range(left.shape[1])))  
+
         return dataset  
-            
+        
 
     def work(self,algorithm,size,image_path):
         feature = algorithm.read_image(image_path,size)
@@ -144,13 +174,20 @@ class ImageProcess(object):
     #multiprocessing the images   
     def multiprocessing_read(self,algorithm):
         print("using multiprocesses to deal with pictures......\n")
-        
         feature_list = []
+
+        #using the size of first image as default
+        for file in os.listdir(self.option_dict["folder"]):
+            if file.split(".")[-1] in self.option_dict["image_format"]:
+                im = np.array(Image.open(os.path.join(self.option_dict["folder"],file)).convert("L"))
+                im_size = im.size
+                break
+
         if self.option_dict["image_size"]:
             size = self.option_dict["image_size"]
             #print(size);exit()
         else:
-            size = None
+            size = im_size
 
         work = partial(proxy,self,algorithm,size)
            
@@ -168,31 +205,39 @@ class ImageProcess(object):
         return dataset
 
     
+
+    
     def save_dataset(self,saving_name,dataset):
         format_list = self.option_dict["save_format"]
-
-        float_format = None
-        if self.option_dict["decimal"]:
-            float_format = "%.{}f".format(self.option_dict["decimal"])
+        
+        decimals = self.option_dict["decimals"]
+        if decimals:
+            print("\nReserving {} significant digits....".format(decimals))
+            dataset = dataset.round(decimals = decimals)
 
         if not os.path.exists("features"):
             os.mkdir("features")
 
+        print("\nSaving features file......")    
         if "csv" in format_list:
-            dataset.to_csv("features/{}.csv".format(saving_name),float_format = float_format)
+            dataset.to_csv("features/{}.csv".format(saving_name))
+
+        if "excel" in format_list:
+            dataset.to_csv("features/{}.xlsx".format(saving_name)) 
+
+        if "json" in format_list:
+            dataset.to_json("features/{}.json".format(saving_name))
+
+        if "txt" in format_list:
+            dataset.to_csv("features/{}.txt".format(saving_name))
 
         if "pickle" in format_list:
             dataset.to_pickle("features/{}.pkl".format(saving_name))
 
-        if "json" in format_list:
-            dataset.to_json("features/{}.json".format(saving_name))        
-
-        if "gzip" in format_list:
-            file = gzip.GzipFile("features/{}.pkl.zip".format(saving_name), 'wb')
-            pickle.dump(dataset, file, -1)
-            file.close()       
-
-        print("\nSaving features file successful!\n")         
+        if "sql" in format_list:
+            dataset.to_sql("features/{}.sqlç".format(saving_name))       
+    
+        print("\nsuccessful!\n")         
         
 
     def run(self):
