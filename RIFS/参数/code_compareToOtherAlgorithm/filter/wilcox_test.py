@@ -77,7 +77,7 @@ def load_class(filename):
 
 
 
-# t_检验  得到每个特征的 t 值
+# w_检验  
 def wilcoxon_test(dataset,labels):
     p_value = dataset.apply(func = wilcoxon,axis=1,args=(None,"wilcox",))
     return p_value
