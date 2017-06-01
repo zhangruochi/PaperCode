@@ -18,8 +18,6 @@ Description
     RIFS2
 
 '''
-
-
 import numpy as np
 import pandas as pd
 import os
@@ -163,8 +161,7 @@ def processed_matches(matches):
 def process_result(result_filename): 
     with open(result_filename,"r") as f:
         content = f.read()
-        #print(content)
-        pattern = re.compile("\d+, \d, 0\.\d+")
+        pattern = re.compile("\d+, \d+, 0\.\d+")
         matches = re.findall(pattern,content)
         candidate_features = processed_matches(matches) 
 
@@ -239,11 +236,11 @@ def recursive_elimination(dataset,labels,feature_list):
 
 
 #对每一个数据集进行运算
-def single(dataset_filename,clinical_filename, seed = 7, threshold = 0.8, percent = 0.5, stop = 4, criterion = [[1,2],[3,4]],max_union_set = 250):
+def single(dataset_filename,clinical_filename, seed = 7, threshold = 0.7, percent = 0.5, stop = 4, criterion = [[1,2],[3,4]],max_union_set = 250):
 #------------参数接口---------------    
 
     seed_number = seed
-    skf = StratifiedKFold(n_splits = 10)
+    skf = StratifiedKFold(n_splits = 3)
     estimator_list = [0,1,2,3,4]
 #-----------------------------------    
 
@@ -252,12 +249,10 @@ def single(dataset_filename,clinical_filename, seed = 7, threshold = 0.8, percen
     result_filename = "result_{}.txt".format(dataset_filename[-8:-4])
     feature_filename = "feature_{}.txt".format(dataset_filename[-8:-4])
 
-
+    
     #此时的 dataset 已经是给特征排名后的dataset
     dataset,labels,name_index_dic = prepare(dataset_filename,clinical_filename,criterion)  
-
     loc_of_first_feature = random_num_generator(dataset.shape[1], seed_number, percent) # 重启的位置
-
     
    #------------------------RIFS1----------------------------------- 
     max_loc_aac = 0
@@ -281,7 +276,7 @@ def single(dataset_filename,clinical_filename, seed = 7, threshold = 0.8, percen
                 if estimator_aac > max_estimator_aac:
                     max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用四个estimator 得到的最大值
                     best_temp_estimator = item
-     
+            
             if max_estimator_aac > max_k_aac:
                 count = 0 
                 max_k_aac = max_estimator_aac   #得到的是从 loc 开始重启的最大值
@@ -292,7 +287,7 @@ def single(dataset_filename,clinical_filename, seed = 7, threshold = 0.8, percen
                 count += 1
                 if count == stop:
                     break
-   
+
         if max_k_aac > threshold:
             max_acc_list.append((loc,num,max_k_aac,best_estimator))
             print(max_acc_list)
@@ -305,7 +300,7 @@ def single(dataset_filename,clinical_filename, seed = 7, threshold = 0.8, percen
     with open(result_filename,"a") as infor_file:
         infor_file.write("using time: {}".format(end-start))  
     
-
+    
 #-----------------------RIFS2------------------------------
    
     candidate_features = process_result(result_filename)
@@ -350,8 +345,8 @@ if __name__ == '__main__':
     """
 
 
-    dataset_filename = "KIRC/matrix_data_kirc.tsv"
-    clinical_filename = "KIRC/clinical_KIRC.json"
+    dataset_filename = "COAD/matrix_data_coad.tsv"
+    clinical_filename = "COAD/clinical_COAD.json"
 
     feature_names = single(dataset_filename,clinical_filename, seed = 7, threshold = 0.8, \
         percent = 0.5, stop = 4, criterion = [[1,2],[3,4]], max_union_set = 200)

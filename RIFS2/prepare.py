@@ -88,14 +88,12 @@ if __name__ == '__main__':
 
     """
 
-    dataset_filename = "KIRC/matrix_data_kirc.tsv"
-    clinical_filename = "KIRC/clinical_KIRC.json"
+    dataset_filename = "COAD/matrix_data_coad.tsv"
+    clinical_filename = "COAD/clinical_COAD.json"
 
     dataset,labels = prepare_dataset_labels(dataset_filename,clinical_filename)
 
-         
-
-    print(dataset)
+    print(dataset)     
     
     
     
