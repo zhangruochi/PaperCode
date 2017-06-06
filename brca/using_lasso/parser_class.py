@@ -58,6 +58,21 @@ def load_sample(dataset_filename):
         return samples
 
 
+#合并第三类和第四类
+def merge_three_four(labels):
+    new_labels = []
+    for label in labels:
+        if label == 4:
+            tmp = 3
+        else:
+            tmp = label
+
+        new_labels.append(tmp)
+
+    return new_labels            
+
+
+
 
 #得到有用的样本及其类标
 def get_labels(dataset_filename,json_filename):
@@ -80,6 +95,7 @@ def get_labels(dataset_filename,json_filename):
 
     #print("the num of samples: " + str(len(sample_mask)))    
     #print("the valid num of samples: " + str(len(labels)))
+    labels = merge_three_four(labels)
     return sample_mask,labels
 
 
@@ -90,6 +106,8 @@ def get_labels(dataset_filename,json_filename):
 
 if __name__ == '__main__':
     sample_mask,labels = get_labels("matrix_data.tsv","clinical.project-TCGA-BRCA.2017-04-20T02_01_20.302397.json")
+    print(labels)
+
                       
 
 

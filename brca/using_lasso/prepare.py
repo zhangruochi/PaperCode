@@ -99,6 +99,8 @@ if __name__ == '__main__':
     """
     dataset,labels = prepare_dataset_labels("matrix_data.tsv",\
         "clinical.project-TCGA-BRCA.2017-04-20T02_01_20.302397.json",[[1,2],[3,4]])
+
+    print(labels)
       
 
     

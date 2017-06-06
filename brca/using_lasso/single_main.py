@@ -51,9 +51,9 @@ def get_name_index(dataset):
 
 
 # 选择重要性程度大的特征
-def rank_importance_value(dataset,labels):
+def rank_importance_value(dataset,labels,alpha = 0.01):
     t_dataset = dataset.T
-    selector = Lasso(alpha = 0.01)
+    selector = Lasso(alpha = alpha,random_state=7)
     selector.fit(t_dataset,labels)
     dataset = t_dataset.iloc[:, abs(selector.coef_) != 0]
     
@@ -63,13 +63,13 @@ def rank_importance_value(dataset,labels):
 
 
 
-def prepare(dataset_filename,json_filename,criterion): 
+def prepare(dataset_filename,json_filename,criterion,alpha): 
     dataset,labels = prepare_dataset_labels(dataset_filename,json_filename,criterion)
 
     name_index_dic = get_name_index(dataset)
     dataset.columns = list(range(dataset.shape[1]))
     dataset.index = list(range(dataset.shape[0]))
-    dataset = rank_importance_value(dataset,labels)
+    dataset = rank_importance_value(dataset,labels,alpha)
 
     return dataset,labels,name_index_dic
 
@@ -103,9 +103,9 @@ def test_acc(X,y):
 
 
 #对每一个数据集进行运算
-def single(dataset_filename,json_filename,classes = [[1,2],[3,4]]):
+def single(dataset_filename,json_filename,alpha = 0.01,classes = [[1,2],[3,4]]):
 
-    dataset,labels,name_index_dic = prepare(dataset_filename,json_filename,classes)
+    dataset,labels,name_index_dic = prepare(dataset_filename,json_filename,classes,alpha)
     
     scores = test_acc(dataset,labels)
     print("for classes {}, the acc is: {}\n".format(classes,scores))
@@ -113,6 +113,7 @@ def single(dataset_filename,json_filename,classes = [[1,2],[3,4]]):
     feature_list = dataset.columns.tolist()
     feature_names = get_name(name_index_dic,feature_list)
 
+    """
     print("the dataset shape is(samples,features): {}".format(str(dataset.shape)))
     print("-"*30)
 
@@ -120,13 +121,13 @@ def single(dataset_filename,json_filename,classes = [[1,2],[3,4]]):
     print("the features name is: ")
     print(feature_names)
 
-
+    
     with open("result.txt","a") as f:
         f.write("for classes: {}\n".format(str(classes)))
         f.write("the dataset shape is(samples,features): {}\n".format(str(dataset.shape)))
         f.write("the acc is: {}\n".format(scores))
         f.write("the feature name is: {}\n\n".format(str(feature_names)))
-
+    """
     return feature_names    
 
 
@@ -140,8 +141,7 @@ if __name__ == '__main__':
         classes           分类标准
         feature_range     选择前 n 个特征
     """
-    single("matrix_data.tsv","clinical.project-TCGA-BRCA.2017-04-20T02_01_20.302397.json",\
-        classes = [[1],[2]])
+    single("matrix_data.tsv","clinical.project-TCGA-BRCA.2017-04-20T02_01_20.302397.json")
 
 
     
