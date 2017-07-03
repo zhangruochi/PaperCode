@@ -169,7 +169,7 @@ def get_aac(estimator,X,y,seed_number,skf):
 #对每一个数据集进行运算
 def single(dataset,labels,feature_list,all_results,seed_number):
     estimator_list = [0,1,2,3,4]
-    skf = StratifiedKFold(n_splits = 3)
+    skf = StratifiedKFold(n_splits = 10)
     max_estimator_aac = -1
     for index in estimator_list:
         estimator_aac = get_aac(select_estimator(index),dataset.iloc[feature_list,:].T,labels,seed_number,skf)

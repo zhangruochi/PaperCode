@@ -241,7 +241,7 @@ def all_dataset():
     
 
     #---  -- test stop ------
-    percent_list = [0.1,0.2,0.3,0.4,0.5]
+    percent_list = [0.15,0.25,0.35,0.45,0.55]
     for dataset_filename,labels_filename in zip(sorted(dataset_list),sorted(label_list)):
         for percent_number in percent_list:
             single(dataset_filename,labels_filename,percent = percent_number)

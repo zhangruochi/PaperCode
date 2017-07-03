@@ -169,8 +169,8 @@ if __name__ == '__main__':
         seed_number       随机种子
 
     """
-    single(dataset_filename = "Adenoma.csv",class_filename = "Adenomaclass.csv",\
-        estimator = ["SVM","KNN","DT","NB","LG"],feature_range = 2, k_fold = 10,seed_number = 7)
+    single(dataset_filename = "ALL2.csv",class_filename = "ALL2class.csv",\
+        estimator = ["SVM","KNN","DT","NB","LG"],feature_range = 8, k_fold = 10,seed_number = 7)
 
 
     
