@@ -108,7 +108,7 @@ def single(dataset_filename,json_filename,alpha = 0.01,classes = [[1,2],[3,4]]):
     dataset,labels,name_index_dic = prepare(dataset_filename,json_filename,classes,alpha)
     
     scores = test_acc(dataset,labels)
-    print("for classes {}, the acc is: {}\n".format(classes,scores))
+    print("for classes {}, the acc is: {}".format(classes,scores))
 
     feature_list = dataset.columns.tolist()
     feature_names = get_name(name_index_dic,feature_list)

@@ -46,6 +46,7 @@ from operator import itemgetter
 from sklearn.linear_model import Ridge
 from sklearn.metrics import confusion_matrix
 import random
+import csv
 
 import warnings
 warnings.filterwarnings(action="ignore", module="scipy", message="^internal gelsd")
@@ -125,9 +126,9 @@ def four_class_acc(dataset,labels,estimator_list,skf):
         #print("the acc for {}: {}".format(estimator,estimator_aac))
         if estimator_aac > max_estimator_aac:
             max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用五个个estimator 得到的最大值
-    print("-"*20)        
-    print("the macc is: {}\n".format(max_estimator_aac))
-    print(cm)        
+    #print("-"*20)        
+    #print("the macc is: {}\n".format(max_estimator_aac))
+    #print(cm)        
     return max_estimator_aac
 
 
@@ -150,34 +151,62 @@ def rmse(y_test, y):
 
 
 
+#优化目标
+def optimization(acc,r2):
+    return acc * r2
+
+
 #循环删除
-def recursive_elimination(dataset,labels,r2_threshold,r22_threshold):
+def recursive_elimination(dataset,labels):
     feature_name = dataset.columns.tolist()
     clf = Ridge(random_state = 7)
+    skf = StratifiedKFold(n_splits = 10)
+
+    OPT = []
+    ACC = []
+    R2 = []
+    NUM = []
+    k = 5
+
     while True:
-        print("current_length: "+ str(len(feature_name)))         
-        clf.fit(dataset,labels)
-        y_pre = clf.predict(dataset)
-        r2 = r2_score(labels,y_pre)
-        r22 = rmse(labels,y_pre)
-        print(r2,r22)
-        if r2 < r2_threshold or r22 > r22_threshold:
-            print("current_length: "+ str(len(feature_name))) 
+        try:
+            #print("current_length: "+ str(len(feature_name)))         
+            clf.fit(dataset,labels)
+            y_pre = clf.predict(dataset)
+
+            acc = four_class_acc(dataset.loc[:,feature_name],labels,["LG"],skf)
+            r2 = r2_score(labels,y_pre)
+            #r22 = rmse(labels,y_pre)
+            opt = optimization(acc,r2)
+
+            OPT.append(opt)
+            ACC.append(acc)
+            R2.append(acc)
+            NUM.append(len(feature_name))
+            print(len(feature_name))
+
+            
+            feature_name = delete_feature(clf.coef_,feature_name,k = k)
+            dataset = dataset.loc[:,feature_name]
+        except:
             break
 
-        feature_list = delete_feature(clf.coef_,feature_name,k = 1)
-        dataset = dataset.loc[:,feature_list]
-    
+    with open("result_{}.csv".format(k),"w") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow([" "] + NUM)
+        writer.writerow(["opt"] + OPT)            
+        writer.writerow(["acc"] + ACC)
+        writer.writerow(["r_2"] + R2)
 
-    return feature_list
+    
+    return feature_name
 
 
 
 
 
 #主函数
-def main(dataset_filename,json_filename,n_splits = 10,\
-    estimator_list = ["LG"],r2_threshold = 0.9,r22_threshold = 0.3,alpha = 0.01):
+def main(dataset_filename,json_filename,n_splits = 10,estimator_list = ["LG"],alpha = 0.01):
     
     skf = StratifiedKFold(n_splits = n_splits)
     filtered_dataset,labels = load_dataset(dataset_filename,json_filename)
@@ -200,7 +229,7 @@ def main(dataset_filename,json_filename,n_splits = 10,\
     print("\nafter recursive elimination......\n")
 
     if not os.path.exists("feature_list.pkl"):
-        feature_list = recursive_elimination(dataset,labels,r2_threshold,r22_threshold)
+        feature_list = recursive_elimination(dataset,labels)
         with open("feature_list.pkl","wb") as f:
             pickle.dump(feature_list,f)
     else:
@@ -208,7 +237,7 @@ def main(dataset_filename,json_filename,n_splits = 10,\
             feature_list = pickle.load(f)
 
     print("\nthe union set length: "+str(len(feature_list)))        
-    macc = four_class_acc(dataset.loc[:,feature_list] ,labels,estimator_list,skf)
+    macc = four_class_acc(dataset.loc[:,feature_list],labels,estimator_list,skf)
 
     return macc
 

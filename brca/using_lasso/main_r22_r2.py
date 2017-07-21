@@ -73,9 +73,9 @@ def get_feature_set(dataset_filename,json_filename,alpha):
         feature_names = single(dataset_filename,json_filename,classes = classes)
         feature_set = feature_set.union(feature_names)
 
-    print("the feature set is: ")    
-    print(feature_set)
-    print("the feature_set length is {}".format(len(feature_set)))
+    #print("the feature set is: ")    
+    #print(feature_set)
+    #print("the feature_set length is {}".format(len(feature_set)))
 
     return feature_set
 
@@ -123,9 +123,9 @@ def four_class_acc(dataset,labels,estimator_list,skf):
         estimator_aac,cm = get_acc(OneVsOneClassifier(select_estimator(estimator)),dataset,labels,skf)
         #print("the acc for {}: {}".format(estimator,estimator_aac))
         if estimator_aac > max_estimator_aac:
-            max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用五个个estimator 得到的最大值
-    print("-"*20)        
+            max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用五个个estimator 得到的最大值      
     print("the macc is: {}\n".format(max_estimator_aac))
+    print("-"*20)  
     #print(cm)  
     #print("\n")      
     return max_estimator_aac
@@ -155,14 +155,15 @@ def recursive_elimination(dataset,labels,r2_threshold,r22_threshold):
     feature_name = dataset.columns.tolist()
     clf = Ridge(random_state = 7)
     while True:
-        print("current_length: "+ str(len(feature_name)))         
+        #print("current_length: "+ str(len(feature_name)))         
         clf.fit(dataset,labels)
         y_pre = clf.predict(dataset)
         r2 = r2_score(labels,y_pre)
         r22 = rmse(labels,y_pre)
-        print(r2,r22)
+        #print(r2,r22)
         
         if r2 < r2_threshold or r22 > r22_threshold:
+            #print(r2,r22)
             print("current_length: "+ str(len(feature_name))) 
             break
 
@@ -174,11 +175,11 @@ def recursive_elimination(dataset,labels,r2_threshold,r22_threshold):
 
 
 #主函数
-def main(dataset_filename,json_filename,n_splits = 10,alpha,estimator_list = ["LG"]):
+def main(dataset_filename,json_filename,n_splits,alpha,estimator_list):
     
-    output_file = open("log_r22_r2.txt","w")
-    __console__ = sys.stdout
-    sys.stdout = output_file
+    #output_file = open("log_r22_r2.txt","w")
+    #__console__ = sys.stdout
+    #sys.stdout = output_file
     
     skf = StratifiedKFold(n_splits = n_splits)
     filtered_dataset,labels = load_dataset(dataset_filename,json_filename)
@@ -189,9 +190,10 @@ def main(dataset_filename,json_filename,n_splits = 10,alpha,estimator_list = ["L
 
 
     feature_set = set(dataset.columns.tolist())
-    print("the union set length: " +str(len(feature_set)))
-    current_length = len(feature_set)
+    #print("the union set length: " +str(len(feature_set)))
+    #current_length = len(feature_set)
     macc = four_class_acc(dataset,labels, estimator_list, skf)
+    print("-"*40)
 
     r2_threshold_list = list(range(1,11))
     r2_threshold_list.reverse()
@@ -201,9 +203,10 @@ def main(dataset_filename,json_filename,n_splits = 10,alpha,estimator_list = ["L
             print("for : r2: {}, r22: {}".format(float(r2_threshold) / 10, float(r22_threshold) / 10))
             feature_list = recursive_elimination(dataset,labels,float(r2_threshold) / 10, float(r22_threshold) / 10)
             macc = four_class_acc(dataset.loc[:,feature_list] ,labels,estimator_list,skf)
+            print("\n")
 
-    sys.stdout = __console__
-    output_file.close() 
+    #sys.stdout = __console__
+    #output_file.close() 
 
     return macc
 
@@ -211,7 +214,7 @@ def main(dataset_filename,json_filename,n_splits = 10,alpha,estimator_list = ["L
     
 
 if __name__ == '__main__':    
-    main("matrix_data.tsv","clinical.project-TCGA-BRCA.2017-04-20T02_01_20.302397.json",n_splits = 10,alpha = None,estimator_list = ["LG"])
+    main("matrix_data.tsv","clinical.project-TCGA-BRCA.2017-04-20T02_01_20.302397.json",n_splits = 10,alpha = 0.01,estimator_list = ["LG"])
 
 
 

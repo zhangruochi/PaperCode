@@ -35,12 +35,13 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import f1_score
 
 
 
 #加载数据集
 def load_data(filename):
-    full_path_name = os.path.join("/Users/ZRC/Desktop/HLab/dataset/data",filename)
+    full_path_name = os.path.join("/Users/ZRC/Desktop/HILab/dataset/data",filename)
     dataset = pd.read_csv(full_path_name,index_col=0)
     name_index_dic = get_name_index(dataset)
     with open("name_index.pkl","wb") as f:
@@ -63,7 +64,7 @@ def get_name_index(dataset):
 
 #加载标签
 def load_class(filename):
-    full_path_name = os.path.join("/Users/ZRC/Desktop/HLab/dataset/class",filename)
+    full_path_name = os.path.join("/Users/ZRC/Desktop/HILab/dataset/class",filename)
     class_set = pd.read_csv(full_path_name,index_col = 0)
     labels = class_set["Class"]
     result = []
@@ -114,12 +115,14 @@ def select_estimator(case):
 
 #采用 K-Fold 交叉验证 得到 aac 
 def get_aac(estimator,X,y,seed_number,skf):
-    scores =[]
+    scores = []
     for train_index,test_index in skf.split(X,y):
         X_train, X_test = X.ix[train_index], X.ix[test_index]
         y_train, y_test = y[train_index], y[test_index]
         estimator.fit(X_train,y_train)
-        scores.append(estimator.score(X_test,y_test))
+        y_pre = estimator.predict(X_test)
+        scores.append(f1_score(y_test,y_pre))
+        #scores.append(estimator.score(X_test,y_test))
 
     return np.mean(scores)    
     

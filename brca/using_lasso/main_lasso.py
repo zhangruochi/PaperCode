@@ -73,9 +73,9 @@ def get_feature_set(dataset_filename,json_filename,alpha):
         feature_names = single(dataset_filename,json_filename,alpha,classes = classes)
         feature_set = feature_set.union(feature_names)
 
-    print("the feature set is: ")    
-    print(feature_set)
-    print("the feature_set length is {}".format(len(feature_set)))
+    #print("the feature set is: ")    
+    #print(feature_set)
+    #print("the feature_set length is {}".format(len(feature_set)))
 
     return feature_set
 
@@ -124,8 +124,8 @@ def four_class_acc(dataset,labels,estimator_list,skf):
         #print("the acc for {}: {}".format(estimator,estimator_aac))
         if estimator_aac > max_estimator_aac:
             max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用五个个estimator 得到的最大值
-    print("-"*20)        
-    print("the macc is: {}\n".format(max_estimator_aac))
+    #print("-"*20)        
+    #print("the macc is: {}\n".format(max_estimator_aac))
     #print(cm)  
     #print("\n")      
     return max_estimator_aac
@@ -146,6 +146,8 @@ def main(dataset_filename,json_filename,n_splits = 10,\
     labels = np.array(labels)
 
     for alpha in np.linspace(0,1,100):
+        print("for alpha: {}".format(alpha))
+        print("-"*40)
         try:
             feature_set = get_feature_set(dataset_filename,json_filename,alpha)
             dataset = filtered_dataset.loc[feature_set,:].T 
@@ -153,16 +155,18 @@ def main(dataset_filename,json_filename,n_splits = 10,\
             print("the union set length: " +str(len(feature_set)))
             current_length = len(feature_set)
             macc = four_class_acc(dataset,labels, estimator_list, skf)
-            print("\nthe macc is : {}\n".format(macc))
-            print("-" * 30)
+            print("the three class acc is : {}".format(macc))
+            print("-" * 40)
+            print("\n")
         except:
             print("can not get valid features for alpha = {}".format(alpha))  
-            print("-" * 30)  
+            print("-" * 40) 
+            print("\n") 
 
 
 
-    sys.stdout = __console__
-    output_file.close() 
+    #sys.stdout = __console__
+    #output_file.close() 
 
 
 if __name__ == '__main__':    

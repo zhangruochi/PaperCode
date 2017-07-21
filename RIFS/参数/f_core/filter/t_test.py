@@ -11,11 +11,11 @@ Required packages
 Info
 - name   : "zhangruochi"
 - email  : "zrc720@gmail.com"
-- date   : "2017.04.28"
+- date   : "2016.10.21"
 - Version : 1.0.0
 
 Description
-    t-test
+    other algorithms compared to RIFS
 '''
 
 
@@ -36,12 +36,14 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import f1_score
 
 
 
 #加载数据集
 def load_data(filename):
-    dataset = pd.read_csv(filename,index_col=0)
+    full_path_name = os.path.join("/Users/ZRC/Desktop/HILab/dataset/data",filename)
+    dataset = pd.read_csv(full_path_name,index_col=0)
     name_index_dic = get_name_index(dataset)
     with open("name_index.pkl","wb") as f:
         pickle.dump(name_index_dic,f)
@@ -63,7 +65,8 @@ def get_name_index(dataset):
 
 #加载标签
 def load_class(filename):
-    class_set = pd.read_csv(filename,index_col = 0)
+    full_path_name = os.path.join("/Users/ZRC/Desktop/HILab/dataset/class",filename)
+    class_set = pd.read_csv(full_path_name,index_col = 0)
     labels = class_set["Class"]
     result = []
     
@@ -113,18 +116,19 @@ def prepare(datset_filename,class_filename):
 #选择分类器 D-tree,SVM,NBayes,KNN
 def select_estimator(case):
 
-    if case == "SVM":
+    if case == 0:
         estimator = SVC()
-    elif case == "KNN":
+    elif case == 1:
         estimator = KNeighborsClassifier()
-    elif case == "DT":
+    elif case == 2:
         estimator = DecisionTreeClassifier()
-    elif case == "NB":
+    elif case == 3:
         estimator = GaussianNB()
-    elif case == "LG":
+    elif case == 4:
         estimator = LogisticRegression()    
 
     return estimator            
+
 
 #采用 K-Fold 交叉验证 得到 aac 
 def get_aac(estimator,X,y,seed_number,skf):
@@ -133,44 +137,66 @@ def get_aac(estimator,X,y,seed_number,skf):
         X_train, X_test = X.ix[train_index], X.ix[test_index]
         y_train, y_test = y[train_index], y[test_index]
         estimator.fit(X_train,y_train)
-        scores.append(estimator.score(X_test,y_test))
+        y_pre = estimator.predict(X_test)
+        scores.append(f1_score(y_test,y_pre))
+        #scores.append(estimator.score(X_test,y_test))
 
     return np.mean(scores)    
 
 
 #对每一个数据集进行运算
-def single(dataset_filename,class_filename,estimator = ["SVM","KNN","DT","NB","LG"],feature_range = 10,k_fold = 10,seed_number = 7):
-    estimator_list = estimator
-    skf = StratifiedKFold(n_splits = k_fold)
-    dataset,labels = prepare(dataset_filename,class_filename)
-    print("the dataset shape is(samples,features): {}".format(str(dataset.shape)))
-    print("-"*20)
+def single(datset_filename,class_filename,feature_range,seed_number):
+    estimator_list = [0,1,2,3,4]
+    skf = StratifiedKFold(n_splits = 10)
+    dataset,labels = prepare(datset_filename,class_filename)
+    
     max_estimator_aac = 0
     for estimator in estimator_list:
         estimator_aac = get_aac(select_estimator(estimator),dataset.iloc[:,:feature_range],labels,seed_number,skf)
-        print("the acc for {}: {}".format(estimator,estimator_aac))
-        
         if estimator_aac > max_estimator_aac:
-            max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用五个个estimator 得到的最大值
-    print("-"*20)        
-    print("the macc is: {}\n".format(max_estimator_aac))        
+            max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用四个estimator 得到的最大值
+
     return max_estimator_aac
 
+
+#得到特征子集的其实位置和特征子集的个数
+def get_ranked_subfeature():
+    with open("output.txt","r") as f:
+        ranked_subfeature = []
+        for line in f.readlines():
+            ranked_subfeature.append(int(line.split(", ")[1]))
+    return ranked_subfeature  
+
+
+def all_dataset():
+    dataset_list = os.listdir('dataset/data')
+    label_list = os.listdir('dataset/class')
+
+    try:
+        dataset_list.remove('.DS_Store')
+        label_list.remove('.DS_Store')
+    except:
+        pass
+
+    ranked_subfeature = get_ranked_subfeature()  #['1', '1', '7', '3', '3', '8', '2', '0', '6', '6', '9', '6', '6', '4', '2', '1', '3', '9', '4']
+
+    all_seed_output = []
+    for seed_number in range(20): 
+        print(seed_number)
+        index = 0
+        output_list = []
+        for dataset_filename,label_filename in zip(dataset_list,label_list):
+            acc = single(dataset_filename,label_filename,ranked_subfeature[index],seed_number)
+            print(dataset_filename,acc)
+            index += 1
+            output_list.append(acc)
+        all_seed_output.append(output_list)
+    
+    print(np.array(all_seed_output).mean(0))  
         
 
 if __name__ == '__main__':
-    """
-    参数接口:
-        dataset_filename  数据文件
-        class_filename    类标签文件
-        estimator         选择的分类器 （可选一个或者多个，默认五个全部选择）  
-        feature_range     选择前 n 个特征
-        k_fold            k 倍交叉验证， 默认10倍
-        seed_number       随机种子
-
-    """
-    single(dataset_filename = "Adenoma.csv",class_filename = "Adenomaclass.csv",\
-        estimator = ["SVM","KNN","DT","NB","LG"],feature_range = 2, k_fold = 10,seed_number = 7)
+    all_dataset()
 
 
     
