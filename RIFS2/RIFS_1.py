@@ -27,6 +27,7 @@ import time
 from functools import partial
 import re
 from operator import itemgetter
+from collections import defaultdict
 
 from scipy.stats import ttest_ind_from_stats
 from sklearn.model_selection import StratifiedKFold
@@ -41,6 +42,7 @@ from sklearn.linear_model import LinearRegression
 from scipy.stats import mannwhitneyu
 from scipy import vectorize
 from prepare import prepare_dataset_labels
+import multiprocessing
 
 
 
@@ -92,8 +94,8 @@ def rank_importance_value(dataset,labels):
     return dataset
  
 
-def prepare(datset_filename,clinical_filename,criterion):
-    dataset,labels = prepare_dataset_labels(dataset_filename,clinical_filename)
+def prepare(dataset_filename,clinical_filename,criterion):
+    dataset,labels = prepare_dataset_labels(dataset_filename,clinical_filename,criterion)
 
     name_index_dic = get_name_index(dataset)
 
@@ -203,6 +205,8 @@ def get_macc(dataset,labels,feature_list):
 def recursive_elimination(dataset,labels,feature_list):
 
     min_acc = get_macc(dataset,labels,list(feature_list))
+    print("for the union set, the acc is : "+str(min_acc))
+
     eliminate_feature = []
 
     while True:
@@ -215,7 +219,7 @@ def recursive_elimination(dataset,labels,feature_list):
             for second in feature_list:
                 tmp_list = feature_list - set([first,second])
                 macc = get_macc(dataset,labels,list(tmp_list))
-                #print(macc,first,second)
+                print(macc,first,second)
                 if macc > current_acc:
                     current_acc = macc
                     eliminate_feature = [first,second]
@@ -236,22 +240,25 @@ def recursive_elimination(dataset,labels,feature_list):
 
 
 #对每一个数据集进行运算
-def single(dataset_filename,clinical_filename, seed = 7, threshold = 0.7, percent = 0.5, stop = 4, criterion = [[1,2],[3,4]],max_union_set = 250):
+def single(dataset_filename,clinical_filename, threshold, criterion):
 #------------参数接口---------------    
 
-    seed_number = seed
+    seed_number = 7
     skf = StratifiedKFold(n_splits = 3)
+    percent = 0.4
+    stop = 3
+    max_union_set = 100
     estimator_list = [0,1,2,3,4]
 #-----------------------------------    
 
     start = time.time()
     print("dealing the {}".format(dataset_filename))
-    result_filename = "result_{}.txt".format(dataset_filename[-8:-4])
-    feature_filename = "feature_{}.txt".format(dataset_filename[-8:-4])
+    result_filename = "result_{}_{}.txt".format(dataset_filename[-8:-4],criterion)
+    #feature_filename = "feature_{}.txt".format(dataset_filename[-8:-4],criterion)
 
     
     #此时的 dataset 已经是给特征排名后的dataset
-    dataset,labels,name_index_dic = prepare(dataset_filename,clinical_filename,criterion)  
+    dataset,labels,name_index_dic = prepare(dataset_filename,clinical_filename,criterion) 
     loc_of_first_feature = random_num_generator(dataset.shape[1], seed_number, percent) # 重启的位置
     
    #------------------------RIFS1----------------------------------- 
@@ -292,7 +299,7 @@ def single(dataset_filename,clinical_filename, seed = 7, threshold = 0.7, percen
             max_acc_list.append((loc,num,max_k_aac,best_estimator))
             print(max_acc_list)
             print("")
-            
+    
     with open(result_filename,"w") as infor_file:
         infor_file.write("=: {}\n".format(max_acc_list))
     
@@ -300,34 +307,44 @@ def single(dataset_filename,clinical_filename, seed = 7, threshold = 0.7, percen
     with open(result_filename,"a") as infor_file:
         infor_file.write("using time: {}".format(end-start))  
     
+
+
+
+def main(dataset_filename,clinical_filename,threshold):
+    criterion_list = [[[1],[2]],[[1],[3]],[[2],[3]],[[1,2],[3]],[[1,3],[2]],[[2,3],[1]]]
     
-#-----------------------RIFS2------------------------------
-   
-    candidate_features = process_result(result_filename)
-    all_features = generate_union_set(candidate_features,max_union_set)
+    for criterion in criterion_list:
+        single(dataset_filename,clinical_filename,threshold, criterion)
 
-    #循环删除
-    feature_list = recursive_elimination(dataset,labels,all_features)
-
-    #得到 dataset 的 column name，  根据排名的 loc 找到对应的 column name，然后再找到实际的 name
-    column_index = dataset.columns.tolist()    
-
-    #得到最终特征的名字
-    feature_names = get_name(name_index_dic, column_index, feature_list)
-    print("\nthe final feature name: "+ str(feature_names))
-
-    with open(feature_filename,"w") as f:
-        f.write(str(feature_names))
-    
-    return feature_names
-  
+    print("all jobs finished......")     
 
 
+"""
+def process_result():
+    disease_features = defaultdict(set)
 
 
+    for filename in os.listdir("feature"):
+        full_path_filename = os.path.join("feature",filename)
+
+        with open(full_path_filename,"r") as f:
+            disease_name = full_path_filename.strip(".txt").split("_")[-1]
+            pattern = re.compile("\'\w+\'")
+            features = [feature.strip("\'") for feature in re.findall(pattern,f.read())]
+            disease_features[disease_name] = set(features)
 
 
-        
+    intersection_set = set()      
+    for key,values in disease_features.items():
+        print(key,len(values))
+        intersection_set = intersection_set.union(values)
+
+    print(len(intersection_set))    
+"""  
+      
+
+
+       
 
 if __name__ == '__main__':
     """
@@ -344,16 +361,9 @@ if __name__ == '__main__':
         max_union_set   特征并集的最大规模(也就是需要做循环删除的特征量)                           
     """
 
+    feature_names = main(dataset_filename = "LUSC/matrix_data_lusc.tsv",clinical_filename = "LUSC/clinical_LUSC.json",threshold = 0.7)
 
-    dataset_filename = "COAD/matrix_data_coad.tsv"
-    clinical_filename = "COAD/clinical_COAD.json"
 
-    feature_names = single(dataset_filename,clinical_filename, seed = 7, threshold = 0.8, \
-        percent = 0.5, stop = 4, criterion = [[1,2],[3,4]], max_union_set = 200)
-    
-
-    
-      
 
     
     

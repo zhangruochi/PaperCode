@@ -110,8 +110,8 @@ def get_labels(dataset_filename,json_filename):
         index += 1
 
     #print("the num of samples: " + str(len(sample_mask)))    
-    #print("the valid num of samples: " + str(len(labels)))
-    #labels = merge_three_four(labels)
+    print("the valid num of samples: " + str(len(labels)))
+    labels = merge_three_four(labels)
     return sample_mask,labels
 
 
@@ -124,6 +124,7 @@ if __name__ == '__main__':
     dataset_filename = "KIRC/matrix_data_kirc.tsv"
     json_filename = "KIRC/clinical_KIRC.json"
     sample_mask,labels = get_labels(dataset_filename,json_filename)
+    print(labels)
 
                       
 

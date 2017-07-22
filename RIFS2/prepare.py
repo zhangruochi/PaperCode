@@ -85,7 +85,6 @@ if __name__ == '__main__':
         clinical 数据文件
         分类标准    如 [[1],[2,3]] 表示stage i为一类， stage ii，iii 为第二类
                      [[1,2],[3]] 表示stage i,ii为一类， stage iii 为第二类
-
     """
 
     dataset_filename = "COAD/matrix_data_coad.tsv"

@@ -1,0 +1,15 @@
+[[1, 3], [2]]
+['YPEL1', 'ANKDD1A', 'ATOH8', 'KIAA1666', 'LCAT', 'MGC12966', 'MLYCD', 'MRPL32', 'TOR1AIP1']
+
+[[1, 2], [3]]
+['FLJ25770', 'KLF13', 'LRP10', 'OR2B6', 'CENPH']
+
+[[1], [3]]
+['CPEB2', 'FNTB', 'EPB41L3', 'PLXDC2', 'FLJ39378', 'GMPS']
+
+[[2, 3], [1]]
+['SLC9A3', 'CTDSP1', 'C3orf49', 'CENPH', 'CCDC60', 'CYP2S1', 'DACT3', 'CYP2A7']
+
+[[1], [2]]
+['SERPINA3', 'MGC12966', 'NFAT5', 'HHLA2', 'SMARCD2', 'SNAG1', 'TNS3', 'TSPAN8', 'TRAPPC1', 'C19orf59', 'IRX1', 'RTBDN', 'ISL1', 'KCNMB1']
+
