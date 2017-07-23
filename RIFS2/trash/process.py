@@ -15,7 +15,6 @@ from functools import partial
 import re
 from operator import itemgetter
 from collections import defaultdict
-import csv
 
 from scipy.stats import ttest_ind_from_stats
 from sklearn.model_selection import StratifiedKFold
@@ -26,19 +25,13 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LinearRegression
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.multiclass import OneVsOneClassifier
-from sklearn.model_selection import LeaveOneOut
-from sklearn.linear_model import Lasso
 
 from scipy.stats import mannwhitneyu
 from scipy import vectorize
 from prepare import prepare_dataset_labels
 from prepare import load_dataset
-import copy
 
-import warnings
-warnings.filterwarnings("ignore")
 
 
 #创造特征索引和特征名字对应的字典 
@@ -115,8 +108,6 @@ def select_estimator(case):
         estimator = GaussianNB()
     elif case == 4:
         estimator = LogisticRegression()    
-    elif case == 5:
-        estimator = RandomForestClassifier(random_state = 7)    
 
     return estimator            
 
@@ -141,7 +132,7 @@ def four_class_acc(dataset,labels,estimator_list,skf):
         if estimator_aac > max_estimator_aac:
             max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用五个个estimator 得到的最大值
     #print("-"*20)        
-    print("the macc is: {}".format(max_estimator_aac))     
+    print("the macc is: {}\n".format(max_estimator_aac))     
     return max_estimator_aac 
 
 
@@ -202,106 +193,23 @@ def generate_union_set(candidate_features,percent = 0.3):
     result = result[:int(len(result) * percent )]
     return result
 
-
-
-#循环删除时使用的 acc
-def recursive_acc(dataset,labels,feature_list):
-    max_estimator_aac = 0
-    estimator_list = [0,1,2,3,4,5]
-    skf = StratifiedKFold(n_splits = 10)
-    
-    for estimator in estimator_list:
-        estimator_aac = get_acc(OneVsOneClassifier(select_estimator(estimator)),dataset[feature_list],labels,skf)
+def get_macc(dataset,labels,feature_list):
+    estimator_list = [0,1,2,3,4]
+    skf = StratifiedKFold(n_splits = 3)
+    max_estimator_aac = -1
+    for index in estimator_list:
+        estimator_aac = get_acc(select_estimator(index),dataset[feature_list],labels,skf)
         if estimator_aac > max_estimator_aac:
-            max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用五个个estimator 得到的最大值
-    #print("-"*20)        
-    #print("the macc is: {}".format(max_estimator_aac))     
-    return max_estimator_aac 
-
-"""
-#删除最不重要的 N 个特征
-def delete_last_feature(features_importance_list,feature_list,k):
-    importances = sum(np.array(features_importance_list))
-
-    importances = {_:index for _,index in zip(importances,range(len(importances)))}
-    sorted_importances = sorted(importances.items(),key = itemgetter(0))
-
-    for i in range(2):
-        feature_list.remove(feature_list[sorted_importances[i][1]])
-
-    return feature_list
-
-
-
-#循环删除
-def recursive_elimination(datasets_dict,labels_dict,feature_list):
-
-    clf = RandomForestClassifier(random_state = 7)
-    skf = StratifiedKFold(n_splits = 10)
-    k = 2
-
-    while True:
-        features_importance_list = []
-
-        print(len(feature_list))
-        for key,dataset in datasets_dict.items():
-            labels = labels_dict[key]
-            clf.fit(dataset[feature_list],labels)
-            acc = four_class_acc(dataset[feature_list],labels,[0],skf)
-            features_importance_list.append(clf.feature_importances_)
-
-        print("\n")
-
-        feature_list = delete_last_feature(features_importance_list,feature_list,k = k)
- 
- 
-    return feature_list
-"""
-
-#删除最不重要的 N 个特征
-def delete_last_feature(features_importance_list,feature_list):
-    importances = sum(np.array(features_importance_list)) / len(feature_list)
-    print(importances)
-    importances = {_:index for _,index in zip(importances,range(len(importances)))}
-    sorted_importances = sorted(importances.items(),key = itemgetter(0),reverse = True)
-
-    for i in range(len(sorted_importances)):
-        if sorted_importances[i][0] == 0:
-            print(sorted_importances[i][0],sorted_importances[i][1])
-            feature_list.remove(feature_list[sorted_importances[i][1]])
-    print(len(feature_list))  
-
-    return feature_list
-
-
-def recursive_elimination(datasets_dict,labels_dict,feature_list):
-
-    clf = Lasso(alpha = 0.01)
-    skf = StratifiedKFold(n_splits = 10)
-    features_importance_list = []
-
-    for key,dataset in datasets_dict.items():
-        labels = labels_dict[key]
-        clf.fit(dataset[feature_list],labels)
-        features_importance_list.append(clf.coef_)
-
-    feature_list = delete_last_feature(features_importance_list,feature_list)
-
-    for key,dataset in datasets_dict.items():
-        labels = labels_dict[key]
-        acc = four_class_acc(dataset[feature_list],labels,[0],skf)
- 
- 
-    return feature_list
-
-
+            max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用四个estimator 得到的最大值
+            
+    return max_estimator_aac    
 
 
 def main():
-    percent = 1
-    estimator_list = [0,1,2,3,4,5]
+    percent = 0.1
+    estimator_list = [0,1,2,3,4]
     seed_number = 7
-    skf = StratifiedKFold(n_splits = 10)
+    skf = StratifiedKFold(n_splits = 3)
 
     dataset_filename_list = [   "COAD/matrix_data_coad.tsv",
                                 "BRAC/matrix_data_brac.tsv",
@@ -316,12 +224,11 @@ def main():
                                 "KIRC/clinical_KIRC.json",
                                 "LUAD/clinical_LUAD.json",
                             ]
-    """      
+                    
     disease_features = defaultdict(set)                        
 
     for dataset_filename,clinical_filename in zip(dataset_filename_list,clinical_filename_list):                        
-        index = 0
-
+        
         for file in os.listdir("result"):
             if not file.endswith(".txt"):
                 continue
@@ -339,78 +246,48 @@ def main():
                 #得到 dataset 的 column name，  根据排名的 loc 找到对应的 column name，然后再找到实际的 name
                 column_index = dataset.columns.tolist()  
                 feature_names = get_name(name_index_dic, column_index, all_features)
-                if index == 0:
-                    disease_features[disease_name] = disease_features[disease_name].union(set(feature_names))
-                else:
-                    disease_features[disease_name] = disease_features[disease_name].intersection(set(feature_names))     
-                
-                index += 1
+                disease_features[disease_name] = disease_features[disease_name].union(set(feature_names))
                 print(disease_name + ": "+str(len(disease_features[disease_name])))
 
 
 
     with open("features_{}.pkl".format(percent),"wb") as f:
         pickle.dump(disease_features,f)
-    
-    """    
+    """
+
     with open("features_{}.pkl".format(percent),"rb") as f:
         disease_features = pickle.load(f)
-        
+    """    
     intersection_set = set() 
 
     for key,values in disease_features.items():
         print(key,len(values))
-        intersection_set = intersection_set.union(values) 
+        if key == "coad":
+            intersection_set = intersection_set.union(values)
 
-    features = sorted(list(intersection_set))
-    print("\n")
+        intersection_set = intersection_set.intersection(values)    
+
+    features = list(intersection_set)
+    print("\n\n")
     print("got: " + str(len(features)) + " features\n")
-    #print(features)
-    print("\n")
+    print(features)
+    print("\n\n")
 
 
-
-    datasets_dict = {}
-    labels_dict = {}
 
     
     for dataset_filename,clinical_filename in zip(dataset_filename_list,clinical_filename_list):
         dataset,labels = load_dataset(dataset_filename,clinical_filename)
         dataset = dataset.T
-        labels = np.array(labels)
-
-        datasets_dict[dataset_filename[-8:-4]] = dataset
-        labels_dict[dataset_filename[-8:-4]] = labels
-
         disease_name = dataset_filename[-8:-4].upper()
 
         print("for dataset : {}".format(disease_name))
         dataset = dataset[features]
-        print("dataset shape: " +str(dataset.shape))
+        print(dataset.shape)
 
-        #acc = four_class_acc(dataset,labels,estimator_list,skf)
-        print("\n") 
+        acc = four_class_acc(dataset,np.array(labels),estimator_list,skf)
             
-    print("\n") 
-
-
-    #进行循环删除
-    features = recursive_elimination(datasets_dict,labels_dict,features)
-
-    with open("ultimate.pkl","wb") as f:
-        pickle.dump(features,f)
-
-
-    print("\n\n")
-    for key,dataset in datasets_dict.items():
-        macc = four_class_acc(dataset[features],labels_dict[key],estimator_list,skf)
-        print(key + ": " + str(macc))
-        
-
-
-
-
-
+    print("\n")  
 
 if __name__ == '__main__':
     main()
