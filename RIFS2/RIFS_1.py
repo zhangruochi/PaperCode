@@ -1,4 +1,4 @@
-'''
+--'''
 python3
 
 Required packages
@@ -311,7 +311,7 @@ def single(dataset_filename,clinical_filename, threshold, criterion):
 
 
 def main(dataset_filename,clinical_filename,threshold):
-    criterion_list = [[[1],[2]],[[1],[3]],[[2],[3]],[[1,2],[3]],[[1,3],[2]],[[2,3],[1]]]
+    criterion_list = [[[1,2],[3]]
     
     for criterion in criterion_list:
         single(dataset_filename,clinical_filename,threshold, criterion)
