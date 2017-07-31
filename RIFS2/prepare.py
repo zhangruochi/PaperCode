@@ -20,7 +20,7 @@ import csv
 
 def load_dataset(dataset_filename,json_filename):
     dataset = pd.read_csv(dataset_filename,"\t",index_col = 0)
-    #print("raw_dataset: ",str(dataset.shape))
+    print("raw_dataset: ",str(dataset.shape))
 
     mask,labels = get_labels(dataset_filename,json_filename)
     filtered_dataset = dataset.iloc[:,mask].fillna(method = "backfill")
