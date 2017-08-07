@@ -1,27 +1,27 @@
-This is the README me file of PyHIVE
+This is the README file of PyHIVE
 
-1，How to configure a running environment.
-    -Firstly, you need download python2 or python3 from the offcial website "https://www.python.org"
+1，How to configure the running environment.
+    -Firstly, you should download python2 or python3 from the offcial website "https://www.python.org"
     
-    -Secondly,you need to install the dependent packages.
+    -Secondly,you should install the dependent packages.
       
-      -for the linux and macos, we provide the requirements.txt. 
+      -for the Linux and MacOS, we provide the requirements.txt. 
                 pip install -r requirements.txt
       
-      -for the windows, if you use the command above, you may not succee. Two way for you to install the dependent packages.for the first,you can open the requirement.txt file, and install the pacakges one by one. But we really recommend you to use the second way. Installing the ANACONDA which include 1,000+ data science packages.You can download it from "https://www.continuum.io/downloads"     
+      -for the Windows, if you use the command above, you may not succeed. Two way for you to install the dependent packages.for the first,you can open the requirement.txt file, and install the pacakges one by one. But we really recommend you to use the second way. Installing the ANACONDA which include 1,000+ data science packages.You can download it from "https://www.continuum.io/downloads"     
 
 
-2,How the run the example dataset in the paper
+2,How to run the example dataset in the paper
     -Firstly, getting the HOG features.
         -enter in the foder of pyHIVE, open the configure file.
         -change the parameter of algorithm in [MAIN] module to ["HOG"], change the parameter of pca in [MAIN] module to True
-        -runnig the main.py file, just typing the command in command line tool.
+        -run the main.py file, just type the command in command line tool.
             python main.py
         -you can find the Img_HOG.pkl file in the folder of feture. it is the features extracting from the images.
         -running the test.py to get the performace of the features in the command line tool
             python test.py
 
-    -Secondly, getting the LBP features. just like above.
+    -Secondly, get the LBP features. just like above.
         -change the parameter of algorithm in [MAIN] module to ["LBP"].
         -all the other steps are the same as step 1.
 

@@ -1,0 +1,54 @@
+# MAIN function
+[MAIN]
+algorithm = ["HOG"] 
+folder = "Img"
+image_size = None           
+njob = 1
+pca = True
+normalize = True
+image_format = ["jpg","png"]   
+save_format = ["pickle"]
+decimals = 10 
+
+
+# PCA Parameters
+[PCA]
+n_components = None           
+
+
+# HOG Parameters
+[HOG]
+orientations = 9
+pixels_per_cell = (8, 8)
+cells_per_block = (3, 3)
+
+# LBP Parameters
+[LBP]
+p = 24                   
+r = 8                    
+method = "uniform"        
+
+
+# GLCM Parameters
+[GLCM]
+block_num = 4
+distances = [1,2]
+angles = [0,np.pi/2]
+levels = 256
+symmetric = False
+normed = True
+prop = "contrast"  
+
+
+# HESSIAN MATRIX Parameters
+[HESSIAN]
+sigma = 1  
+
+
+# CANNY Parameters
+[CANNY]
+sigma = 3
+low_threshold = None 
+high_threshold = None 
+mask = None
+use_quantiles = False

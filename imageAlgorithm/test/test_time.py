@@ -1,5 +1,7 @@
+#coding: utf-8
 from PIL import Image
 import os
+import time
 import numpy as np
 from functools import partial
 import multiprocessing
@@ -72,10 +74,9 @@ class ImageProcess(object):
 
     # image read function
     def image_read(self, algorithm):
-        print("using single process to dealing with pictures......\n")
+        print("using single process to dealing with pictures.......\n")
         feature_list = []
         name_list = []
-        im_size = None
 
         # using the size of first image as default
         for file in os.listdir(self.option_dict["folder"]):
@@ -84,10 +85,6 @@ class ImageProcess(object):
                                 "folder"], file)).convert("L")
                 im_size = im.size
                 break
-
-        if not im_size:
-            print("can not find image in the image folder!\n")
-            exit()         
 
         if self.option_dict["image_size"]:
             size = self.option_dict["image_size"]
@@ -178,6 +175,8 @@ class ImageProcess(object):
         dataset_index = 0
         algorithm_list = self.get_algorithm()
 
+        start = time.time()
+
         if self.option_dict["njob"] == 1:
             for algorithm in algorithm_list:
                 print(algorithm)
@@ -209,12 +208,17 @@ class ImageProcess(object):
         else:
             print("you should write the true value of njob")
 
+        end = time.time()
+        
+        print("using {} seconds to extract image feature ".format(end - start))    
+        
+        exit()    
         if self.option_dict["pca"]:
             left = my_pca.implement_pca(left)
 
         dataset = pd.DataFrame(data=left, index=name_list,
                                columns=list(range(left.shape[1])))
-
+            
         return dataset
 
     
@@ -257,7 +261,7 @@ class ImageProcess(object):
         dataset = self.merge_dataset()
         print("\nGetting {} samples, every sample has {} features".format(
             dataset.shape[0], dataset.shape[1]))
-        # print(dataset.shape)   #"[sample,feature]"
+        print(dataset.shape)   #"[sample,feature]"
         self.save_dataset(dataset)
 
 

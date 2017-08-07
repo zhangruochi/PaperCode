@@ -1,25 +1,5 @@
 #coding: utf-8
-'''
-python3
 
-Required packages
-- pandas
-- scipy
-- numpy
-- sklearn
-- scipy
-- PIL
-
-
-Info
-- name   : "zhangruochi"
-- email  : "zrc720@gmail.com"
-- date   : "2017.04.14"
-- Version : 1.0.0
-
-Description
-    test image feature selection algorithms
-'''
 
 import pickle
 from sklearn.svm import SVC
@@ -44,9 +24,9 @@ def prepare(filename):
     labels = []
     for name in dataset.index.tolist():
         if name.startswith("normal"):
-            labels.append(1)
-        else:
             labels.append(0)
+        else:
+            labels.append(1)
 
     labels = np.array(labels)
     return dataset, labels
