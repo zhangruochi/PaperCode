@@ -19,16 +19,16 @@ data <- data.frame(
     plot1 <- ggplot(data = data, mapping = aes(x = x, y = y, color = color,shape = color)) + geom_point(size = 5)
 
     #修改坐标轴标签
-    plot1 <- plot1 + labs(x="ILMN_1708743",y="ILMN_1727184",title = "") + theme(axis.title.y  = element_text(size = 10, color = "black", face = "bold", vjust = 1 , hjust = 0.5)) + theme(axis.title.x = element_text(size = 10, color = "black", face = "bold", vjust = 1 , hjust = 0.5))
+    plot1 <- plot1 + labs(x="ILMN_1708743",y="ILMN_1727184",title = "") + theme(axis.title.y  = element_text(size = 13, color = "black", face = "bold", vjust = 1 , hjust = 0.5)) + theme(axis.title.x = element_text(size = 15, color = "black", face = "bold", vjust = 1 , hjust = 0.5))
 
     #设置坐标轴范围
     plot1 <- plot1 + scale_x_continuous(limits = c(200, 800),breaks = seq(200,800,200))
 
 
     #修改坐标轴刻度
-    plot1 <- plot1 + theme(axis.text.x = element_text(size = 15, color = "black", face = "bold", vjust = 0.5, hjust = 0.5)) + 
-             theme(axis.text.y = element_text(size = 15, color = "black", face = "bold", vjust = 0.5, hjust = 0.5)) + 
-             theme(legend.position = "top",legend.title = element_blank(),legend.text = element_text(size = 10),legend.key.size=unit(0.2,'cm'),legend.background = element_rect(colour="white",fill="white",size = 0.2),legend.direction= "horizontal")
+    plot1 <- plot1 + theme(axis.text.x = element_text(size = 13, color = "black", face = "bold", vjust = 0.5, hjust = 0.5)) + 
+             theme(axis.text.y = element_text(size = 13, color = "black", face = "bold", vjust = 0.5, hjust = 0.5)) + 
+             theme(legend.position = "top",legend.title = element_blank(),legend.text = element_text(size = 13),legend.key.size=unit(0.2,'cm'),legend.background = element_rect(colour="white",fill="white",size = 0.2),legend.direction= "horizontal")
 
 
 #print(plot1)

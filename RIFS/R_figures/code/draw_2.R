@@ -13,7 +13,8 @@ data = data.frame(
 
 #----------------------图（a）--------------------------------
 plot1 <- ggplot(data = data)    
-plot1 <- plot1 + geom_bar( aes(x = group_labels,y = IFS_K, fill = legend), position = "dodge",stat="identity",width = 0.5)  + scale_fill_manual(values=c("#808080", "#000000")) 
+plot1 <- plot1 + geom_bar( aes(x = group_labels,y = IFS_K, fill = legend), position = "dodge",stat="identity",width = 0.5)  
+#+ scale_fill_manual(values=c("#808080", "#000000")) 
 
 #修改坐标轴标签
 plot1 <- plot1 + labs(x="(a)",y="",title = "") + xlab("(a)") + theme(axis.title.x = element_text(size = 15, color = "black", face = "bold", vjust = 1 , hjust = 0.5))
@@ -88,7 +89,7 @@ data <- data.frame(
     x = rep(c(0.15,0.25,0.35,0.45,0.55), times = 4)
 )         
 
-plot4 <- ggplot(data = data,aes(x = x,y = ALL, group = supp1))    
+plot4 <- ggplot(data = data,aes(x = x,y = ALL, group = supp1, shape = supp1, color = supp1))    
 plot4 <- plot4 + geom_line() + geom_point(size = 4, aes(shape = supp1))
 
 
@@ -103,7 +104,7 @@ plot4 <- plot4 + xlab("(d)") + theme(axis.title.x = element_text(size = 15, colo
 #修改坐标轴刻度
 plot4 <- plot4 + theme(axis.text.x = element_text(size = 10, color = "black", face = "bold", vjust = 0.5, hjust = 0.5)) + 
          theme(axis.text.y = element_text(size = 10, color = "black", face = "bold", vjust = 0.5, hjust = 0.5)) + 
-         theme(legend.position = c(.5,.92),legend.title = element_blank(),legend.text = element_text(size = 10),legend.key.size=unit(0.3,'cm'),legend.background = element_rect(colour="white",fill="white",size = 0.3),legend.direction= "horizontal")
+         theme(legend.position = c(.5,.92),legend.title = element_blank(),legend.text = element_text(size = 8),legend.key.size=unit(0.2,'cm'),legend.background = element_rect(colour="white",fill="white",size = 0.2),legend.direction= "horizontal")
 
 #print(plot4)
 
