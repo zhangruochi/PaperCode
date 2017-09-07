@@ -113,11 +113,11 @@ def single(dataset_filename,json_filename,alpha = 0.01,classes = [[1,2],[3,4]]):
 
     dataset,labels,name_index_dic = prepare(dataset_filename,json_filename,classes,alpha)
     
-    acc,r2 = test_acc(dataset,labels)
+    #acc,r2 = test_acc(dataset,labels)
     
     feature_list = dataset.columns.tolist()
     feature_names = get_name(name_index_dic,feature_list)
-    print("for classes {},\n the acc is: {},\n the r2 is: {},\n the opt is: {},\n the feature length is: {}\n".format(classes,acc,r2, r2*acc, len(feature_names)))
+    #print("for classes {},\n the acc is: {},\n the r2 is: {},\n the opt is: {},\n the feature length is: {}\n".format(classes,acc,r2, r2*acc, len(feature_names)))
 
     """
     print("the dataset shape is(samples,features): {}".format(str(dataset.shape)))

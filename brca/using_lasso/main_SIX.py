@@ -37,13 +37,14 @@ from operator import itemgetter
 from sklearn.linear_model import Ridge
 from sklearn.metrics import confusion_matrix
 import csv
+from sklearn.linear_model import Lasso
 
 import warnings
 warnings.filterwarnings(action="ignore", module="scipy", message="^internal gelsd")
 
 
 #得到特征并集
-def get_feature_set(dataset_filename,json_filename,alpha):
+def get_feature_set(dataset_filename,json_filename,alpha,dataset, labels,estimator_list):
     if os.path.exists("result.txt"):
         os.remove("result.txt")
 
@@ -60,7 +61,8 @@ def get_feature_set(dataset_filename,json_filename,alpha):
     feature_set = set()
     for classes in classes_list:
         feature_names = single(dataset_filename,json_filename,classes = classes)
-        print(feature_names)
+        macc,r2 = test_acc(dataset.loc[feature_names,:].T ,labels,estimator_list)
+        print("for classes {},\n the macc is: {},\n the r2 is: {},\n the opt is: {},\n the feature length is: {}\n".format(classes,macc,r2, r2*macc, len(feature_names)))
 
         feature_set = feature_set.union(feature_names)
 
@@ -109,18 +111,6 @@ def get_acc(estimator,X,y,skf):
 
 
     
-#四分类的准确性   
-def four_class_acc(dataset,labels,estimator_list,skf):
-    max_estimator_aac = 0
-    for estimator in estimator_list:
-        estimator_aac,cm = get_acc(OneVsOneClassifier(select_estimator(estimator)),dataset,labels,skf)
-        #print("the acc for {}: {}".format(estimator,estimator_aac))
-        if estimator_aac > max_estimator_aac:
-            max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用五个个estimator 得到的最大值
-    #print("-"*20)        
-    #print("the macc is: {}\n".format(max_estimator_aac))
-    #print(cm)        
-    return max_estimator_aac
 
 
 
@@ -192,32 +182,40 @@ def recursive_elimination(dataset,labels):
     
     return feature_name
 
-def test_acc(X,y):
+
+#四分类的准确性   
+def four_class_acc(dataset,labels,estimator_list,skf):
+    max_estimator_aac = 0
+    for estimator in estimator_list:
+        estimator_aac,cm = get_acc(OneVsOneClassifier(select_estimator(estimator)),dataset,labels,skf)
+        #print("the acc for {}: {}".format(estimator,estimator_aac))
+        if estimator_aac > max_estimator_aac:
+            max_estimator_aac = estimator_aac   #记录对于 k 个 特征 用五个个estimator 得到的最大值
+    #print("-"*20)        
+    #print("the macc is: {}\n".format(max_estimator_aac))
+    #print(cm)        
+    return max_estimator_aac
+
+
+def test_acc(X,y,estimator_list):
     """
     df = pd.read_csv("eggs.csv")
     y = df.values[0]
     estimator = OneVsOneClassifier(LogisticRegression())
     """
-            
+      
     skf = StratifiedKFold(n_splits = 10)
     clf = Ridge()
-    estimator = LogisticRegression()
 
-    accs = []
-    for train_index,test_index in skf.split(X,y):
-        X_train, X_test = X.ix[train_index], X.ix[test_index]
-        y_train, y_test = y[train_index], y[test_index]
-        estimator.fit(X_train,y_train)
-        accs.append(estimator.score(X_test,y_test))
-
+    macc = four_class_acc(X,y,estimator_list,skf)
     clf.fit(X,y)
     r2 = clf.score(X,y) 
 
-    return np.mean(accs),r2
+    return macc,r2
 
 
 #主函数
-def main(dataset_filename,json_filename,n_splits = 10,estimator_list = ["LG"],alpha = 0.01):
+def main(dataset_filename,json_filename,n_splits = 10,estimator_list = ["SVM","KNN","DT","NB","LG"],alpha = 0.01):
     
     skf = StratifiedKFold(n_splits = n_splits)
     filtered_dataset,labels = load_dataset(dataset_filename,json_filename)
@@ -227,7 +225,7 @@ def main(dataset_filename,json_filename,n_splits = 10,estimator_list = ["LG"],al
         with open("feature_set.pkl","rb") as f:
             feature_set = pickle.load(f)
     else:
-        feature_set = get_feature_set(dataset_filename,json_filename,alpha)
+        feature_set = get_feature_set(dataset_filename,json_filename,alpha, filtered_dataset, labels,estimator_list)
 
     dataset = filtered_dataset.loc[feature_set,:].T 
 
@@ -235,7 +233,7 @@ def main(dataset_filename,json_filename,n_splits = 10,estimator_list = ["LG"],al
     feature_set = set(dataset.columns.tolist())
     print("the union set length: " +str(len(feature_set)))
     current_length = len(feature_set)
-    acc,r2 = test_acc(dataset,labels)
+    acc,r2 = test_acc(dataset,labels,estimator_list)
 
     print("the acc is: {},\n the r2 is: {},\n the opt is: {},\n the feature length is: {}\n".format(acc,r2,acc*r2,current_length))
 
@@ -248,11 +246,6 @@ def main(dataset_filename,json_filename,n_splits = 10,estimator_list = ["LG"],al
     else:
         with open("feature_list.pkl","rb") as f:
             feature_list = pickle.load(f)
-
-    print("\nthe union set length: "+str(len(feature_list)))        
-    macc = four_class_acc(dataset.loc[:,feature_list],labels,estimator_list,skf)
-
-    return macc
 
 
     
