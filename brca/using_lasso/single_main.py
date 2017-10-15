@@ -36,6 +36,7 @@ from sklearn.linear_model import Lasso
 from sklearn.linear_model import LogisticRegression
 from sklearn.multiclass import OneVsOneClassifier
 from sklearn.model_selection import StratifiedKFold
+from sklearn.linear_model import Ridge
 import csv
 
 

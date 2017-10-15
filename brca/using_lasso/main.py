@@ -20,39 +20,28 @@ Description
 
 import numpy as np
 import scipy as sp
-import pandas as pd
 from single_main import single
 import os
 import pickle
 from sklearn.model_selection import StratifiedKFold
 from sklearn.multiclass import OneVsOneClassifier
 from prepare import load_dataset
-from sklearn.linear_model import LassoLarsIC
 from sklearn.svm import SVC
 from sklearn.svm import LinearSVC
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.multiclass import OneVsOneClassifier
-from sklearn.linear_model import Lasso
-from sklearn.model_selection import GridSearchCV
-from sklearn.metrics import make_scorer
 from sklearn.metrics import r2_score
-from sklearn.linear_model import LassoLarsCV
-from sklearn.svm import SVR
-from sklearn.linear_model import LinearRegression
 from operator import itemgetter
 from sklearn.linear_model import Ridge
 from sklearn.metrics import confusion_matrix
-import random
 import csv
 
 import warnings
 warnings.filterwarnings(action="ignore", module="scipy", message="^internal gelsd")
 
 
-    
 #得到特征并集
 def get_feature_set(dataset_filename,json_filename,alpha):
     if os.path.exists("result.txt"):
@@ -200,8 +189,6 @@ def recursive_elimination(dataset,labels):
 
     
     return feature_name
-
-
 
 
 

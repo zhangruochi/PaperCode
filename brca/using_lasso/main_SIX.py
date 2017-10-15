@@ -162,7 +162,7 @@ def recursive_elimination(dataset,labels):
 
             OPT.append(opt)
             ACC.append(acc)
-            R2.append(acc)
+            R2.append(r2)
             NUM.append(len(feature_name))
             print(len(feature_name),opt,acc,r2)
 

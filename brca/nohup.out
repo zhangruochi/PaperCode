@@ -1,0 +1,605 @@
+#1352
+#the acc for LG: 0.7058582202111614
+#--------------------
+#the macc is: 0.7058582202111614
+#
+#for : r2: 1.0, r22: 0.1
+#current_length: 508
+#the acc for LG: 0.7609245852187029
+#--------------------
+#the macc is: 0.7609245852187029
+#
+#for : r2: 1.0, r22: 0.2
+#current_length: 508
+#the acc for LG: 0.7609245852187029
+#--------------------
+#the macc is: 0.7609245852187029
+#
+#for : r2: 1.0, r22: 0.3
+#current_length: 508
+#the acc for LG: 0.7609245852187029
+#--------------------
+#the macc is: 0.7609245852187029
+#
+#for : r2: 1.0, r22: 0.4
+#current_length: 508
+#the acc for LG: 0.7609245852187029
+#--------------------
+#the macc is: 0.7609245852187029
+#
+#for : r2: 1.0, r22: 0.5
+#current_length: 508
+#the acc for LG: 0.7609245852187029
+#--------------------
+#the macc is: 0.7609245852187029
+#
+#for : r2: 1.0, r22: 0.6
+#current_length: 508
+#the acc for LG: 0.7609245852187029
+#--------------------
+#the macc is: 0.7609245852187029
+#
+#for : r2: 1.0, r22: 0.7
+#current_length: 508
+#the acc for LG: 0.7609245852187029
+#--------------------
+#the macc is: 0.7609245852187029
+#
+#for : r2: 1.0, r22: 0.8
+#current_length: 508
+#the acc for LG: 0.7609245852187029
+#--------------------
+#the macc is: 0.7609245852187029
+#
+#for : r2: 1.0, r22: 0.9
+#current_length: 508
+#the acc for LG: 0.7609245852187029
+#--------------------
+#the macc is: 0.7609245852187029
+#
+#for : r2: 1.0, r22: 1.0
+#current_length: 508
+#the acc for LG: 0.7609245852187029
+#--------------------
+#the macc is: 0.7609245852187029
+#
+#for : r2: 0.9, r22: 0.1
+#current_length: 238
+#the acc for LG: 0.773001508295626
+#--------------------
+#the macc is: 0.773001508295626
+#
+#for : r2: 0.9, r22: 0.2
+#current_length: 158
+#the acc for LG: 0.7610784313725489
+#--------------------
+#the macc is: 0.7610784313725489
+#
+#for : r2: 0.9, r22: 0.3
+#current_length: 148
+#the acc for LG: 0.7727662141779789
+#--------------------
+#the macc is: 0.7727662141779789
+#
+#for : r2: 0.9, r22: 0.4
+#current_length: 148
+#the acc for LG: 0.7727662141779789
+#--------------------
+#the macc is: 0.7727662141779789
+#
+#for : r2: 0.9, r22: 0.5
+#current_length: 148
+#the acc for LG: 0.7727662141779789
+#--------------------
+#the macc is: 0.7727662141779789
+#
+#for : r2: 0.9, r22: 0.6
+#current_length: 148
+#the acc for LG: 0.7727662141779789
+#--------------------
+#the macc is: 0.7727662141779789
+#
+#for : r2: 0.9, r22: 0.7
+#current_length: 148
+#the acc for LG: 0.7727662141779789
+#--------------------
+#the macc is: 0.7727662141779789
+#
+#for : r2: 0.9, r22: 0.8
+#current_length: 148
+#the acc for LG: 0.7727662141779789
+#--------------------
+#the macc is: 0.7727662141779789
+#
+#for : r2: 0.9, r22: 0.9
+#current_length: 148
+#the acc for LG: 0.7727662141779789
+#--------------------
+#the macc is: 0.7727662141779789
+#
+#for : r2: 0.9, r22: 1.0
+#current_length: 148
+#the acc for LG: 0.7727662141779789
+#--------------------
+#the macc is: 0.7727662141779789
+#
+#for : r2: 0.8, r22: 0.1
+#current_length: 238
+#the acc for LG: 0.773001508295626
+#--------------------
+#the macc is: 0.773001508295626
+#
+#for : r2: 0.8, r22: 0.2
+#current_length: 158
+#the acc for LG: 0.7610784313725489
+#--------------------
+#the macc is: 0.7610784313725489
+#
+#for : r2: 0.8, r22: 0.3
+#current_length: 108
+#the acc for LG: 0.719580693815988
+#--------------------
+#the macc is: 0.719580693815988
+#
+#for : r2: 0.8, r22: 0.4
+#current_length: 104
+#the acc for LG: 0.7118898944193062
+#--------------------
+#the macc is: 0.7118898944193062
+#
+#for : r2: 0.8, r22: 0.5
+#current_length: 104
+#the acc for LG: 0.7118898944193062
+#--------------------
+#the macc is: 0.7118898944193062
+#
+#for : r2: 0.8, r22: 0.6
+#current_length: 104
+#the acc for LG: 0.7118898944193062
+#--------------------
+#the macc is: 0.7118898944193062
+#
+#for : r2: 0.8, r22: 0.7
+#current_length: 104
+#the acc for LG: 0.7118898944193062
+#--------------------
+#the macc is: 0.7118898944193062
+#
+#for : r2: 0.8, r22: 0.8
+#current_length: 104
+#the acc for LG: 0.7118898944193062
+#--------------------
+#the macc is: 0.7118898944193062
+#
+#for : r2: 0.8, r22: 0.9
+#current_length: 104
+#the acc for LG: 0.7118898944193062
+#--------------------
+#the macc is: 0.7118898944193062
+#
+#for : r2: 0.8, r22: 1.0
+#current_length: 104
+#the acc for LG: 0.7118898944193062
+#--------------------
+#the macc is: 0.7118898944193062
+#
+#for : r2: 0.7, r22: 0.1
+#current_length: 238
+#the acc for LG: 0.773001508295626
+#--------------------
+#the macc is: 0.773001508295626
+#
+#for : r2: 0.7, r22: 0.2
+#current_length: 158
+#the acc for LG: 0.7610784313725489
+#--------------------
+#the macc is: 0.7610784313725489
+#
+#for : r2: 0.7, r22: 0.3
+#current_length: 108
+#the acc for LG: 0.719580693815988
+#--------------------
+#the macc is: 0.719580693815988
+#
+#for : r2: 0.7, r22: 0.4
+#current_length: 76
+#the acc for LG: 0.6962006033182504
+#--------------------
+#the macc is: 0.6962006033182504
+#
+#for : r2: 0.7, r22: 0.5
+#current_length: 76
+#the acc for LG: 0.6962006033182504
+#--------------------
+#the macc is: 0.6962006033182504
+#
+#for : r2: 0.7, r22: 0.6
+#current_length: 76
+#the acc for LG: 0.6962006033182504
+#--------------------
+#the macc is: 0.6962006033182504
+#
+#for : r2: 0.7, r22: 0.7
+#current_length: 76
+#the acc for LG: 0.6962006033182504
+#--------------------
+#the macc is: 0.6962006033182504
+#
+#for : r2: 0.7, r22: 0.8
+#current_length: 76
+#the acc for LG: 0.6962006033182504
+#--------------------
+#the macc is: 0.6962006033182504
+#
+#for : r2: 0.7, r22: 0.9
+#current_length: 76
+#the acc for LG: 0.6962006033182504
+#--------------------
+#the macc is: 0.6962006033182504
+#
+#for : r2: 0.7, r22: 1.0
+#current_length: 76
+#the acc for LG: 0.6962006033182504
+#--------------------
+#the macc is: 0.6962006033182504
+#
+#for : r2: 0.6, r22: 0.1
+#current_length: 238
+#the acc for LG: 0.773001508295626
+#--------------------
+#the macc is: 0.773001508295626
+#
+#for : r2: 0.6, r22: 0.2
+#current_length: 158
+#the acc for LG: 0.7610784313725489
+#--------------------
+#the macc is: 0.7610784313725489
+#
+#for : r2: 0.6, r22: 0.3
+#current_length: 108
+#the acc for LG: 0.719580693815988
+#--------------------
+#the macc is: 0.719580693815988
+#
+#for : r2: 0.6, r22: 0.4
+#current_length: 70
+#the acc for LG: 0.6706319758672701
+#--------------------
+#the macc is: 0.6706319758672701
+#
+#for : r2: 0.6, r22: 0.5
+#current_length: 56
+#the acc for LG: 0.658788838612368
+#--------------------
+#the macc is: 0.658788838612368
+#
+#for : r2: 0.6, r22: 0.6
+#current_length: 56
+#the acc for LG: 0.658788838612368
+#--------------------
+#the macc is: 0.658788838612368
+#
+#for : r2: 0.6, r22: 0.7
+#current_length: 56
+#the acc for LG: 0.658788838612368
+#--------------------
+#the macc is: 0.658788838612368
+#
+#for : r2: 0.6, r22: 0.8
+#current_length: 56
+#the acc for LG: 0.658788838612368
+#--------------------
+#the macc is: 0.658788838612368
+#
+#for : r2: 0.6, r22: 0.9
+#current_length: 56
+#the acc for LG: 0.658788838612368
+#--------------------
+#the macc is: 0.658788838612368
+#
+#for : r2: 0.6, r22: 1.0
+#current_length: 56
+#the acc for LG: 0.658788838612368
+#--------------------
+#the macc is: 0.658788838612368
+#
+#for : r2: 0.5, r22: 0.1
+#current_length: 238
+#the acc for LG: 0.773001508295626
+#--------------------
+#the macc is: 0.773001508295626
+#
+#for : r2: 0.5, r22: 0.2
+#current_length: 158
+#the acc for LG: 0.7610784313725489
+#--------------------
+#the macc is: 0.7610784313725489
+#
+#for : r2: 0.5, r22: 0.3
+#current_length: 108
+#the acc for LG: 0.719580693815988
+#--------------------
+#the macc is: 0.719580693815988
+#
+#for : r2: 0.5, r22: 0.4
+#current_length: 70
+#the acc for LG: 0.6706319758672701
+#--------------------
+#the macc is: 0.6706319758672701
+#
+#for : r2: 0.5, r22: 0.5
+#current_length: 42
+#the acc for LG: 0.6078702865761689
+#--------------------
+#the macc is: 0.6078702865761689
+#
+#for : r2: 0.5, r22: 0.6
+#current_length: 42
+#the acc for LG: 0.6078702865761689
+#--------------------
+#the macc is: 0.6078702865761689
+#
+#for : r2: 0.5, r22: 0.7
+#current_length: 42
+#the acc for LG: 0.6078702865761689
+#--------------------
+#the macc is: 0.6078702865761689
+#
+#for : r2: 0.5, r22: 0.8
+#current_length: 42
+#the acc for LG: 0.6078702865761689
+#--------------------
+#the macc is: 0.6078702865761689
+#
+#for : r2: 0.5, r22: 0.9
+#current_length: 42
+#the acc for LG: 0.6078702865761689
+#--------------------
+#the macc is: 0.6078702865761689
+#
+#for : r2: 0.5, r22: 1.0
+#current_length: 42
+#the acc for LG: 0.6078702865761689
+#--------------------
+#the macc is: 0.6078702865761689
+#
+#for : r2: 0.4, r22: 0.1
+#current_length: 238
+#the acc for LG: 0.773001508295626
+#--------------------
+#the macc is: 0.773001508295626
+#
+#for : r2: 0.4, r22: 0.2
+#current_length: 158
+#the acc for LG: 0.7610784313725489
+#--------------------
+#the macc is: 0.7610784313725489
+#
+#for : r2: 0.4, r22: 0.3
+#current_length: 108
+#the acc for LG: 0.719580693815988
+#--------------------
+#the macc is: 0.719580693815988
+#
+#for : r2: 0.4, r22: 0.4
+#current_length: 70
+#the acc for LG: 0.6706319758672701
+#--------------------
+#the macc is: 0.6706319758672701
+#
+#for : r2: 0.4, r22: 0.5
+#current_length: 38
+#the acc for LG: 0.600182503770739
+#--------------------
+#the macc is: 0.600182503770739
+#
+#for : r2: 0.4, r22: 0.6
+#current_length: 24
+#the acc for LG: 0.5938310708898945
+#--------------------
+#the macc is: 0.5938310708898945
+#
+#for : r2: 0.4, r22: 0.7
+#current_length: 24
+#the acc for LG: 0.5938310708898945
+#--------------------
+#the macc is: 0.5938310708898945
+#
+#for : r2: 0.4, r22: 0.8
+#current_length: 24
+#the acc for LG: 0.5938310708898945
+#--------------------
+#the macc is: 0.5938310708898945
+#
+#for : r2: 0.4, r22: 0.9
+#current_length: 24
+#the acc for LG: 0.5938310708898945
+#--------------------
+#the macc is: 0.5938310708898945
+#
+#for : r2: 0.4, r22: 1.0
+#current_length: 24
+#the acc for LG: 0.5938310708898945
+#--------------------
+#the macc is: 0.5938310708898945
+#
+#for : r2: 0.3, r22: 0.1
+#current_length: 238
+#the acc for LG: 0.773001508295626
+#--------------------
+#the macc is: 0.773001508295626
+#
+#for : r2: 0.3, r22: 0.2
+#current_length: 158
+#the acc for LG: 0.7610784313725489
+#--------------------
+#the macc is: 0.7610784313725489
+#
+#for : r2: 0.3, r22: 0.3
+#current_length: 108
+#the acc for LG: 0.719580693815988
+#--------------------
+#the macc is: 0.719580693815988
+#
+#for : r2: 0.3, r22: 0.4
+#current_length: 70
+#the acc for LG: 0.6706319758672701
+#--------------------
+#the macc is: 0.6706319758672701
+#
+#for : r2: 0.3, r22: 0.5
+#current_length: 38
+#the acc for LG: 0.600182503770739
+#--------------------
+#the macc is: 0.600182503770739
+#
+#for : r2: 0.3, r22: 0.6
+#current_length: 16
+#the acc for LG: 0.5803725490196079
+#--------------------
+#the macc is: 0.5803725490196079
+#
+#for : r2: 0.3, r22: 0.7
+#current_length: 16
+#the acc for LG: 0.5803725490196079
+#--------------------
+#the macc is: 0.5803725490196079
+#
+#for : r2: 0.3, r22: 0.8
+#current_length: 16
+#the acc for LG: 0.5803725490196079
+#--------------------
+#the macc is: 0.5803725490196079
+#
+#for : r2: 0.3, r22: 0.9
+#current_length: 16
+#the acc for LG: 0.5803725490196079
+#--------------------
+#the macc is: 0.5803725490196079
+#
+#for : r2: 0.3, r22: 1.0
+#current_length: 16
+#the acc for LG: 0.5803725490196079
+#--------------------
+#the macc is: 0.5803725490196079
+#
+#for : r2: 0.2, r22: 0.1
+#current_length: 238
+#the acc for LG: 0.773001508295626
+#--------------------
+#the macc is: 0.773001508295626
+#
+#for : r2: 0.2, r22: 0.2
+#current_length: 158
+#the acc for LG: 0.7610784313725489
+#--------------------
+#the macc is: 0.7610784313725489
+#
+#for : r2: 0.2, r22: 0.3
+#current_length: 108
+#the acc for LG: 0.719580693815988
+#--------------------
+#the macc is: 0.719580693815988
+#
+#for : r2: 0.2, r22: 0.4
+#current_length: 70
+#the acc for LG: 0.6706319758672701
+#--------------------
+#the macc is: 0.6706319758672701
+#
+#for : r2: 0.2, r22: 0.5
+#current_length: 38
+#the acc for LG: 0.600182503770739
+#--------------------
+#the macc is: 0.600182503770739
+#
+#for : r2: 0.2, r22: 0.6
+#current_length: 14
+#the acc for LG: 0.5960633484162896
+#--------------------
+#the macc is: 0.5960633484162896
+#
+#for : r2: 0.2, r22: 0.7
+#current_length: 10
+#the acc for LG: 0.5923318250377074
+#--------------------
+#the macc is: 0.5923318250377074
+#
+#for : r2: 0.2, r22: 0.8
+#current_length: 10
+#the acc for LG: 0.5923318250377074
+#--------------------
+#the macc is: 0.5923318250377074
+#
+#for : r2: 0.2, r22: 0.9
+#current_length: 10
+#the acc for LG: 0.5923318250377074
+#--------------------
+#the macc is: 0.5923318250377074
+#
+#for : r2: 0.2, r22: 1.0
+#current_length: 10
+#the acc for LG: 0.5923318250377074
+#--------------------
+#the macc is: 0.5923318250377074
+#
+#for : r2: 0.1, r22: 0.1
+#current_length: 238
+#the acc for LG: 0.773001508295626
+#--------------------
+#the macc is: 0.773001508295626
+#
+#for : r2: 0.1, r22: 0.2
+#current_length: 158
+#the acc for LG: 0.7610784313725489
+#--------------------
+#the macc is: 0.7610784313725489
+#
+#for : r2: 0.1, r22: 0.3
+#current_length: 108
+#the acc for LG: 0.719580693815988
+#--------------------
+#the macc is: 0.719580693815988
+#
+#for : r2: 0.1, r22: 0.4
+#current_length: 70
+#the acc for LG: 0.6706319758672701
+#--------------------
+#the macc is: 0.6706319758672701
+#
+#for : r2: 0.1, r22: 0.5
+#current_length: 38
+#the acc for LG: 0.600182503770739
+#--------------------
+#the macc is: 0.600182503770739
+#
+#for : r2: 0.1, r22: 0.6
+#current_length: 14
+#the acc for LG: 0.5960633484162896
+#--------------------
+#the macc is: 0.5960633484162896
+#
+#for : r2: 0.1, r22: 0.7
+#current_length: 6
+#the acc for LG: 0.5746425339366515
+#--------------------
+#the macc is: 0.5746425339366515
+#
+#for : r2: 0.1, r22: 0.8
+#current_length: 6
+#the acc for LG: 0.5746425339366515
+#--------------------
+#the macc is: 0.5746425339366515
+#
+#for : r2: 0.1, r22: 0.9
+#current_length: 6
+#the acc for LG: 0.5746425339366515
+#--------------------
+#the macc is: 0.5746425339366515
+#
+#for : r2: 0.1, r22: 1.0
+#current_length: 6
+#the acc for LG: 0.5746425339366515
+#--------------------
+#the macc is: 0.5746425339366515
+#

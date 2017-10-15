@@ -1,23 +1,3 @@
-'''
-python3
-
-Required packages
-- pandas
-- numpy
-- sklearn
-- scipy
-
-
-Info
-- name   : "zhangruochi"
-- email  : "zrc720@gmail.com"
-- date   : "2017._5.1"
-- Version : 2.0.0
-
-Description
-    brac
-'''
-
 import numpy as np
 import pandas as pd
 from single_main import single
