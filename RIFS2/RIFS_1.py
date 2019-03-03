@@ -363,10 +363,3 @@ if __name__ == '__main__':
 
     feature_names = main(dataset_filename = "LUSC/matrix_data_lusc.tsv",clinical_filename = "LUSC/clinical_LUSC.json",threshold = 0.7)
 
-
-
-    
-    
-    
-
-     

@@ -244,8 +244,8 @@ def evaluate(estimator,X,y,skf):
 
         Tp = sum(y_true[predict_index_p])       #正确预测的正类  （实际为正类 预测为正类）
         Tn = sum([1 for x in list(y_true[predict_index_n]) if x == 0]) #正确预测的负类   (实际为负类 预测为负类)
-        Fn = sum(y_predict[index_n])       #错误预测的负类  （实际为负类 预测为正类）
-        Fp = sum(y_true[predict_index_n])       #错误预测的正类   (实际为正类 预测为负类)
+        Fp = sum(y_predict[index_n])       
+        Fn = sum(y_true[predict_index_n])       
 
         try:
             acc = (Tp+Tn)/(Tp+Tn+Fp+Fn)
